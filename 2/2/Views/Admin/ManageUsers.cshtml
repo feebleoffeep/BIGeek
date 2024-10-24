@@ -1,0 +1,97 @@
+﻿@model IEnumerable<_2.Models.ApplicationUser>
+
+@{
+    ViewData["Title"] = "Список користувачів";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Управління користувачами</title>
+    <style>
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-button {
+            text-align: left;
+        }
+
+            .back-button a {
+                background-color: #ff3333; /* Червоний колір фону */
+                color: white;
+                padding: 10px 20px;
+                text-decoration: none;
+                border-radius: 5px;
+            }
+
+                .back-button a:hover {
+                    background-color: #cc0000; /* Трохи темніший червоний при наведенні */
+                }
+
+        .title {
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        td a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+            td a:hover {
+                text-decoration: underline;
+            }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <div class="back-button">
+            <a asp-controller="Home" asp-action="Index">Повернутися назад</a>
+        </div>
+        <h1 class="title">Управління користувачами</h1>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Ім'я</th>
+                <th>Прізвище</th>
+                <th>Email</th>
+                <th>Дії</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.FirstName</td>
+                    <td>@user.LastName</td>
+                    <td>@user.Email</td>
+                    <td>
+                        <a asp-controller="Admin" asp-action="EditUser" asp-route-id="@user.Id">Редагувати</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

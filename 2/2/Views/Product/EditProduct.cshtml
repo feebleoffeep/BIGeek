@@ -1,0 +1,113 @@
+﻿@model _2.Models.Product
+
+@{
+    ViewData["Title"] = "Редагування";
+}
+<h2>Редагування продукту</h2>
+
+<form asp-action="EditProduct" asp-route-id="@Model.Id" method="post">
+
+    <div class="form-group">
+        <label for="Name">Найменування продукту</label>
+        <input type="text" class="form-control" asp-for="Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="Description">Опис</label>
+        <textarea class="form-control" asp-for="Description"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="ImageUrl">ImageUrl</label>
+        <input type="text" class="form-control" asp-for="ImageUrl" />
+        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="Price">Ціна</label>
+        <input type="number" class="form-control" asp-for="Price" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn-save">Зберегти зміни</button>
+</form>
+
+<form asp-action="DeleteProduct" method="post" onsubmit="return confirm('Ви впевнені, що хочете видалити цей продукт?');">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn-delete">Видалити продукт</button>
+</form>
+
+<a asp-action="ManageProducts" class="btn-back">Назад до списку продукції</a>
+
+<style>
+    /* Input field styles */
+    input[type="text"],
+    input[type="number"],
+    textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #E0E0E0;
+        border-radius: 4px;
+        font-size: 16px;
+        box-sizing: border-box;
+    }
+
+    /* Labels for the form */
+    label {
+        font-weight: bold;
+        font-size: 14px;
+        color: #333;
+    }
+
+    /* Button styles */
+    button.btn-save {
+        background-color: #FF4136;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+        button.btn-save:hover {
+            background-color: #FF6347;
+        }
+
+    /* Delete button style */
+    button.btn-delete {
+        background-color: #333;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 10px;
+    }
+
+        button.btn-delete:hover {
+            background-color: #444;
+        }
+
+    /* Back button styling */
+    a.btn-back {
+        display: inline-block;
+        margin-top: 20px;
+        text-decoration: none;
+        color: #FF4136;
+        font-weight: bold;
+    }
+
+        a.btn-back:hover {
+            text-decoration: underline;
+        }
+
+    /* Error messages */
+    .text-danger {
+        color: red;
+        font-size: 12px;
+    }
+
+</style>
+
+

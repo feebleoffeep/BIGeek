@@ -1,0 +1,23 @@
+﻿@model _2.Models.Product
+
+<h2>Додати новий продукт</h2>
+
+<form asp-action="Create" method="post">
+    <div>
+        <label for="Name">Назва</label>
+        <input type="text" id="Name" name="Name" asp-for="Name" />
+    </div>
+    <div>
+        <label for="Description">Опис</label>
+        <textarea id="Description" name="Description" asp-for="Description"></textarea>
+    </div>
+    <div>
+        <label for="Price">Ціна</label>
+        <input type="text" id="Price" name="Price" asp-for="Price" />
+    </div>
+    <div>
+        <label for="ImageUrl">Зображення (URL)</label>
+        <input type="text" id="ImageUrl" name="ImageUrl" asp-for="ImageUrl" />
+    </div>
+    <button type="submit">Додати продукт</button>
+</form>

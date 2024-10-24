@@ -1,0 +1,118 @@
+﻿@model IEnumerable<_2.Models.CartItem>
+
+@{
+    ViewData["Title"] = "Ваш кошик";
+}
+
+<h2>Ваш кошик</h2>
+
+@if (!Model.Any())
+{
+    <p>Кошик порожній. Перейдіть до <a href="/">каталогу</a>, щоб додати товари.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Товар</th>
+                <th>Ціна</th>
+                <th>Кількість</th>
+                <th>Загальна сума</th>
+                <th>Дії</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Price.ToString("C")</td>
+                    <td>
+                        <form asp-action="UpdateQuantity" asp-route-id="@item.ProductId" method="post">
+                            <input type="number" name="quantity" value="@item.Quantity" min="1" />
+                            <button type="submit" class="btn btn-primary">Оновити</button>
+                        </form>
+                    </td>
+                    <td>@(item.Price * item.Quantity).ToString("C")</td>
+                    <td>
+                        <form asp-action="RemoveFromCart" asp-route-id="@item.ProductId" method="post">
+                            <button type="submit" class="btn btn-danger">Видалити</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="cart-summary">
+        <p>Загальна вартість: <strong>@Model.Sum(i => i.Price * i.Quantity).ToString("C")</strong></p>
+        <a href="/Checkout" class="btn btn-success">Оформити замовлення</a>
+    </div>
+}
+
+<style>
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+        .table th, .table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        .table td {
+            color: #555;
+        }
+
+    .btn {
+        padding: 8px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background-color: #f53e3e;
+        color: white;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .cart-summary {
+        margin-top: 20px;
+    }
+
+        .cart-summary p {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .cart-summary a {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+            .cart-summary a:hover {
+                background-color: #218838;
+            }
+</style>

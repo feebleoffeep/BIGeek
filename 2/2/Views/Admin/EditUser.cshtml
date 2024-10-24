@@ -1,0 +1,102 @@
+﻿@model _2.Models.ApplicationUser
+
+@{
+    ViewData["Title"] = "Редагування";
+}
+
+<h2>Редагувати користувача</h2>
+
+<form asp-action="EditUser" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="input-field">
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+
+    <div class="input-field">
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn-save">Зберегти зміни</button>
+</form>
+
+<form asp-action="DeleteUser" method="post" onsubmit="return confirm('Ви впевнені, що хочете видалити цього користувача?');">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn-delete">Видалити користувача</button>
+</form>
+
+<a asp-action="ManageUsers" class="btn-back">Назад до списку користувачів</a>
+
+<style>
+    /* Input field styles */
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #E0E0E0;
+        border-radius: 4px;
+        font-size: 16px;
+        box-sizing: border-box;
+    }
+
+    /* Labels for the form */
+    label {
+        font-weight: bold;
+        font-size: 14px;
+        color: #333;
+    }
+
+    /* Button styles */
+    button.btn-save {
+        background-color: #FF4136;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+        button.btn-save:hover {
+            background-color: #FF6347;
+        }
+
+    /* Delete button style */
+    button.btn-delete {
+        background-color: #333;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 10px;
+    }
+
+        button.btn-delete:hover {
+            background-color: #444;
+        }
+
+    /* Back button styling */
+    a.btn-back {
+        display: inline-block;
+        margin-top: 20px;
+        text-decoration: none;
+        color: #FF4136;
+        font-weight: bold;
+    }
+
+        a.btn-back:hover {
+            text-decoration: underline;
+        }
+
+    /* Error messages */
+    .text-danger {
+        color: red;
+        font-size: 12px;
+    }
+
+</style>

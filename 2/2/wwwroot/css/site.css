@@ -1,0 +1,316 @@
+﻿body {
+    background: #FFFFFF;
+    font-family: 'Montserrat', sans-serif;
+}
+
+header {
+    color: #f44236;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #FFFFFF;
+    border-bottom: 2px solid #800;
+}
+.logo a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 65px;
+    background-color: transparent;
+}
+
+.logo a:hover, .logo a:focus, .logo a:active {
+    color: inherit;
+}
+    header .logo {
+        font-weight: 600;
+        font-size: 45px;
+        font-family: 'Montserrat', sans-serif;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    header form.search-form {
+        display: flex;
+        align-items: center;
+        margin: 0 50px;
+    }
+
+input[type="search"] {
+    padding: 6px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    width: 650px;
+    position: static;
+}
+
+button.search-btn {
+    padding: 9px 10px;
+    margin-left: 5px;
+    background-color: #f44236;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+    button.search-btn:hover {
+        background-color: #d43b2f;
+    }
+
+header nav {
+    display: flex;
+    align-items: center;
+}
+
+    header nav a {
+        color: #000000;
+        text-decoration: none;
+        margin-left: 15px;
+    }
+
+        header nav a:hover {
+            text-decoration: underline;
+        }
+
+main {
+    width: 80%;
+    padding: 15px 10%;
+    margin: 50px 0;
+}
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    margin: 10px 0;
+    gap: 30px;
+}
+
+.product {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 20%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+    .product:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    }
+
+.product-img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+.product h2 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.product p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.buy-btn {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #f44236;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+    .buy-btn:hover {
+        background-color: #d43b2f;
+    }
+
+.main-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.sidebar {
+    width: 20%;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-right: 1px solid #ccc;
+}
+
+.category-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+    .category-list li {
+        margin-bottom: 10px;
+    }
+
+    .category-list a {
+        text-decoration: none;
+        color: #333;
+        font-size: 18px;
+    }
+
+        .category-list a:hover {
+            color: #f44236;
+        }
+
+.products-container {
+    width: 75%;
+    padding: 20px;
+}
+.logout-btn {
+    background-color: #ff4d4d; /* Червоний колір кнопки */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+}
+
+    .logout-btn:hover {
+        background-color: #ff3333; /* Трохи темніший відтінок при наведенні */
+    }
+
+/* Стилі для випадаючого меню */
+.dropdown {
+    position: relative;
+    display: flex;
+    white-space: nowrap; /* Запобігає переносу тексту */
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #e6e6e6;
+    min-width: 160px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    right: 0;
+    border-radius: 8px;
+}
+
+    .dropdown-content form {
+        padding: 10px;
+        text-align: center;
+    }
+
+    .dropdown-content button {
+        background: #d32f2f;
+        border: none;
+        color: #fff;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s ease;
+    }
+
+        .dropdown-content button:hover {
+            background-color: #b71c1c;
+        }
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    top: 100%;
+    right: 0;
+}
+
+ul {
+    padding: 0;
+}
+footer {
+    background-color: #f8f8f8; /* Колір фону */
+    padding: 20px 0; /* Внутрішні відступи */
+    text-align: center; /* Вирівнювання тексту по центру */
+}
+
+.footer-content {
+    max-width: 1200px; /* Максимальна ширина футера */
+    margin: 0 auto; /* Вирівнювання по центру */
+}
+
+    .footer-content p {
+        margin: 5px 0; /* Відступи для параграфів */
+    }
+
+.social-links {
+    list-style-type: none; /* Без маркерів */
+    padding: 0; /* Без відступів */
+}
+
+    .social-links li {
+        display: inline; /* Розташування елементів в рядок */
+        margin: 0 10px; /* Відступи між соціальними іконками */
+    }
+/* Стиль для полів введення */
+.form-control {
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+}
+/* Кнопка входу */
+.btn-primary {
+    background-color: #ff4a4a;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 6px;
+    width: 100%;
+    cursor: pointer;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-primary:hover {
+        background-color: #ff6666;
+    }
+/* Помилки валідації */
+.text-danger {
+    font-size: 14px;
+    color: #e74c3c;
+    /* Стиль для посилання */
+    a
+
+{
+    color: #ff4a4a;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+/* Стиль для заголовка */
+.login-container h1 {
+    font-size: 36px; /* Збільшений розмір шрифту */
+    font-weight: bold; /* Жирний шрифт */
+    color: #333; /* Темний текст для контрасту */
+    margin-bottom: 30px; /* Відступ знизу */
+    letter-spacing: 1px; /* Трохи більше відстань між літерами */
+    text-transform: uppercase; /* Всі букви заголовні */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Легка тінь для об'єму */
+}

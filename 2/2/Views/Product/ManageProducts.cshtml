@@ -1,0 +1,156 @@
+﻿@model IEnumerable<_2.Models.Product>
+
+@{
+    ViewData["Title"] = "Список продукції";
+}
+
+<div class="header-container">
+    <div class="back-button">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Повернутися назад</a>
+    </div>
+    <h2 class="title">Керування продукцією</h2>
+
+    <!-- Додати кнопку "Додати товар" -->
+    <a href="@Url.Action("CreateProduct", "Product")" class="btn btn-success">Додати товар</a>
+
+    <!-- Search Form -->
+    <form asp-action="ManageProducts" method="get" class="search-form">
+        <input type="text" name="searchTerm" placeholder="Пошук за назвою товару" value="@ViewData["SearchTerm"]" class="search-input" />
+        <button type="submit" class="btn btn-search">Шукати</button>
+    </form>
+</div>
+
+@if (!Model.Any())
+{
+    <p>Немає жодних продуктів, що відповідають критеріям пошуку. Додайте перший продукт:</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Найменування</th>
+                <th>Опис</th>
+                <th>ImageUrl</th>
+                <th>Ціна</th>
+                <th>Дії</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.Id</td>
+                    <td>@product.Name</td>
+                    <td>@product.Description</td>
+                    <td>@product.ImageUrl</td>
+                    <td>@product.Price</td>
+                    <td>
+                        <a asp-controller="Product" asp-action="EditProduct" asp-route-id="@product.Id">Редагувати</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<style>
+    h2 {
+        color: #333;
+        font-weight: bold;
+        margin: 20px 0;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+        .table th, .table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        .table td {
+            color: #555;
+        }
+
+    .btn {
+        padding: 8px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background-color: #f53e3e;
+        color: white;
+        text-decoration: none;
+    }
+
+    .btn-success {
+        background-color: #28a745; /* Зелений колір для кнопки "Додати товар" */
+        color: white;
+    }
+
+    .btn-search {
+        background-color: #f53e3e;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        margin-left: 10px;
+    }
+
+        .btn-search:hover {
+            background-color: #d43b2f;
+        }
+
+    .btn:hover {
+        opacity: 0.9;
+    }
+
+    form {
+        display: inline;
+    }
+
+    a {
+        color: #0066cc;
+        text-decoration: none;
+    }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+    p {
+        font-size: 16px;
+        color: #777;
+    }
+
+    .back-button {
+        margin-bottom: 20px;
+    }
+
+    /* Search form */
+    .search-form {
+        margin-bottom: 20px;
+    }
+
+    .search-input {
+        padding: 10px;
+        width: 200px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+</style>

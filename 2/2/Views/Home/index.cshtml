@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "BigGeek";
+}
+
+@model IEnumerable<_2.Models.Product>
+
+<section class="products">
+    @foreach (var product in Model)
+    {
+        <div class="product">
+            <img src="~/images/@product.ImageUrl" alt="@product.Name" class="product-img" />
+            <h2>@product.Name</h2>
+            <p>@product.Description</p>
+            <p>Ціна: $@product.Price</p>
+            <a href="/buy" class="buy-btn">Купити</a>
+        </div>
+    }
+</section>
+
+
