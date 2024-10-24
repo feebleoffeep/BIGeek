@@ -22,7 +22,7 @@ public class CategoryController : Controller
         // Дія для відображення товарів в обраній категорії
         public IActionResult ProductsByCategory(int id)
         {
-            var category = _context.Categories.Include(c => c.Products).FirstOrDefault(c => c.Id == id);
+            var category = _context.Categories.Include(c => c.Products).FirstOrDefault(c => c.CategoryId == id);
             if (category == null)
             {
                 return NotFound();

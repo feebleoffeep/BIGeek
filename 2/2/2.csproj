@@ -50,6 +50,5 @@
   <ItemGroup>
     <Compile Remove="Migrations\20241017085501_Initial.cs" />
     <Compile Remove="Migrations\20241017085501_Initial.Designer.cs" />
-    <Compile Remove="Migrations\ApplicationDbContextModelSnapshot.cs" />
   </ItemGroup>
 </Project>

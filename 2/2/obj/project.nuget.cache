@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "GG2HMv9Lmjp7MovkQDTzkOLhiSxGO4vf9DE1U0eEOTJiW1ru+zcDhNoBtHtAYsgmgjlkgOogAs6AohCTrpvBiw==",
+  "dgSpecHash": "jeBnOXFQuvU=",
   "success": true,
-  "projectFilePath": "/Users/koliakrutoy/Projects/2/2/2.csproj",
+  "projectFilePath": "/Users/koliakrutoy/Projects/2/BIGeek/2/2/2.csproj",
   "expectedPackageFiles": [
     "/Users/koliakrutoy/.nuget/packages/azure.core/1.35.0/azure.core.1.35.0.nupkg.sha512",
     "/Users/koliakrutoy/.nuget/packages/azure.identity/1.10.3/azure.identity.1.10.3.nupkg.sha512",

@@ -9134,11 +9134,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/koliakrutoy/Projects/2/2/2.csproj",
+      "projectUniqueName": "/Users/koliakrutoy/Projects/2/BIGeek/2/2/2.csproj",
       "projectName": "2",
-      "projectPath": "/Users/koliakrutoy/Projects/2/2/2.csproj",
+      "projectPath": "/Users/koliakrutoy/Projects/2/BIGeek/2/2/2.csproj",
       "packagesPath": "/Users/koliakrutoy/.nuget/packages/",
-      "outputPath": "/Users/koliakrutoy/Projects/2/2/obj/",
+      "outputPath": "/Users/koliakrutoy/Projects/2/BIGeek/2/2/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/koliakrutoy/.nuget/NuGet/NuGet.Config"

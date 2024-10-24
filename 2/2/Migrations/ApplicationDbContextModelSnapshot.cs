@@ -318,9 +318,11 @@ namespace _2.Migrations
 
             modelBuilder.Entity("_2.Models.Product", b =>
                 {
-                    b.HasOne("_2.Models.Category", null)
+                    b.HasOne("_2.Models.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId");
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("_2.Models.Category", b =>
