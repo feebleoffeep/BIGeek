@@ -4,17 +4,162 @@
 
 @model IEnumerable<_2.Models.Product>
 
-<section class="products">
-    @foreach (var product in Model)
-    {
-        <div class="product">
-            <img src="~/images/@product.ImageUrl" alt="@product.Name" class="product-img" />
-            <h2>@product.Name</h2>
-            <p>@product.Description</p>
-            <p>Ціна: $@product.Price</p>
-            <a href="/buy" class="buy-btn">Купити</a>
-        </div>
+<div class="content-wrapper">
+    <!-- Sidebar with clickable categories -->
+    <aside class="sidebar">
+        <section class="categories">
+            <h2>Категорії</h2>
+            <ul class="categories-list">
+                <li><a asp-controller="Product" asp-action="ByCategory" asp-route-category="Смартфон">Смартфони</a></li>
+                <li><a asp-controller="Product" asp-action="ByCategory" asp-route-category="Ноутбук">Ноутбуки</a></li>
+                <li><a asp-controller="Product" asp-action="ByCategory" asp-route-category="Планшет">Планшети</a></li>
+            </ul>
+
+        </section>
+    </aside>
+
+    <!-- Products Section -->
+    <section class="products">
+        @foreach (var product in Model)
+        {
+            <div class="product">
+                <img src="~/images/@product.ImageUrl" alt="@product.Name" class="product-img" />
+                <h2>@product.Name</h2>
+                <p>@product.Description</p>
+                <p>Ціна: $@product.Price</p>
+                <button class="buy-btn add-to-cart" data-product-id="@product.Id">Додати в кошик</button>
+            </div>
+        }
+    </section>
+</div>
+
+<!-- jQuery for Add to Cart functionality -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>$(document).ready(function () {
+        $('.add-to-cart').click(function (e) {
+            e.preventDefault();
+
+            var productId = $(this).data('product-id');
+
+            $.ajax({
+                url: '/Cart/AddToCart',
+                type: 'POST',
+                data: { productId: productId },
+                success: function (response) {
+                    alert('Товар доданий у кошик!');
+                },
+                error: function () {
+                    alert('Сталася помилка при додаванні товару у кошик.');
+                }
+            });
+        });
+    });</script>
+
+<!-- CSS Styling -->
+<style>
+    /* Main layout styling */
+    .content-wrapper {
+        display: flex;
+        gap: 20px;
     }
-</section>
 
+    /* Sidebar styling */
+    .sidebar {
+        width: 20%;
+        padding: 20px;
+        background-color: #f2f2f2;
+        border-radius: 8px;
+    }
 
+    .categories h2 {
+        font-size: 1.5em;
+        color: #333;
+        margin-bottom: 15px;
+    }
+
+    .categories ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .categories li {
+        margin: 10px 0;
+    }
+
+    .categories a {
+        font-size: 1.1em;
+        color: #007bff; /* Link color */
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+        .categories a:hover {
+            color: #0056b3; /* Hover color */
+        }
+
+    /* Product styling */
+    .products {
+        width: 80%;
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 20px;
+        padding: 10px;
+    }
+
+    .product {
+        width: 225px; 
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+    .product-img {
+        width: 100%;
+        height: auto;
+        max-height: 200px;
+        object-fit: contain;
+        margin-bottom: 15px;
+    }
+
+    .product h2 {
+        font-size: 1.3em;
+        color: #333;
+        margin-bottom: 8px;
+    }
+
+    .product p {
+        font-size: 1em;
+        color: #666;
+        margin-bottom: 8px;
+    }
+
+        /* Price and button styling */
+        .product p:nth-child(4) {
+            font-weight: bold;
+            color: #000;
+        }
+
+    .buy-btn {
+        background-color: #ff4c4c;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 1em;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .buy-btn:hover {
+            background-color: #e03b3b;
+        }
+</style>

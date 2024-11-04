@@ -4,6 +4,8 @@ using _2.Models;
 using System.Linq;
 using System.Threading.Tasks;
 using _2.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 [Authorize(Roles = "Admin")]
 public class ProductController : Controller
@@ -16,10 +18,10 @@ public class ProductController : Controller
     }
 
     // Список продуктів
-public IActionResult ManageProducts(string searchTerm)
+    public IActionResult ManageProducts(string searchTerm)
     {
         // Отримуємо всі продукти з бази даних
-        var products = _context.Products.AsQueryable();
+        var products = _context.Products.Include(c => c.Category).AsQueryable();
 
         // Якщо введено термін пошуку, фільтруємо продукти
         if (!string.IsNullOrWhiteSpace(searchTerm))
@@ -35,6 +37,7 @@ public IActionResult ManageProducts(string searchTerm)
     // Створення продукту (Форма)
     public IActionResult CreateProduct()
     {
+        ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name"); // Завантаження категорій
         return View();
     }
 
@@ -48,6 +51,7 @@ public IActionResult ManageProducts(string searchTerm)
             await _context.SaveChangesAsync();
             return RedirectToAction("ManageProducts");
         }
+        ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name"); // Перезавантаження категорій у разі помилки
         return View(product);
     }
 
@@ -59,6 +63,7 @@ public IActionResult ManageProducts(string searchTerm)
         {
             return NotFound();
         }
+        ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name", product.CategoryId); // Встановлення вибраної категорії
         return View(product);
     }
 
@@ -72,24 +77,25 @@ public IActionResult ManageProducts(string searchTerm)
             await _context.SaveChangesAsync();
             return RedirectToAction("ManageProducts");
         }
+        ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name", product.CategoryId); // Перезавантаження категорій у разі помилки
         return View(product);
     }
-
-    // Видалення продукту
-    public async Task<IActionResult> DeleteProduct(int id)
+    // Метод для відображення продуктів за категорією
+    public async Task<IActionResult> ByCategory(string category)
     {
-        var product = await _context.Products.FindAsync(id);
-        if (product != null)
+        // Отримуємо продукти, що належать до вказаної категорії
+        var products = await _context.Products
+            .Include(c => c.Category) // Включаємо категорії для відображення
+            .Where(p => p.Category.Name == category) // Фільтруємо за назвою категорії
+            .ToListAsync();
+
+        if (products == null || !products.Any())
         {
-            _context.Products.Remove(product);
-            await _context.SaveChangesAsync();
+            return NotFound(); // Якщо не знайдено, повертаємо NotFound
         }
-        return RedirectToAction("ManageProducts");
+
+        ViewBag.Category = category; // Зберігаємо назву категорії для відображення в заголовку
+        return View(products); // Повертаємо знайдені продукти до представлення
     }
-  
+
 }
-
-
-
-
-

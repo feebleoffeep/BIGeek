@@ -34,18 +34,20 @@ else
                 <th>Опис</th>
                 <th>ImageUrl</th>
                 <th>Ціна</th>
+                <th>Категорія</th>
                 <th>Дії</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var product in Model)
-            {
+            { 
                 <tr>
                     <td>@product.Id</td>
                     <td>@product.Name</td>
                     <td>@product.Description</td>
                     <td>@product.ImageUrl</td>
                     <td>@product.Price</td>
+                    <td>@product.Category?.Name</td>
                     <td>
                         <a asp-controller="Product" asp-action="EditProduct" asp-route-id="@product.Id">Редагувати</a>
                     </td>
@@ -56,6 +58,7 @@ else
 }
 
 <style>
+
     h2 {
         color: #333;
         font-weight: bold;
@@ -152,5 +155,8 @@ else
         width: 200px;
         border: 1px solid #ddd;
         border-radius: 4px;
+    }
+    a {
+        text-decoration: none;
     }
 </style>

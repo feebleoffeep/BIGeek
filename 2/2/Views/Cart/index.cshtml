@@ -27,16 +27,14 @@ else
             {
                 <tr>
                     <td>@item.Name</td>
-                    <td>@item.Price.ToString("C")</td>
+                    <td class="price">@item.Price</td>
                     <td>
-                        <form asp-action="UpdateQuantity" asp-route-id="@item.ProductId" method="post">
-                            <input type="number" name="quantity" value="@item.Quantity" min="1" />
-                            <button type="submit" class="btn btn-primary">Оновити</button>
-                        </form>
+                        <!-- Ползунок для вибору кількості -->
+                        <input type="number" class="quantity-input" data-product-id="@item.ProductId" value="@item.Quantity" min="1" />
                     </td>
-                    <td>@(item.Price * item.Quantity).ToString("C")</td>
+                    <td class="total">@(@item.Price * item.Quantity)</td>
                     <td>
-                        <form asp-action="RemoveFromCart" asp-route-id="@item.ProductId" method="post">
+                        <form asp-action="RemoveFromCart" asp-route-productId="@item.ProductId" method="post">
                             <button type="submit" class="btn btn-danger">Видалити</button>
                         </form>
                     </td>
@@ -46,7 +44,7 @@ else
     </table>
 
     <div class="cart-summary">
-        <p>Загальна вартість: <strong>@Model.Sum(i => i.Price * i.Quantity).ToString("C")</strong></p>
+        <p>Загальна вартість: <strong class="grand-total">@Model.Sum(i => i.Price * i.Quantity)</strong></p>
         <a href="/Checkout" class="btn btn-success">Оформити замовлення</a>
     </div>
 }
@@ -73,6 +71,11 @@ else
             color: #555;
         }
 
+    .quantity-input {
+        width: 60px; /* Ширина поля вводу */
+        text-align: center; /* Центрування тексту */
+    }
+
     .btn {
         padding: 8px 12px;
         border: none;
@@ -80,18 +83,8 @@ else
         cursor: pointer;
     }
 
-    .btn-primary {
-        background-color: #f53e3e;
-        color: white;
-    }
-
     .btn-danger {
         background-color: #dc3545;
-        color: white;
-    }
-
-    .btn-success {
-        background-color: #28a745;
         color: white;
     }
 
@@ -116,3 +109,48 @@ else
                 background-color: #218838;
             }
 </style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>$(document).ready(function () {
+        function updateTotal() {
+            var grandTotal = 0;
+            $('.total').each(function () {
+                grandTotal += parseFloat($(this).text()) || 0;
+            });
+            $('.grand-total').text(grandTotal.toFixed(2)); // Оновлюємо загальну вартість
+        }
+
+        $('.quantity-input').on('input', function () {
+            var quantity = $(this).val();
+            var productId = $(this).data('product-id');
+            var price = parseFloat($(this).closest('tr').find('.price').text());
+            var total = (price * quantity).toFixed(2);
+
+            $(this).closest('tr').find('.total').text(total); // Оновлюємо загальну вартість для товару
+
+            // Перевіряємо, що кількість більша за 0
+            if (quantity < 1) {
+                alert('Кількість має бути принаймні 1.');
+                return;
+            }
+
+            $.ajax({
+                url: '/Cart/UpdateCart', // URL вашого методу контролера
+                type: 'POST',
+                data: { productId: productId, quantity: quantity },
+                success: function (response) {
+                    if (response.success) {
+                        console.log('Кількість оновлена');
+                        updateTotal(); // Оновлюємо загальну вартість після успішного оновлення
+                    } else {
+                        alert('Сталася помилка при оновленні кількості товару.');
+                    }
+                },
+                error: function () {
+                    alert('Сталася помилка при оновленні кількості товару.');
+                }
+            });
+        });
+
+        updateTotal(); // Ініціалізація загальної вартості при завантаженні
+    });</script>

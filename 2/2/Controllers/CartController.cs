@@ -41,7 +41,7 @@ namespace _2.Controllers
 
             if (product == null)
             {
-                return NotFound();
+                return NotFound(); // Якщо продукт не знайдено, повертаємо 404
             }
 
             var cart = GetCart();
@@ -70,8 +70,10 @@ namespace _2.Controllers
 
             SaveCart(cart);
 
-            return RedirectToAction("Index");
+            // Повертаємо успішну відповідь
+            return Ok(new { success = true, message = "Товар доданий у кошик!" });
         }
+
 
 
         // Видалити продукт з кошика
@@ -90,7 +92,6 @@ namespace _2.Controllers
         }
 
 
-        // Оновити кількість товарів у кошику
         [HttpPost]
         public IActionResult UpdateCart(int productId, int quantity)
         {
@@ -108,10 +109,15 @@ namespace _2.Controllers
                     cart.Remove(cartItem);
                 }
                 SaveCart(cart);
+
+                // Повертаємо відповідь про успішне оновлення
+                return Json(new { success = true });
             }
 
-            return RedirectToAction("Index");
+            // Якщо товар не знайдено, повертаємо невдалу відповідь
+            return Json(new { success = false });
         }
+
 
 
         // Очистити кошик

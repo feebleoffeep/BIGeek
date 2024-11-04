@@ -1,0 +1,105 @@
+﻿@model IEnumerable<_2.Models.Product>
+
+<h2>Товари в категорії: @ViewBag.Category</h2>
+
+<div class="products">
+    @foreach (var product in Model)
+    {
+        <div class="product">
+            <img src="~/images/@product.ImageUrl" alt="@product.Name" class="product-img" />
+            <h2>@product.Name</h2>
+            <p>@product.Description</p>
+            <p>Ціна: $@product.Price</p>
+            <button class="buy-btn add-to-cart" data-product-id="@product.Id">Додати в кошик</button>
+        </div>
+    }
+</div>
+
+@if (!Model.Any())
+{
+    <p>Немає товарів у цій категорії.</p>
+}
+
+<!-- jQuery для функціоналу додавання в кошик -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>$(document).ready(function () {
+        $('.add-to-cart').click(function (e) {
+            e.preventDefault();
+
+            var productId = $(this).data('product-id');
+
+            $.ajax({
+                url: '/Cart/AddToCart',
+                type: 'POST',
+                data: { productId: productId },
+                success: function (response) {
+                    alert('Товар доданий у кошик!');
+                },
+                error: function () {
+                    alert('Сталася помилка при додаванні товару у кошик.');
+                }
+            });
+        });
+    });</script>
+
+<!-- CSS Стилі (додати або переконатися, що стилі з головної сторінки підключені) -->
+<style>
+    /* Стилі для відображення продуктів */
+    .products {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 10px;
+    }
+
+    .product {
+        width: 225px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+    .product-img {
+        width: 100%;
+        height: auto;
+        max-height: 200px;
+        object-fit: contain;
+        margin-bottom: 15px;
+    }
+
+    .product h2 {
+        font-size: 1.3em;
+        color: #333;
+        margin-bottom: 8px;
+    }
+
+    .product p {
+        font-size: 1em;
+        color: #666;
+        margin-bottom: 8px;
+    }
+
+    .buy-btn {
+        background-color: #ff4c4c;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 1em;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .buy-btn:hover {
+            background-color: #e03b3b;
+        }
+</style>

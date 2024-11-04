@@ -40,8 +40,9 @@
                             @if (await UserManager.IsInRoleAsync(currentUser, "Admin"))
                             {
                                 <div class="edit-options">
-                                    <a asp-controller="Admin" asp-action="ManageUsers" class="edit-button">Редагувати користувачів</a> 
+                                    <a asp-controller="Admin" asp-action="ManageUsers" class="edit-button">Редагувати користувачів</a>
                                     <a asp-controller="Product" asp-action="ManageProducts" class="edit-button">Редагувати продукцію</a>
+                                    <a asp-controller="Category" asp-action="ManageCategories" class="edit-button">Редагувати категорії</a>
                                 </div>
                             }
                             <form asp-controller="Account" asp-action="Logout" method="post">
@@ -59,17 +60,7 @@
     </header>
 
     <div class="main-container">
-        @if (ViewContext.RouteData.Values["controller"].ToString() == "Home" && ViewContext.RouteData.Values["action"].ToString() == "Index")
-        {
-            <aside class="sidebar">
-                <h3>Категорії</h3>
-                <ul class="category-list">
-                    <li><a href="/category/smartphones">Смартфони</a></li>
-                    <li><a href="/category/laptops">Ноутбуки</a></li>
-                    <li><a href="/category/tablets">Планшети</a></li>
-                </ul>
-            </aside>
-        }
+        
         <main class="products-container">
             @RenderBody()
         </main>

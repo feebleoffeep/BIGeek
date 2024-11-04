@@ -12,6 +12,7 @@
   <ItemGroup>
     <Content Remove="wwwroot\images\" />
     <Content Remove="Views\Login\Template.cshtml" />
+    <Content Remove="Views\Category\Smartphones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\images\" />

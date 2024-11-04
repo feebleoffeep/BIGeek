@@ -18,9 +18,15 @@ namespace _2.Controllers
         public IActionResult Index()
         {
             List<Product> products = _context.Products.ToList();
+            List<Category> categories = _context.Categories.ToList(); // Отримуємо категорії
+
+            ViewBag.Categories = categories; // Зберігаємо категорії у ViewBag
 
             return View(products);
         }
+
+
+
         [AllowAnonymous]
         [Route("/NotFound")]
 

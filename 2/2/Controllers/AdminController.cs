@@ -27,11 +27,25 @@ public class AdminController : Controller
 
     // Методи для управління користувачами
 
-    public async Task<IActionResult> ManageUsers()
+    [HttpGet]
+    public async Task<IActionResult> ManageUsers(string searchTerm)
     {
         var users = await _userManager.Users.ToListAsync();
+
+        if (!string.IsNullOrEmpty(searchTerm))
+        {
+            // Розділіть searchTerm на слова
+            var searchTerms = searchTerm.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            users = users.Where(u => searchTerms.All(term =>
+                u.FirstName.Contains(term, StringComparison.OrdinalIgnoreCase) ||
+                u.LastName.Contains(term, StringComparison.OrdinalIgnoreCase))).ToList();
+        }
+
+        ViewData["SearchTerm"] = searchTerm; // Зберігаємо значення для повернення в представлення
         return View(users);
     }
+
+
 
     public async Task<IActionResult> EditUser(string id)
     {

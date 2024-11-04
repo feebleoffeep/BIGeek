@@ -3,30 +3,40 @@
 @{
     ViewData["Title"] = "Редагування";
 }
+
 <h2>Редагування продукту</h2>
 
 <form asp-action="EditProduct" asp-route-id="@Model.Id" method="post">
-
     <div class="form-group">
         <label for="Name">Найменування продукту</label>
         <input type="text" class="form-control" asp-for="Name" />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
+
     <div class="form-group">
-        <label for="Description">Опис</label>
+        <label for="ShortDescription">Короткий Опис</label>
         <textarea class="form-control" asp-for="Description"></textarea>
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
+
     <div class="form-group">
-        <label for="ImageUrl">ImageUrl</label>
+        <label for="ImageUrl">URL зображення</label>
         <input type="text" class="form-control" asp-for="ImageUrl" />
         <span asp-validation-for="ImageUrl" class="text-danger"></span>
     </div>
+
     <div class="form-group">
         <label for="Price">Ціна</label>
         <input type="number" class="form-control" asp-for="Price" />
         <span asp-validation-for="Price" class="text-danger"></span>
     </div>
+
+    <div class="form-group">
+        <label for="CategoryId">Категорія</label>
+        @Html.DropDownListFor(m => m.CategoryId, (SelectList)ViewBag.Categories, "Виберіть категорію", new { @class = "form-control" })
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+
     <button type="submit" class="btn-save">Зберегти зміни</button>
 </form>
 
@@ -107,7 +117,4 @@
         color: red;
         font-size: 12px;
     }
-
 </style>
-
-

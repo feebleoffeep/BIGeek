@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "8mbRM+yUn2kWEV5v5Kzs0It4+hY8Sp+aERi+BbHGqu0=",
+  "Hash": "OsjJnnFSZ149zwzV20zkaegn3PUy8EFSkU6vr/tzvto=",
   "Source": "2",
   "BasePath": "_content/2",
   "Mode": "Default",
@@ -1231,6 +1231,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/favicon.ico"
+    },
+    {
+      "Identity": "/Users/koliakrutoy/Projects/2/BIGeek/2/2/wwwroot/images/AppleiPad10.92022Wi-Fi.jpg",
+      "SourceId": "2",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/koliakrutoy/Projects/2/BIGeek/2/2/wwwroot/",
+      "BasePath": "_content/2",
+      "RelativePath": "images/AppleiPad10.92022Wi-Fi.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/AppleiPad10.92022Wi-Fi.jpg"
     },
     {
       "Identity": "/Users/koliakrutoy/Projects/2/BIGeek/2/2/wwwroot/images/iPad-Pro-M2-2022-12-9-spacegray-photo.jpg",
