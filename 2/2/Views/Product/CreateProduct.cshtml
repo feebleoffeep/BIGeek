@@ -15,7 +15,7 @@
 
     <div class="form-group">
         <label for="Description">Опис</label>
-        <textarea asp-for="Description" class="form-control"></textarea>
+        <input asp-for="Description" class="form-control" />
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
 
@@ -27,7 +27,7 @@
 
     <div class="form-group">
         <label for="Price">Ціна</label>
-        <input asp-for="Price" class="form-control" type="number" step="0.01" />
+        <input asp-for="Price" class="form-control" type="number" step="0.01" min="0" />
         <span asp-validation-for="Price" class="text-danger"></span>
     </div>
 
@@ -37,6 +37,111 @@
         <span asp-validation-for="CategoryId" class="text-danger"></span>
     </div>
 
+    <div class="form-group">
+        <label for="AlternativeNames">Альтернативна назва</label>
+        <input asp-for="AlternativeNames" class="form-control" />
+        <span asp-validation-for="AlternativeNames" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="ScreenDiagonal">Діагональ екрану</label>
+        <input asp-for="ScreenDiagonal" class="form-control" />
+        <span asp-validation-for="ScreenDiagonal" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="Color">Колір</label>
+        <input asp-for="Color" class="form-control" />
+        <span asp-validation-for="Color" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="Processor">Процесор</label>
+        <input asp-for="Processor" class="form-control" />
+        <span asp-validation-for="Processor" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="RamSize">Обсяг пам'яті (ГБ)</label>
+        <input asp-for="RamSize" class="form-control" />
+        <span asp-validation-for="RamSize" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="StorageSize">Обсяг накопичувача (ГБ)</label>
+        <input asp-for="StorageSize" class="form-control" />
+        <span asp-validation-for="StorageSize" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="GraphicsType">Відеокарта</label>
+        <input asp-for="GraphicsType" class="form-control" />
+        <span asp-validation-for="GraphicsType" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="BatteryCapacity">Ємність батареї</label>
+        <input asp-for="BatteryCapacity" class="form-control" />
+        <span asp-validation-for="BatteryCapacity" class="text-danger"></span>
+    </div>
+
     <button type="submit" class="btn btn-primary">Додати продукт</button>
     <a asp-action="ManageProducts" class="btn btn-secondary">Повернутися назад</a>
 </form>
+
+<style>
+    /* Input field styles */
+    input[type="text"],
+    input[type="number"],
+    textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #E0E0E0;
+        border-radius: 4px;
+        font-size: 16px;
+        box-sizing: border-box;
+    }
+
+    /* Labels for the form */
+    label {
+        font-weight: bold;
+        font-size: 14px;
+        color: #333;
+    }
+
+    /* Button styles */
+    button.btn-primary {
+        background-color: #FF4136;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+        button.btn-primary:hover {
+            background-color: #FF6347;
+        }
+
+    button.btn-secondary {
+        background-color: #f0f0f0;
+        color: #333;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-left: 10px;
+    }
+
+        button.btn-secondary:hover {
+            background-color: #e0e0e0;
+        }
+
+    /* Error messages */
+    .text-danger {
+        color: red;
+        font-size: 12px;
+    }
+</style>

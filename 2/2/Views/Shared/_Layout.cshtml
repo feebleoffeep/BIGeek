@@ -22,12 +22,13 @@
             </a>
         </span>
         <nav>
-            <form class="search-form" action="/search" method="GET">
-                <input type="search" name="query" required>
-                <button type="submit" class="search-btn">Шукати</button>
+            <form class="search-form" asp-controller="Product" asp-action="Search" method="GET">
+                <input type="search" name="query" />
+                <button type="submit" class="search-btn">Пошук</button>
             </form>
 
-            <a asp-controller="Cart" >Кошик</a>
+
+            <a asp-controller="Cart">Кошик</a>
             <ul>
                 @if (SignInManager.IsSignedIn(User))
                 {
@@ -60,7 +61,7 @@
     </header>
 
     <div class="main-container">
-        
+
         <main class="products-container">
             @RenderBody()
         </main>
@@ -86,6 +87,34 @@
                 }
             }
         };</script>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-links">
+                <h3>Швидкі посилання</h3>
+                <ul>
+                    <li><a href="/">Головна</a></li>
+                    <li><a href="/Account/Login">Увійти</a></li>
+                    <li><a href="/Account/Register">Реєстрація</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Контакти</h3>
+                <p>Email: support@bigeek.com</p>
+                <p>Телефон: +38 (044) 123-45-67</p>
+            </div>
+            <div class="footer-social">
+                <h3>Слідкуйте за нами</h3>
+                <ul>
+                    <li><a href="https://www.facebook.com/BIGeek" target="_blank">Facebook</a></li>
+                    <li><a href="https://www.instagram.com/BIGeek" target="_blank">Instagram</a></li>
+                    <li><a href="https://www.twitter.com/BIGeek" target="_blank">Twitter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 BIGeek. Всі права захищені.</p>
+        </div>
+    </footer>
 
     <style>
         /* Стиль для випадаючого меню */
@@ -116,6 +145,81 @@
         .dropdown-toggle {
             cursor: pointer;
         }
+        footer {
+            background-color: #ff3b3b; /* Основний червоний колір сайту */
+            color: white; /* Білий текст */
+
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .footer-links, .footer-contact, .footer-social {
+            flex: 1;
+            min-width: 180px;
+            margin: 10px;
+        }
+
+            .footer-links h3, .footer-contact h3, .footer-social h3 {
+                border-bottom: 2px solid white; /* Білий роздільник */
+                padding-bottom: 8px;
+                font-size: 1.1em;
+            }
+
+            .footer-links ul {
+                list-style-type: none; /* Прибираємо маркери */
+                padding: 0;
+                margin: 10px 0;
+            }
+
+                .footer-links ul li, .footer-social ul li {
+                    margin: 8px 0;
+                }
+
+            .footer-links a, .footer-social a {
+                color: white;
+                text-decoration: none;
+                transition: color 0.3s; /* Додаємо анімацію зміни кольору */
+            }
+
+                .footer-links a:hover, .footer-social a:hover {
+                    color: #cccccc; /* Легкий сірий при наведенні */
+                }
+
+        .footer-bottom {
+            background-color: #d60000; /* Темніший червоний колір для нижнього розділу */
+            padding: 10px 0;
+            font-size: 0.9em;
+            color: #f0f0f0; /* Трохи світліший відтінок для тексту */
+        }
+
+            .footer-bottom p {
+                margin: 0;
+            }
+
+        .footer-contact p {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+
+        .footer-social ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+            .footer-social ul li {
+                display: inline; /* Горизонтальне розташування посилань на соціальні мережі */
+                margin-right: 15px;
+
+
     </style>
 </body>
 </html>

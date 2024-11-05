@@ -13,6 +13,7 @@ namespace _2.Data
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
+        //public DbSet<> Categories { get; set; }
 
         // Метод налаштування контексту бази даних
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Product>
+
+<h2>Товари за пошуком: @ViewBag.Query</h2>
+
+@if (!Model.Any())
+{
+    <p>Немає товарів у цій категорії.</p>
+}
+else
+{
+    <div class="products">
+        @foreach (var product in Model)
+        {
+            <div class="product">
+                <img src="~/images/@product.ImageUrl" alt="@product.Name" class="product-img" />
+                <h2>@product.Name</h2>
+                <p>Ціна: $@product.Price</p>
+                <button class="buy-btn add-to-cart" data-product-id="@product.Id">Додати в кошик</button>
+            </div>
+        }
+    </div>
+}

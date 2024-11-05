@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "OsjJnnFSZ149zwzV20zkaegn3PUy8EFSkU6vr/tzvto=",
+  "Hash": "GW8z7LhZSMpCk3IwvijVjGt8EuHWzRIJm3yFjAZ8BBA=",
   "Source": "2",
   "BasePath": "_content/2",
   "Mode": "Default",
@@ -1271,6 +1271,25 @@
       "OriginalItemSpec": "wwwroot/images/iPad-Pro-M2-2022-12-9-spacegray-photo.jpg"
     },
     {
+      "Identity": "/Users/koliakrutoy/Projects/2/BIGeek/2/2/wwwroot/images/iphone11green.jpg",
+      "SourceId": "2",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/koliakrutoy/Projects/2/BIGeek/2/2/wwwroot/",
+      "BasePath": "_content/2",
+      "RelativePath": "images/iphone11green.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/iphone11green.jpg"
+    },
+    {
       "Identity": "/Users/koliakrutoy/Projects/2/BIGeek/2/2/wwwroot/images/iphone14pro.jpg",
       "SourceId": "2",
       "SourceType": "Discovered",
@@ -1288,6 +1307,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/images/iphone14pro.jpg"
+    },
+    {
+      "Identity": "/Users/koliakrutoy/Projects/2/BIGeek/2/2/wwwroot/images/iphonexsgold.jpg",
+      "SourceId": "2",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/koliakrutoy/Projects/2/BIGeek/2/2/wwwroot/",
+      "BasePath": "_content/2",
+      "RelativePath": "images/iphonexsgold.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/iphonexsgold.jpg"
     },
     {
       "Identity": "/Users/koliakrutoy/Projects/2/BIGeek/2/2/wwwroot/images/logo-icon-removebg-preview.png",

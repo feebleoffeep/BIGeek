@@ -1,35 +1,40 @@
 ﻿<Properties StartupConfiguration="{09F60CB1-6C4B-4910-8848-FD89EBC17BED}|https">
-  <MonoDevelop.Ide.ItemProperties.2 PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="2/Views/Home/index.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="2/Views/Account/Register.cshtml">
     <Files>
-      <File FileName="2/wwwroot/css/site.css" Line="150" Column="1" />
-      <File FileName="2/Views/Home/index.cshtml" Line="121" Column="28" />
-      <File FileName="2/Controllers/ProductController.cs" Line="71" Column="13" />
+      <File FileName="2/Views/Product/CreateProduct.cshtml" Line="19" Column="46" />
+      <File FileName="2/Views/Product/ManageProducts.cshtml" Line="56" Column="21" />
+      <File FileName="2/Views/Home/index.cshtml" Line="25" Column="94" />
+      <File FileName="2/Views/Product/EditProduct.cshtml" Line="11" Column="9" />
+      <File FileName="2/Controllers/ProductController.cs" Line="166" Column="1" />
+      <File FileName="2/Controllers/HomeController.cs" Line="1" Column="1" />
       <File FileName="2/Models/Product.cs" Line="1" Column="1" />
-      <File FileName="2/Models/Category.cs" Line="10" Column="1" />
-      <File FileName="2/Views/Category/ProductsByCategory.cshtml" Line="3" Column="23" />
-      <File FileName="2/Views/Cart/index.cshtml" Line="1" Column="1" />
-      <File FileName="2/Views/Shared/_Layout.cshtml" Line="1" Column="1" />
+      <File FileName="2/Views/Shared/_Layout.cshtml" Line="226" Column="1" />
+      <File FileName="2/Views/Product/SearchResults.cshtml" Line="16" Column="39" />
+      <File FileName="2/Views/Product/ByCategory.cshtml" Line="10" Column="35" />
+      <File FileName="2/wwwroot/css/site.css" Line="232" Column="1" />
+      <File FileName="2/Views/Account/Register.cshtml" Line="31" Column="51" />
+      <File FileName="2/Views/Account/Login.cshtml" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="2" expanded="True">
+          <Node name="2">
             <Node name="2">
               <Node name="Controllers" expanded="True" />
+              <Node name="Data" expanded="True" />
               <Node name="Models" expanded="True" />
               <Node name="Views">
+                <Node name="Account">
+                  <Node name="Register.cshtml" selected="True" />
+                </Node>
+                <Node name="Admin" expanded="True" />
                 <Node name="Cart" expanded="True" />
                 <Node name="Category" expanded="True" />
-                <Node name="Home" expanded="True">
-                  <Node name="index.cshtml" selected="True" />
-                </Node>
-                <Node name="Shared" expanded="True" />
+                <Node name="Home" expanded="True" />
+                <Node name="Product" expanded="True" />
+              </Node>
+              <Node name="wwwroot" expanded="True">
+                <Node name="css" expanded="True" />
               </Node>
             </Node>
           </Node>
@@ -40,5 +45,11 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.2 PreferredExecutionTarget="/Applications/Google Chrome.app" />
 </Properties>

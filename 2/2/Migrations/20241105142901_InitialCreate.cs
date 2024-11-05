@@ -7,7 +7,7 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace _2.Migrations
 {
     /// <inheritdoc />
-    public partial class migration1 : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -189,10 +189,11 @@ namespace _2.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "longtext", nullable: false),
-                    Description = table.Column<string>(type: "longtext", nullable: false),
-                    ImageUrl = table.Column<string>(type: "longtext", nullable: false),
+                    Name = table.Column<string>(type: "longtext", nullable: true),
+                    Description = table.Column<string>(type: "longtext", nullable: true),
+                    ImageUrl = table.Column<string>(type: "longtext", nullable: true),
                     Price = table.Column<double>(type: "double", nullable: false),
+                    AlternativeNames = table.Column<string>(type: "longtext", nullable: true),
                     CategoryId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>

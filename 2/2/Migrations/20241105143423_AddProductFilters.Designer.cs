@@ -11,8 +11,8 @@ using _2.Data;
 namespace _2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241024172823_migration3")]
-    partial class migration3
+    [Migration("20241105143423_AddProductFilters")]
+    partial class AddProductFilters
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -243,27 +243,47 @@ namespace _2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("AlternativeNames")
+                        .HasColumnType("longtext");
+
+                    b.Property<double?>("BatteryCapacity")
+                        .HasColumnType("double");
+
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("FullDescription")
-                        .IsRequired()
+                    b.Property<string>("Color")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("GraphicsType")
                         .HasColumnType("longtext");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<double>("Price")
                         .HasColumnType("double");
 
-                    b.Property<string>("ShortDescription")
-                        .IsRequired()
+                    b.Property<string>("Processor")
                         .HasColumnType("longtext");
+
+                    b.Property<int?>("RamSize")
+                        .HasColumnType("int");
+
+                    b.Property<double?>("ScreenDiagonal")
+                        .HasColumnType("double");
+
+                    b.Property<string>("ScreenResolution")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("StorageSize")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

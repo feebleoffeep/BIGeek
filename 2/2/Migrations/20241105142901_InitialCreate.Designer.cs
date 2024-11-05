@@ -11,8 +11,8 @@ using _2.Data;
 namespace _2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241024121344_migration2")]
-    partial class migration2
+    [Migration("20241105142901_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -243,19 +243,19 @@ namespace _2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("AlternativeNames")
+                        .HasColumnType("longtext");
+
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<double>("Price")

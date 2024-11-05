@@ -26,39 +26,56 @@
 }
 else
 {
-    <table class="table">
-        <thead>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Найменування</th>
+            <th>Опис</th>
+            <th>ImageUrl</th>
+            <th>Ціна</th>
+            <th>Категорія</th>
+            <th>Альтернативна назва</th>
+            <th>Діагональ екрану</th>
+            <th>Колір</th>
+            <th>Процесор</th>
+            <th>Обсяг пам'яті (ГБ)</th>
+            <th>Обсяг накопичувача (ГБ)</th>
+            <th>Відеокарта</th>
+            <th>Ємність батареї</th>
+            <th>Дії</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
             <tr>
-                <th>ID</th>
-                <th>Найменування</th>
-                <th>Опис</th>
-                <th>ImageUrl</th>
-                <th>Ціна</th>
-                <th>Категорія</th>
-                <th>Дії</th>
+                <td>@product.Id</td>
+                <td>@product.Name</td>
+                <td>@product.Description</td>
+                <td>@product.ImageUrl"</td> 
+                <td>@product.Price</td>
+                <td>@product.Category?.Name</td>
+                <td>@product.AlternativeNames</td> 
+                <td>@product.ScreenDiagonal</td>   
+                <td>@product.Color</td>            
+                <td>@product.Processor</td>
+                <td>@product.RamSize</td>
+                <td>@product.StorageSize</td>
+                <td>@product.GraphicsType</td>
+                <td>@product.BatteryCapacity</td>
+                <td>
+                    <a asp-controller="Product" asp-action="EditProduct" asp-route-id="@product.Id">Редагувати</a>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var product in Model)
-            { 
-                <tr>
-                    <td>@product.Id</td>
-                    <td>@product.Name</td>
-                    <td>@product.Description</td>
-                    <td>@product.ImageUrl</td>
-                    <td>@product.Price</td>
-                    <td>@product.Category?.Name</td>
-                    <td>
-                        <a asp-controller="Product" asp-action="EditProduct" asp-route-id="@product.Id">Редагувати</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+        }
+    </tbody>
+
+</table>
+
 }
 
 <style>
-
     h2 {
         color: #333;
         font-weight: bold;
@@ -152,11 +169,8 @@ else
 
     .search-input {
         padding: 10px;
-        width: 200px;
+        margin-right: 10px; /* Додано відступ між полями */
         border: 1px solid #ddd;
         border-radius: 4px;
-    }
-    a {
-        text-decoration: none;
     }
 </style>

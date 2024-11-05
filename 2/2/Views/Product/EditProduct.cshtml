@@ -14,7 +14,7 @@
     </div>
 
     <div class="form-group">
-        <label for="ShortDescription">Короткий Опис</label>
+        <label for="Description">Короткий Опис</label>
         <textarea class="form-control" asp-for="Description"></textarea>
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
@@ -27,7 +27,7 @@
 
     <div class="form-group">
         <label for="Price">Ціна</label>
-        <input type="number" class="form-control" asp-for="Price" />
+        <input type="number" class="form-control" asp-for="Price" step="0.01" min="0" />
         <span asp-validation-for="Price" class="text-danger"></span>
     </div>
 
@@ -37,15 +37,63 @@
         <span asp-validation-for="CategoryId" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn-save">Зберегти зміни</button>
+    <div class="form-group">
+        <label for="AlternativeName">Альтернативна назва</label>
+        <input type="text" class="form-control" asp-for="AlternativeNames" />
+        <span asp-validation-for="AlternativeNames" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="ScreenDiagonal">Діагональ екрану</label>
+        <input type="text" class="form-control" asp-for="ScreenDiagonal" />
+        <span asp-validation-for="ScreenDiagonal" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="Color">Колір</label>
+        <input type="text" class="form-control" asp-for="Color" />
+        <span asp-validation-for="Color" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="Processor">Процесор</label>
+        <input type="text" class="form-control" asp-for="Processor" />
+        <span asp-validation-for="Processor" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="RamSize">Обсяг пам'яті (ГБ)</label>
+        <input type="number" class="form-control" asp-for="RamSize" min="0" />
+        <span asp-validation-for="RamSize" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="StorageSize">Обсяг накопичувача (ГБ)</label>
+        <input type="number" class="form-control" asp-for="StorageSize" min="0" />
+        <span asp-validation-for="StorageSize" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="GraphicsType">@((Model.Category.Name == "Ноутбук") ? "Відеокарта" : "Відеоядро")</label>
+        <input asp-for="GraphicsType" class="form-control" />
+        <span asp-validation-for="GraphicsType" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="BatteryCapacity">Ємність батареї</label>
+        <input type="text" class="form-control" asp-for="BatteryCapacity" />
+        <span asp-validation-for="BatteryCapacity" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-save">Зберегти зміни</button>
 </form>
 
 <form asp-action="DeleteProduct" method="post" onsubmit="return confirm('Ви впевнені, що хочете видалити цей продукт?');">
     <input type="hidden" asp-for="Id" />
-    <button type="submit" class="btn-delete">Видалити продукт</button>
+    <button type="submit" class="btn btn-delete">Видалити продукт</button>
 </form>
 
-<a asp-action="ManageProducts" class="btn-back">Назад до списку продукції</a>
+<a asp-action="ManageProducts" class="btn btn-back">Назад до списку продукції</a>
 
 <style>
     /* Input field styles */

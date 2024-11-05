@@ -17,22 +17,31 @@ public class ProductController : Controller
         _context = context;
     }
 
-    // Список продуктів
     public IActionResult ManageProducts(string searchTerm)
     {
-        // Отримуємо всі продукти з бази даних
         var products = _context.Products.Include(c => c.Category).AsQueryable();
 
         // Якщо введено термін пошуку, фільтруємо продукти
         if (!string.IsNullOrWhiteSpace(searchTerm))
         {
-            products = products.Where(p => p.Name.Contains(searchTerm));
+            searchTerm = searchTerm.ToLower(); // Переводимо пошуковий термін у нижній регістр
+
+            // Завантажуємо продукти в пам'ять, щоб обробити альтернативні назви
+            products = products.ToList().Where(p =>
+                p.Name.ToLower().Contains(searchTerm) ||
+                (p.AlternativeNames != null && p.AlternativeNames
+                    .ToLower().Split(',')
+                    .Any(an => an.Trim().Contains(searchTerm)))
+            ).AsQueryable();
         }
 
-        // Повертаємо відфільтровані продукти до представлення
         ViewData["SearchTerm"] = searchTerm; // Зберігаємо термін для відображення в полі вводу
         return View(products.ToList());
     }
+
+
+
+
 
     // Створення продукту (Форма)
     public IActionResult CreateProduct()
@@ -97,5 +106,68 @@ public class ProductController : Controller
         ViewBag.Category = category; // Зберігаємо назву категорії для відображення в заголовку
         return View(products); // Повертаємо знайдені продукти до представлення
     }
+    // Видалення продукту (Підтвердження видалення)
+    public async Task<IActionResult> DeleteProduct(int id)
+    {
+        var product = await _context.Products
+            .Include(c => c.Category) // Включаємо категорію для відображення
+            .FirstOrDefaultAsync(p => p.Id == id);
+
+        if (product == null)
+        {
+            return NotFound();
+        }
+
+        return View(product); // Повертаємо до представлення для підтвердження видалення
+    }
+
+    // Видалення продукту (Обробка запиту)
+    [HttpPost, ActionName("DeleteProduct")]
+    public async Task<IActionResult> DeleteProductConfirmed(int id)
+    {
+        var product = await _context.Products.FindAsync(id);
+        if (product != null)
+        {
+            _context.Products.Remove(product);
+            await _context.SaveChangesAsync();
+        }
+
+        return RedirectToAction("ManageProducts"); // Повернення до списку продуктів після видалення
+    }
+    [AllowAnonymous] // Дозволяє доступ для всіх користувачів, не тільки для адміністраторів
+
+    public IActionResult Search(string query)
+    {
+        if (string.IsNullOrWhiteSpace(query))
+        {
+            return View("SearchResults", new List<Product>());
+        }
+
+        var products = _context.Products
+            .Include(p => p.Category)
+            .ToList();
+
+        var lowerCaseQuery = query.ToLower();
+
+        var filteredProducts = products
+            .Where(p =>
+                p.Name != null && p.Name.ToLower().Contains(lowerCaseQuery) ||
+                (p.AlternativeNames != null &&
+                 p.AlternativeNames
+                    .Split(',')
+                    .Select(altName => altName.Trim().ToLower())
+                    .Any(name => name.Contains(lowerCaseQuery)))
+            )
+            .ToList();
+
+        ViewBag.Query = query; // Додаємо запит до ViewBag
+        return View("SearchResults", filteredProducts);
+    }
+
+
+
+
+
+
 
 }

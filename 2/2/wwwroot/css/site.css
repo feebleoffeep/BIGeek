@@ -82,14 +82,12 @@ header nav {
 main {
     width: 80%;
     padding: 15px 10%;
-    margin: 50px 0;
 }
 
 .products {
     display: flex;
     flex-wrap: wrap;
     justify-content: start;
-    margin: 10px 0;
     gap: 30px;
 }
 
@@ -144,7 +142,6 @@ main {
 
 .main-container {
     display: flex;
-    justify-content: space-between;
     width: 100%;
 }
 
@@ -232,30 +229,7 @@ main {
 ul {
     padding: 0;
 }
-footer {
-    background-color: #f8f8f8; /* Колір фону */
-    padding: 20px 0; /* Внутрішні відступи */
-    text-align: center; /* Вирівнювання тексту по центру */
-}
 
-.footer-content {
-    max-width: 1200px; /* Максимальна ширина футера */
-    margin: 0 auto; /* Вирівнювання по центру */
-}
-
-    .footer-content p {
-        margin: 5px 0; /* Відступи для параграфів */
-    }
-
-.social-links {
-    list-style-type: none; /* Без маркерів */
-    padding: 0; /* Без відступів */
-}
-
-    .social-links li {
-        display: inline; /* Розташування елементів в рядок */
-        margin: 0 10px; /* Відступи між соціальними іконками */
-    }
 /* Стиль для полів введення */
 .form-control {
     margin-bottom: 20px;

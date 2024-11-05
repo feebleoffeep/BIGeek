@@ -21,8 +21,16 @@
       "PackagePath": "staticwebassets/images/iPad-Pro-M2-2022-12-9-spacegray-photo.jpg"
     },
     {
+      "Id": "/Users/koliakrutoy/Projects/2/BIGeek/2/2/wwwroot/images/iphone11green.jpg",
+      "PackagePath": "staticwebassets/images/iphone11green.jpg"
+    },
+    {
       "Id": "/Users/koliakrutoy/Projects/2/BIGeek/2/2/wwwroot/images/iphone14pro.jpg",
       "PackagePath": "staticwebassets/images/iphone14pro.jpg"
+    },
+    {
+      "Id": "/Users/koliakrutoy/Projects/2/BIGeek/2/2/wwwroot/images/iphonexsgold.jpg",
+      "PackagePath": "staticwebassets/images/iphonexsgold.jpg"
     },
     {
       "Id": "/Users/koliakrutoy/Projects/2/BIGeek/2/2/wwwroot/images/logo-icon-removebg-preview.png",

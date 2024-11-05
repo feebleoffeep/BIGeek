@@ -14,7 +14,6 @@
                 <li><a asp-controller="Product" asp-action="ByCategory" asp-route-category="Ноутбук">Ноутбуки</a></li>
                 <li><a asp-controller="Product" asp-action="ByCategory" asp-route-category="Планшет">Планшети</a></li>
             </ul>
-
         </section>
     </aside>
 
@@ -25,9 +24,10 @@
             <div class="product">
                 <img src="~/images/@product.ImageUrl" alt="@product.Name" class="product-img" />
                 <h2>@product.Name</h2>
-                <p>@product.Description</p>
-                <p>Ціна: $@product.Price</p>
-                <button class="buy-btn add-to-cart" data-product-id="@product.Id">Додати в кошик</button>
+                <div class="product-info">
+                    <p>Ціна: $@product.Price</p>
+                    <button class="buy-btn add-to-cart" data-product-id="@product.Id">Додати в кошик</button>
+                </div>
             </div>
         }
     </section>
@@ -47,6 +47,9 @@
                 data: { productId: productId },
                 success: function (response) {
                     alert('Товар доданий у кошик!');
+                    // Оновити значок кошика або лічильник товарів у кошику
+                    var cartCount = $('#cart-count');
+                    cartCount.text(parseInt(cartCount.text()) + 1);
                 },
                 error: function () {
                     alert('Сталася помилка при додаванні товару у кошик.');
@@ -88,26 +91,25 @@
 
     .categories a {
         font-size: 1.1em;
-        color: #007bff; /* Link color */
+        color: #007bff;
         text-decoration: none;
         transition: color 0.3s ease;
     }
 
         .categories a:hover {
-            color: #0056b3; /* Hover color */
+            color: #0056b3;
         }
 
     /* Product styling */
     .products {
         width: 80%;
         display: flex;
-        flex-wrap: nowrap;
-        gap: 20px;
+        gap: 18px;
         padding: 10px;
     }
 
     .product {
-        width: 225px; 
+        width: 225px;
         background-color: #fff;
         border: 1px solid #ddd;
         border-radius: 8px;
@@ -115,6 +117,9 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         text-align: center;
         transition: transform 0.2s ease, box-shadow 0.2s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
 
         .product:hover {
@@ -136,23 +141,24 @@
         margin-bottom: 8px;
     }
 
+    .product-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
     .product p {
         font-size: 1em;
         color: #666;
-        margin-bottom: 8px;
+        font-weight: bold;
     }
-
-        /* Price and button styling */
-        .product p:nth-child(4) {
-            font-weight: bold;
-            color: #000;
-        }
 
     .buy-btn {
         background-color: #ff4c4c;
         color: #fff;
         border: none;
-        padding: 10px 20px;
+        padding: 10px;
         border-radius: 5px;
         font-size: 1em;
         cursor: pointer;
@@ -163,3 +169,4 @@
             background-color: #e03b3b;
         }
 </style>
+
