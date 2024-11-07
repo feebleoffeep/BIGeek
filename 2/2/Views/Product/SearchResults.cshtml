@@ -1,22 +1,237 @@
 ﻿@model IEnumerable<Product>
 
-<h2>Товари за пошуком: @ViewBag.Query</h2>
+@{
+    ViewData["Title"] = "BIGeek - Пошук товарів";
+}
 
-@if (!Model.Any())
-{
-    <p>Немає товарів у цій категорії.</p>
-}
-else
-{
-    <div class="products">
-        @foreach (var product in Model)
-        {
-            <div class="product">
-                <img src="~/images/@product.ImageUrl" alt="@product.Name" class="product-img" />
-                <h2>@product.Name</h2>
-                <p>Ціна: $@product.Price</p>
-                <button class="buy-btn add-to-cart" data-product-id="@product.Id">Додати в кошик</button>
+<div class="container">
+    <aside class="sidebar">
+        <h3>Фільтри</h3>
+        <form method="get" asp-action="AdvancedSearch">
+            <input type="hidden" name="query" value="@ViewBag.Query" /> <!-- Приховане поле для початкового запиту -->
+
+            <div class="filter-group">
+                <label for="color">Колір</label>
+                <select name="color" id="color">
+                    <option value="">Всі</option>
+                    <option value="black">Чорний</option>
+                    <option value="white">Білий</option>
+                    <option value="gold">Золотий</option>
+                </select>
             </div>
+
+            <div class="filter-group">
+                <label for="priceMin">Ціна від</label>
+                <input type="number" name="priceMin" id="priceMin" min="0" step="1">
+                <label for="priceMax">до</label>
+                <input type="number" name="priceMax" id="priceMax" min="0" step="1">
+            </div>
+
+            <div class="filter-group">
+                <label for="screenSize">Розмір екрану</label>
+                <select name="screenSize" id="screenSize">
+                    <option value="">Всі</option>
+                    <option value="4,7">4,7</option>
+                    <option value="5,8">5,8</option>
+                    <option value="6,1">6,1</option>
+                    <option value="13,6">13,6</option>
+                    <option value="9,2">9,2</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="ram">Оперативна пам'ять (GB)</label>
+                <select name="ram" id="ram">
+                    <option value="">Всі</option>
+                    <option value="2">2GB</option>
+                    <option value="4">4GB</option>
+                    <option value="6">6GB</option>
+                    <option value="8">8GB</option>
+                    <option value="16">16GB</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="storage">Постійна пам'ять (GB)</label>
+                <select name="storage" id="storage">
+                    <option value="">Всі</option>
+                    <option value="64">64GB</option>
+                    <option value="128">128GB</option>
+                    <option value="256">256GB</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="resolution">Роздільна здатність екрану</label>
+                <input type="text" name="resolution" id="resolution" placeholder="Напр. 1920x1080" />
+            </div>
+
+            <button type="submit" class="filter-btn">Застосувати фільтри</button>
+        </form>
+    </aside>
+
+    <main class="content">
+        <h2>Товари за пошуком: @ViewBag.Query</h2>
+
+        @if (!Model.Any())
+        {
+            <p>Немає товарів, що відповідають вашим критеріям пошуку.</p>
         }
-    </div>
-}
+        else
+        {
+            <section class="products">
+                @foreach (var product in Model)
+                {
+                    <div class="product">
+                        <img src="~/images/@product.ImageUrl" alt="@product.Name" class="product-img" />
+                        <h2>@product.Name</h2>
+                        <div class="product-info">
+                            <p>Ціна: $@product.Price</p>
+                            <button class="buy-btn add-to-cart" data-product-id="@product.Id">Додати в кошик</button>
+                        </div>
+                    </div>
+                }
+            </section>
+        }
+    </main>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>$(document).ready(function () {
+        $('.add-to-cart').click(function (e) {
+            e.preventDefault();
+
+            var productId = $(this).data('product-id');
+
+            $.ajax({
+                url: '/Cart/AddToCart',
+                type: 'POST',
+                data: { productId: productId },
+                success: function (response) {
+                    alert('Товар доданий у кошик!');
+                    var cartCount = $('#cart-count');
+                    cartCount.text(parseInt(cartCount.text()) + 1);
+                },
+                error: function () {
+                    alert('Сталася помилка при додаванні товару у кошик.');
+                }
+            });
+        });
+    });</script>
+
+<style>
+    .container {
+        display: flex;
+        font-family: Arial, sans-serif;
+        color: #333;
+    }
+
+    .sidebar {
+        width: 250px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-right: 2px solid #eaeaea;
+        border-radius: 8px;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+        .sidebar h3 {
+            color: #db2b39;
+            font-size: 1.5em;
+            margin-bottom: 1em;
+            font-weight: bold;
+        }
+
+    .filter-group {
+        margin-bottom: 20px;
+        font-size: 0.9em;
+    }
+
+        .filter-group label {
+            display: block;
+            color: #555;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .filter-group select,
+        .filter-group input[type="number"],
+        .filter-group input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+    .filter-btn {
+        display: block;
+        width: 100%;
+        background-color: #db2b39;
+        color: #fff;
+        border: none;
+        padding: 10px;
+        font-size: 1em;
+        font-weight: bold;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .filter-btn:hover {
+            background-color: #b9232d;
+        }
+
+    .content {
+        flex: 1;
+        padding: 20px;
+    }
+
+    .products {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .product {
+        width: 200px;
+        background-color: #fff;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+        .product h2 {
+            font-size: 1em;
+            color: #333;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+    .product-info {
+        font-size: 0.9em;
+        color: #666;
+    }
+
+    .buy-btn {
+        display: inline-block;
+        background-color: #db2b39;
+        color: #fff;
+        border: none;
+        padding: 8px 12px;
+        font-size: 0.9em;
+        font-weight: bold;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 10px;
+    }
+
+        .buy-btn:hover {
+            background-color: #b9232d;
+        }
+</style>

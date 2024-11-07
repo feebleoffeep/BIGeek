@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using _2.Data;
 
@@ -10,9 +11,11 @@ using _2.Data;
 namespace _2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241107095827_ChangeTypeForScreenDiagonal")]
+    partial class ChangeTypeForScreenDiagonal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -273,8 +276,8 @@ namespace _2.Migrations
                     b.Property<int?>("RamSize")
                         .HasColumnType("int");
 
-                    b.Property<string>("ScreenDiagonal")
-                        .HasColumnType("longtext");
+                    b.Property<double?>("ScreenDiagonal")
+                        .HasColumnType("double");
 
                     b.Property<string>("ScreenResolution")
                         .HasColumnType("longtext");

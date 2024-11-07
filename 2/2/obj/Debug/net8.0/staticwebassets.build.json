@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "GW8z7LhZSMpCk3IwvijVjGt8EuHWzRIJm3yFjAZ8BBA=",
+  "Hash": "vatjDTjVCYBq69na3knAsG6DjIvTFgUmBIq0YnF4wpE=",
   "Source": "2",
   "BasePath": "_content/2",
   "Mode": "Default",
@@ -1309,6 +1309,25 @@
       "OriginalItemSpec": "wwwroot/images/iphone14pro.jpg"
     },
     {
+      "Identity": "/Users/koliakrutoy/Projects/2/BIGeek/2/2/wwwroot/images/iphone7jetblack.jpg",
+      "SourceId": "2",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/koliakrutoy/Projects/2/BIGeek/2/2/wwwroot/",
+      "BasePath": "_content/2",
+      "RelativePath": "images/iphone7jetblack.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/iphone7jetblack.jpg"
+    },
+    {
       "Identity": "/Users/koliakrutoy/Projects/2/BIGeek/2/2/wwwroot/images/iphonexsgold.jpg",
       "SourceId": "2",
       "SourceType": "Discovered",
@@ -1364,6 +1383,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/images/logo-icon.png"
+    },
+    {
+      "Identity": "/Users/koliakrutoy/Projects/2/BIGeek/2/2/wwwroot/images/macbookairm1gold.jpg",
+      "SourceId": "2",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/koliakrutoy/Projects/2/BIGeek/2/2/wwwroot/",
+      "BasePath": "_content/2",
+      "RelativePath": "images/macbookairm1gold.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/macbookairm1gold.jpg"
     },
     {
       "Identity": "/Users/koliakrutoy/Projects/2/BIGeek/2/2/wwwroot/images/macbookairm2.jpg",

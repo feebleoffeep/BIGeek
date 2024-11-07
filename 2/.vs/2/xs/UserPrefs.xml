@@ -1,55 +1,44 @@
 ﻿<Properties StartupConfiguration="{09F60CB1-6C4B-4910-8848-FD89EBC17BED}|https">
-  <MonoDevelop.Ide.Workbench ActiveDocument="2/Views/Account/Register.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="2/Views/Product/SearchResults.cshtml">
     <Files>
-      <File FileName="2/Views/Product/CreateProduct.cshtml" Line="19" Column="46" />
-      <File FileName="2/Views/Product/ManageProducts.cshtml" Line="56" Column="21" />
-      <File FileName="2/Views/Home/index.cshtml" Line="25" Column="94" />
-      <File FileName="2/Views/Product/EditProduct.cshtml" Line="11" Column="9" />
-      <File FileName="2/Controllers/ProductController.cs" Line="166" Column="1" />
-      <File FileName="2/Controllers/HomeController.cs" Line="1" Column="1" />
-      <File FileName="2/Models/Product.cs" Line="1" Column="1" />
-      <File FileName="2/Views/Shared/_Layout.cshtml" Line="226" Column="1" />
-      <File FileName="2/Views/Product/SearchResults.cshtml" Line="16" Column="39" />
-      <File FileName="2/Views/Product/ByCategory.cshtml" Line="10" Column="35" />
-      <File FileName="2/wwwroot/css/site.css" Line="232" Column="1" />
-      <File FileName="2/Views/Account/Register.cshtml" Line="31" Column="51" />
-      <File FileName="2/Views/Account/Login.cshtml" Line="1" Column="1" />
+      <File FileName="2/Views/Home/index.cshtml" Line="1" Column="1" />
+      <File FileName="2/wwwroot/css/site.css" />
+      <File FileName="2/Views/Product/SearchResults.cshtml" Line="40" Column="19" />
+      <File FileName="2/Controllers/ProductController.cs" Line="175" Column="11" />
+      <File FileName="2/Models/Product.cs" Line="14" Column="23" />
+      <File FileName="2/Views/Product/ByCategory.cshtml" Line="1" Column="1" />
+      <File FileName="2/Views/Shared/_Layout.cshtml" />
+      <File FileName="2/Program.cs" Line="39" Column="1" />
+      <File FileName="2/Data/ApplicationDbContext.cs" Line="26" Column="1" />
+      <File FileName="2/Migrations/20241107095827_ChangeTypeForScreenDiagonal.cs" Line="1" Column="1" />
+      <File FileName="2/Migrations/20241107095827_ChangeTypeForScreenDiagonal.Designer.cs" Line="1" Column="1" />
+      <File FileName="2/Controllers/HomeController.cs" Line="23" Column="16" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="2">
+          <Node name="2" expanded="True">
             <Node name="2">
               <Node name="Controllers" expanded="True" />
               <Node name="Data" expanded="True" />
-              <Node name="Models" expanded="True" />
-              <Node name="Views">
-                <Node name="Account">
-                  <Node name="Register.cshtml" selected="True" />
-                </Node>
-                <Node name="Admin" expanded="True" />
-                <Node name="Cart" expanded="True" />
-                <Node name="Category" expanded="True" />
+              <Node name="Views" expanded="True">
                 <Node name="Home" expanded="True" />
-                <Node name="Product" expanded="True" />
+                <Node name="Product" expanded="True">
+                  <Node name="SearchResults.cshtml" selected="True" />
+                </Node>
               </Node>
-              <Node name="wwwroot" expanded="True">
-                <Node name="css" expanded="True" />
-              </Node>
+              <Node name="wwwroot" expanded="True" />
             </Node>
           </Node>
         </State>
       </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
-      </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.2 PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

@@ -29,6 +29,10 @@
       "PackagePath": "staticwebassets/images/iphone14pro.jpg"
     },
     {
+      "Id": "/Users/koliakrutoy/Projects/2/BIGeek/2/2/wwwroot/images/iphone7jetblack.jpg",
+      "PackagePath": "staticwebassets/images/iphone7jetblack.jpg"
+    },
+    {
       "Id": "/Users/koliakrutoy/Projects/2/BIGeek/2/2/wwwroot/images/iphonexsgold.jpg",
       "PackagePath": "staticwebassets/images/iphonexsgold.jpg"
     },
@@ -39,6 +43,10 @@
     {
       "Id": "/Users/koliakrutoy/Projects/2/BIGeek/2/2/wwwroot/images/logo-icon.png",
       "PackagePath": "staticwebassets/images/logo-icon.png"
+    },
+    {
+      "Id": "/Users/koliakrutoy/Projects/2/BIGeek/2/2/wwwroot/images/macbookairm1gold.jpg",
+      "PackagePath": "staticwebassets/images/macbookairm1gold.jpg"
     },
     {
       "Id": "/Users/koliakrutoy/Projects/2/BIGeek/2/2/wwwroot/images/macbookairm2.jpg",

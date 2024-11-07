@@ -126,6 +126,13 @@ namespace _2.Controllers
             SaveCart(new List<CartItem>());
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult Search()
+        {
+            // Перенаправлення з /Cart/Search на /Cart
+            return RedirectToAction("Index");
+        }
     }
 }
 

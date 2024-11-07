@@ -11,7 +11,7 @@ namespace _2.Models
         public string? ImageUrl { get; set; }
         public double Price { get; set; }
         public string? AlternativeNames { get; set; }
-        public double? ScreenDiagonal { get; set; }
+        public string? ScreenDiagonal { get; set; }
         public string? Color { get; set; }
         public string? Processor { get; set; }
         public int? RamSize { get; set; }

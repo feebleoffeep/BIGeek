@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using _2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Org.BouncyCastle.Tsp;
+using Microsoft.IdentityModel.Tokens;
 
 [Authorize(Roles = "Admin")]
 public class ProductController : Controller
@@ -164,9 +166,89 @@ public class ProductController : Controller
         return View("SearchResults", filteredProducts);
     }
 
+    [AllowAnonymous]
+    public IActionResult AdvancedSearch(
+    string query,
+    string color,
+    int? priceMin,
+    int? priceMax,
+    string screenSize, // Тип double для зберігання розміру екрану
+    int? ram,
+    int? storage,
+    string resolution)
+{
+    // Ініціалізуємо запит до бази даних
+    var products = _context.Products.AsQueryable();
 
+    // Отримуємо унікальні значення для фільтрів
+    var colors = _context.Products.Select(p => p.Color).Distinct().ToList();
+    var screenSizes = _context.Products.Select(p => p.ScreenDiagonal).Distinct().ToList();
+    var rams = _context.Products.Select(p => p.RamSize).Distinct().ToList();
+    var storages = _context.Products.Select(p => p.StorageSize).Distinct().ToList();
+    var resolutions = _context.Products.Select(p => p.ScreenResolution).Distinct().ToList();
 
+    // Передаємо значення для фільтрів у ViewBag
+    ViewBag.Colors = colors;
+    ViewBag.ScreenSizes = screenSizes;
+    ViewBag.Rams = rams;
+    ViewBag.Storages = storages;
+    ViewBag.Resolutions = resolutions;
 
+    // Фільтруємо за запитом, кольором, ціною, екраном і т.д.
+    if (!string.IsNullOrEmpty(query))
+    {
+        var searchQuery = query.ToLower();
+        products = products
+            .AsEnumerable()
+            .Where(p =>
+                (p.Name != null && p.Name.ToLower().Contains(searchQuery)) ||
+                (p.AlternativeNames != null &&
+                 p.AlternativeNames
+                    .Split(',', StringSplitOptions.None)
+                    .Select(altName => altName.Trim().ToLower())
+                    .Contains(searchQuery))
+            ).AsQueryable();
+    }
+
+    if (!string.IsNullOrEmpty(color))
+    {
+        products = products.Where(p => p.Color.Equals(color, StringComparison.OrdinalIgnoreCase));
+    }
+
+    if (priceMin.HasValue)
+    {
+        products = products.Where(p => p.Price >= priceMin.Value);
+    }
+    if (priceMax.HasValue)
+    {
+        products = products.Where(p => p.Price <= priceMax.Value);
+    }
+
+        if (!string.IsNullOrEmpty(screenSize))
+        {
+            products = products.Where(p => p.ScreenDiagonal.ToString() == screenSize);
+        }
+
+        if (ram.HasValue)
+    {
+        products = products.Where(p => p.RamSize == ram.Value);
+    }
+
+    if (storage.HasValue)
+    {
+        products = products.Where(p => p.StorageSize == storage.Value);
+    }
+
+    if (!string.IsNullOrEmpty(resolution))
+    {
+        products = products.Where(p => p.ScreenResolution.Contains(resolution, StringComparison.OrdinalIgnoreCase));
+    }
+
+    // Передаємо результат в представлення
+    ViewBag.Query = query;
+
+    return View("SearchResults", products.ToList());
+}
 
 
 
