@@ -1,26 +1,46 @@
 ﻿<Properties StartupConfiguration="{09F60CB1-6C4B-4910-8848-FD89EBC17BED}|https">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.2 PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="2/Views/Product/EditProduct.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="2/Views/City/ManageCity.cshtml">
     <Files>
-      <File FileName="2/Controllers/ProductController.cs" Line="69" Column="45" />
-      <File FileName="2/Models/Category.cs" Line="1" Column="1" />
-      <File FileName="2/Models/Product.cs" Line="28" Column="6" />
-      <File FileName="2/Views/Product/EditProduct.cshtml" Line="1" Column="1" />
+      <File FileName="2/Models/Category.cs" Line="12" Column="9" />
+      <File FileName="2/Models/Orders/DeliveryMethod.cs" Line="5" Column="18" />
+      <File FileName="2/Views/DeliveryMethod/CreateDeliveryMethod.cshtml" Line="15" Column="1" />
+      <File FileName="2/Controllers/DeliveryMethodController.cs" Line="101" Column="18" />
+      <File FileName="2/Migrations/ApplicationDbContextModelSnapshot.cs" Line="1" Column="1" />
+      <File FileName="2/Migrations/20241109094141_changedelmethod2.0.cs" Line="1" Column="1" />
+      <File FileName="2/Views/DeliveryMethod/EditDeliveryMethod.cshtml" Line="99" Column="1" />
+      <File FileName="2/Views/Checkout/OrderConfirmation.cshtml" Line="26" Column="18" />
+      <File FileName="2/Views/Checkout/index.cshtml" Line="77" Column="1" />
+      <File FileName="2/Controllers/CheckoutController.cs" Line="150" Column="1" />
+      <File FileName="2/Models/Orders/Order.cs" Line="24" Column="1" />
+      <File FileName="2/Models/Orders/OrderItem.cs" Line="1" Column="1" />
+      <File FileName="2/Controllers/CategoryController.cs" Line="63" Column="5" />
+      <File FileName="2/Models/City.cs" Line="5" Column="18" />
+      <File FileName="2/Data/ApplicationDbContext.cs" Line="24" Column="38" />
+      <File FileName="2/Controllers/HomeController.cs" Line="20" Column="1" />
+      <File FileName="2/Models/Cart.cs" Line="1" Column="1" />
+      <File FileName="2/Models/CartItem.cs" Line="5" Column="9" />
+      <File FileName="2/Controllers/CartController.cs" Line="1" Column="1" />
+      <File FileName="2/Controllers/CityController.cs" Line="48" Column="66" />
+      <File FileName="2/Views/City/CreateCity.cshtml" Line="1" Column="22" />
+      <File FileName="2/Views/City/EditCitycshtml.cshtml" Line="10" Column="39" />
+      <File FileName="2/Views/City/ManageCity.cshtml" Line="31" Column="32" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="2" expanded="True">
-            <Node name="2" expanded="True">
-              <Node name="Controllers" expanded="True" />
-              <Node name="Models" expanded="True" />
-              <Node name="Views" expanded="True">
-                <Node name="Product" expanded="True">
-                  <Node name="EditProduct.cshtml" selected="True" />
+          <Node name="2">
+            <Node name="2">
+              <Node name="Data" expanded="True" />
+              <Node name="Models" expanded="True">
+                <Node name="Orders" expanded="True" />
+              </Node>
+              <Node name="Views">
+                <Node name="Checkout" expanded="True" />
+                <Node name="City" expanded="True">
+                  <Node name="ManageCity.cshtml" selected="True" />
                 </Node>
+                <Node name="DeliveryMethod" expanded="True" />
               </Node>
             </Node>
           </Node>
@@ -31,4 +51,7 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.2 PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
 </Properties>

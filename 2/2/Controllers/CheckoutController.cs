@@ -27,7 +27,7 @@ public class CheckoutController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> PlaceOrder(int deliveryMethodId, string cityName, float? distance)
+    public async Task<IActionResult> PlaceOrder(int deliveryMethodId, float? distance)
     {
         var cart = GetCart();
 
@@ -35,15 +35,6 @@ public class CheckoutController : Controller
         {
             ModelState.AddModelError("", "Ваш кошик порожній.");
             return RedirectToAction("Index", "Cart");
-        }
-
-        // Розрахунок відстані за вибраним містом
-        var selectedCity = _context.Cities.FirstOrDefault(c => c.Name == cityName);
-        double distanceToCity = 0;
-
-        if (selectedCity != null)
-        {
-            distanceToCity = GetDistance(49.4673, 27.5161, selectedCity.Latitude, selectedCity.Longitude);
         }
 
         // Отримання вибраного методу доставки
@@ -59,12 +50,13 @@ public class CheckoutController : Controller
         double deliveryPrice = 0;
         string deliveryTime = "";
 
-        if (selectedDeliveryMethod.Name == "Кур'єр" && distanceToCity > 0)
+        // Розрахунок ціни і часу доставки для кур'єра
+        if (selectedDeliveryMethod.Id == 2 && distance.HasValue) // ID кур'єра = 2
         {
-            deliveryPrice = distanceToCity * 5; // Ціна доставки
-            deliveryTime = (distanceToCity / 50).ToString("F1") + " год."; // Час доставки
+            deliveryPrice = distance.Value * 5; // Ціна доставки: 5 грн за км
+            deliveryTime = (distance.Value / 50).ToString("F1") + " год."; // Час доставки: 1 година на 50 км
         }
-        else if (selectedDeliveryMethod.Name == "Самовивіз")
+        else if (selectedDeliveryMethod.Id == 1) // Самовивіз
         {
             deliveryPrice = 0;
             deliveryTime = "Не потрібно";
@@ -74,9 +66,9 @@ public class CheckoutController : Controller
         var order = new Order
         {
             OrderDate = DateTime.Now,
-            DeliveryMethodId = deliveryMethodId,
-            DeliveryPrice = deliveryPrice,
-            DeliveryTime = deliveryTime,
+            DeliveryMethodId = deliveryMethodId, // Збереження вибраного методу доставки
+            DeliveryPrice = deliveryPrice,       // Збереження ціни доставки
+            DeliveryTime = deliveryTime,         // Збереження часу доставки
             OrderItems = cart.Select(i => new OrderItem
             {
                 ProductId = i.ProductId,
@@ -85,16 +77,15 @@ public class CheckoutController : Controller
             }).ToList()
         };
 
-        // Збереження замовлення у базу даних
+        // Збереження замовлення в базу даних
         _context.Orders.Add(order);
         await _context.SaveChangesAsync();
 
-        // Очищення кошика
+        // Очищення кошика після успішного замовлення
         SaveCart(new List<CartItem>());
 
         return RedirectToAction("OrderConfirmation", new { orderId = order.Id });
     }
-
 
     public IActionResult OrderConfirmation(int orderId)
     {
@@ -122,32 +113,9 @@ public class CheckoutController : Controller
         // Збереження кошика в сесію
         HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(cart));
     }
-
-    public double GetDistance(double lat1, double lon1, double lat2, double lon2)
-    {
-        const double R = 6371; // Рadius of Earth in km
-        var lat1Rad = ToRadians(lat1);
-        var lon1Rad = ToRadians(lon1);
-        var lat2Rad = ToRadians(lat2);
-        var lon2Rad = ToRadians(lon2);
-
-        var dlat = lat2Rad - lat1Rad;
-        var dlon = lon2Rad - lon1Rad;
-
-        var a = Math.Sin(dlat / 2) * Math.Sin(dlat / 2) +
-                Math.Cos(lat1Rad) * Math.Cos(lat2Rad) *
-                Math.Sin(dlon / 2) * Math.Sin(dlon / 2);
-        var c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
-
-        var distance = R * c; // Відстань в км
-        return distance;
-    }
-
-    private double ToRadians(double degree)
-    {
-        return degree * (Math.PI / 180);
-    }
-
 }
+
+
+
 
 

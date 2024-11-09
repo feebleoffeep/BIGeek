@@ -19,7 +19,6 @@ namespace _2.Data
         public DbSet<OrderStatus> OrderStatuses { get; set; }
         public DbSet<DeliveryMethod> DeliveryMethods { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
-        public DbSet<City> Cities { get; set; }
         // Метод конфігурації контексту бази даних
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

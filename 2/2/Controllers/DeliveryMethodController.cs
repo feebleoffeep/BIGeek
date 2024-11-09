@@ -98,29 +98,6 @@ namespace _2.Controllers
                 await _context.SaveChangesAsync();
             }
             return RedirectToAction("ManageDeliveryMethod");
-        }
-        public IActionResult Index()
-        {
-            // Місто магазину (Красилів)
-            var storeLatitude = 49.4673;
-            var storeLongitude = 27.5161;
-
-            // Список міст з координатами
-            var cities = new List<City>
-        {
-            new City { Name = "Київ", Latitude = 50.4501, Longitude = 30.5186 },
-            new City { Name = "Харків", Latitude = 49.9935, Longitude = 36.2304 },
-            new City { Name = "Львів", Latitude = 49.8397, Longitude = 24.0297 },
-            new City { Name = "Одеса", Latitude = 46.4825, Longitude = 30.7326 },
-
-        };
-
-            ViewBag.Cities = cities;
-            return View();
-        }
-
-        
-
-
+        }        
     }
 }
