@@ -17,8 +17,8 @@ namespace _2.Models
         public int? RamSize { get; set; }
         public int? StorageSize { get; set; }
         public string? ScreenResolution { get; set; }
-        public string? GraphicsType { get; set; } // Наприклад, NVIDIA GTX 1650
-        public double? BatteryCapacity { get; set; } // У мАг
+        public string? GraphicsType { get; set; } 
+        public double? BatteryCapacity { get; set; } 
 
 
         public int? CategoryId { get; set; }

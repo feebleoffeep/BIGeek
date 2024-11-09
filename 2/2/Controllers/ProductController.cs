@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Org.BouncyCastle.Tsp;
 using Microsoft.IdentityModel.Tokens;
 
-[Authorize(Roles = "Admin")]
 public class ProductController : Controller
 {
     private readonly ApplicationDbContext _context;

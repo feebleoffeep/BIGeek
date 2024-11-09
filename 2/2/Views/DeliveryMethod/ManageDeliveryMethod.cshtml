@@ -1,0 +1,110 @@
+﻿@model IEnumerable<_2.Models.DeliveryMethod>
+
+@{
+    ViewData["Title"] = "Список доставок";
+}
+
+<div class="header-container">
+    <h2 class="title">Керування доставками</h2>
+</div>
+<a href="@Url.Action("CreateDeliveryMethod", "DeliveryMethod")" class="btn btn-success">Додати доставку</a>
+
+@if (!Model.Any())
+{
+    <p>Немає жодних варіантів доставки. Додайте першу:</p>
+    <a href="@Url.Action("CreateDeliveryMethod", "DeliveryMethod")" class="btn btn-success">Додати нову доставку</a>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Назва доставки</th>
+                <th>Дії</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var deliveryMethod in Model)
+            {
+                <tr>
+                    <td>@deliveryMethod.Id</td>
+                    <td>@deliveryMethod.Name</td>
+                    <td>
+                        <a asp-controller="DeliveryMethod" asp-action="EditDeliveryMethod" asp-route-id="@deliveryMethod.Id" class="btn btn-primary">Редагувати</a>
+                        <a asp-controller="DeliveryMethod" asp-action="DeleteDeliveryMethod" asp-route-id="@deliveryMethod.Id" class="btn btn-danger" onclick="return confirm('Ви впевнені, що хочете видалити цей метод доставки?')">Видалити</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<style>
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+        .header-container .btn {
+            margin-left: 10px;
+        }
+
+    h2 {
+        color: #333;
+        font-weight: bold;
+        margin: 20px 0;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+        .table th, .table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        .table td {
+            color: #555;
+        }
+
+    .btn {
+        padding: 8px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin: 0 5px;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    a {
+        text-decoration: none;
+    }
+</style>

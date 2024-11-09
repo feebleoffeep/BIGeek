@@ -1,0 +1,76 @@
+﻿@model IEnumerable<_2.Models.CartItem>
+
+<h2>Оформлення замовлення</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Товар</th>
+            <th>Ціна</th>
+            <th>Кількість</th>
+            <th>Загальна сума</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Price</td>
+                <td>@item.Quantity</td>
+                <td>@(item.Price * item.Quantity)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>Загальна вартість: <strong>@Model.Sum(i => i.Price * i.Quantity)</strong></p>
+
+<h3>Вибір методу доставки</h3>
+<form asp-action="PlaceOrder" method="post">
+    <select name="DeliveryMethodId" class="form-control" id="DeliveryMethodId" onchange="updateDeliveryDetails()">
+        @foreach (var deliveryMethod in ViewBag.DeliveryMethods as IEnumerable<_2.Models.DeliveryMethod>)
+        {
+            <option value="@deliveryMethod.Id">@deliveryMethod.Name</option>
+        }
+    </select>
+
+    <!-- Вибір відстані (тільки якщо вибрано "Кур'єр") -->
+    <div class="form-group" id="DistanceDiv" style="display:none;">
+        <label for="Distance">Відстань (км):</label>
+        <input type="number" name="distance" id="Distance" class="form-control" step="0.1" />
+    </div>
+
+    <!-- Виведення ціни і часу доставки (тільки якщо вибрано "Кур'єр") -->
+    <div id="DeliveryInfo" style="margin-top: 20px; display:none;">
+        <p>Ціна доставки: <span id="DeliveryPrice">0</span> грн</p>
+        <p>Час доставки: <span id="DeliveryTime">0</span> годин</p>
+    </div>
+
+    <button type="submit" class="btn btn-success">Підтвердити замовлення</button>
+</form>
+
+<script>function updateDeliveryDetails() {
+        var deliveryMethodId = document.getElementById('DeliveryMethodId').value;
+        var distanceDiv = document.getElementById('DistanceDiv');
+        var deliveryInfo = document.getElementById('DeliveryInfo');
+        var distanceInput = document.getElementById('Distance');
+
+        if (deliveryMethodId == "2") { // ID кур'єра = 2
+            distanceDiv.style.display = "block";
+            deliveryInfo.style.display = "block";
+            distanceInput.addEventListener('input', function () {
+                var distance = parseFloat(this.value);
+                if (!isNaN(distance)) {
+                    var deliveryPrice = distance * 5; // Ціна доставки: 5 грн за км
+                    var deliveryTime = distance / 50; // Час доставки: 1 година на 50 км
+
+                    document.getElementById('DeliveryPrice').textContent = deliveryPrice.toFixed(2);
+                    document.getElementById('DeliveryTime').textContent = deliveryTime.toFixed(1);
+                }
+            });
+        } else {
+            distanceDiv.style.display = "none";
+            deliveryInfo.style.display = "none";
+        }
+    }</script>

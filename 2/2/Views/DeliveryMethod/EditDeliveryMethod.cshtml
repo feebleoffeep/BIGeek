@@ -1,0 +1,98 @@
+﻿@model _2.Models.DeliveryMethod
+
+@{
+    ViewData["Title"] = "Редагування";
+}
+
+<h2>Редагувати доставку</h2>
+
+<form asp-action="EditDeliveryMethod" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Name" class="form-label">Назва доставки</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Зберегти зміни</button>
+</form>
+
+<form asp-action="DeleteDeliveryMethod" method="post" onsubmit="return confirm('Ви впевнені, що хочете видалити цю доставку?');">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Видалити доставку</button>
+</form>
+
+<a asp-action="ManageDeliveryMethod" class="btn btn-secondary">Назад до списку доставок</a>
+
+<style>
+    /* Загальні стилі для полів форми */
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-label {
+        font-weight: bold;
+        font-size: 14px;
+        color: #333;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        border: 1px solid #E0E0E0;
+        border-radius: 4px;
+        font-size: 16px;
+        box-sizing: border-box;
+    }
+
+    /* Стилі для кнопок */
+    button.btn-primary {
+        background-color: #FF4136;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+        button.btn-primary:hover {
+            background-color: #FF6347;
+        }
+
+    button.btn-danger {
+        background-color: #d9534f;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 10px;
+    }
+
+        button.btn-danger:hover {
+            background-color: #c9302c;
+        }
+
+    /* Стилі для кнопки "Назад" */
+    a.btn-secondary {
+        display: inline-block;
+        margin-top: 20px;
+        text-decoration: none;
+        color: #FF4136;
+        font-weight: bold;
+    }
+
+        a.btn-secondary:hover {
+            text-decoration: underline;
+        }
+
+    /* Повідомлення про помилки */
+    .text-danger {
+        color: red;
+        font-size: 12px;
+    }
+</style>

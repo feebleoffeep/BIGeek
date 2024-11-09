@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using _2.Data;
 
@@ -10,9 +11,11 @@ using _2.Data;
 namespace _2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241109094141_changedelmethod2.0")]
+    partial class changedelmethod20
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -277,13 +280,6 @@ namespace _2.Migrations
 
                     b.Property<int>("DeliveryMethodId")
                         .HasColumnType("int");
-
-                    b.Property<double>("DeliveryPrice")
-                        .HasColumnType("double");
-
-                    b.Property<string>("DeliveryTime")
-                        .IsRequired()
-                        .HasColumnType("longtext");
 
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime(6)");

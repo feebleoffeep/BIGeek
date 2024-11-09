@@ -1,0 +1,33 @@
+﻿@model _2.Models.Order
+
+<h2>Підтвердження замовлення</h2>
+
+<p>Ваше замовлення номер @Model.Id було успішно оформлено.</p>
+
+<h3>Інформація про замовлення</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Товар</th>
+            <th>Ціна</th>
+            <th>Кількість</th>
+            <th>Загальна сума</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderItems)
+        {
+            <tr>
+                <td>@item.Product.Name</td>
+                <td>@item.Price</td>
+                <td>@item.Quantity</td>
+                <td>@(item.Price * item.Quantity)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>Загальна вартість: <strong>@Model.OrderItems.Sum(i => i.Price * i.Quantity)</strong></p>
+
+<a href="/" class="btn btn-primary">Повернутися до каталогу</a>

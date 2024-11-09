@@ -1,44 +1,34 @@
 ﻿<Properties StartupConfiguration="{09F60CB1-6C4B-4910-8848-FD89EBC17BED}|https">
-  <MonoDevelop.Ide.Workbench ActiveDocument="2/Views/Product/SearchResults.cshtml">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.2 PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="2/Views/Product/EditProduct.cshtml">
     <Files>
-      <File FileName="2/Views/Home/index.cshtml" Line="1" Column="1" />
-      <File FileName="2/wwwroot/css/site.css" />
-      <File FileName="2/Views/Product/SearchResults.cshtml" Line="40" Column="19" />
-      <File FileName="2/Controllers/ProductController.cs" Line="175" Column="11" />
-      <File FileName="2/Models/Product.cs" Line="14" Column="23" />
-      <File FileName="2/Views/Product/ByCategory.cshtml" Line="1" Column="1" />
-      <File FileName="2/Views/Shared/_Layout.cshtml" />
-      <File FileName="2/Program.cs" Line="39" Column="1" />
-      <File FileName="2/Data/ApplicationDbContext.cs" Line="26" Column="1" />
-      <File FileName="2/Migrations/20241107095827_ChangeTypeForScreenDiagonal.cs" Line="1" Column="1" />
-      <File FileName="2/Migrations/20241107095827_ChangeTypeForScreenDiagonal.Designer.cs" Line="1" Column="1" />
-      <File FileName="2/Controllers/HomeController.cs" Line="23" Column="16" />
+      <File FileName="2/Controllers/ProductController.cs" Line="69" Column="45" />
+      <File FileName="2/Models/Category.cs" Line="1" Column="1" />
+      <File FileName="2/Models/Product.cs" Line="28" Column="6" />
+      <File FileName="2/Views/Product/EditProduct.cshtml" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="2" expanded="True">
-            <Node name="2">
+            <Node name="2" expanded="True">
               <Node name="Controllers" expanded="True" />
-              <Node name="Data" expanded="True" />
+              <Node name="Models" expanded="True" />
               <Node name="Views" expanded="True">
-                <Node name="Home" expanded="True" />
                 <Node name="Product" expanded="True">
-                  <Node name="SearchResults.cshtml" selected="True" />
+                  <Node name="EditProduct.cshtml" selected="True" />
                 </Node>
               </Node>
-              <Node name="wwwroot" expanded="True" />
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.2 PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
