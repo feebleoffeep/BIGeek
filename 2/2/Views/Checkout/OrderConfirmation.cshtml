@@ -1,33 +1,128 @@
 ﻿@model _2.Models.Order
 
-<h2>Підтвердження замовлення</h2>
+@{
+    ViewData["Title"] = "Підтвердження замовлення";
+}
 
-<p>Ваше замовлення номер @Model.Id було успішно оформлено.</p>
+<div class="container">
+    <h2>Підтвердження замовлення</h2>
 
-<h3>Інформація про замовлення</h3>
+    <p>Ваше замовлення номер <strong>@Model.Id</strong> було успішно оформлено.</p>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Товар</th>
-            <th>Ціна</th>
-            <th>Кількість</th>
-            <th>Загальна сума</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.OrderItems)
-        {
+    <h3>Інформація про користувача</h3>
+    <p>Ім'я: <strong>@Model.FirstName</strong></p>
+    <p>Прізвище: <strong>@Model.LastName</strong></p>
+
+    <h3>Інформація про замовлення</h3>
+
+    <table class="table table-bordered">
+        <thead>
             <tr>
-                <td>@item.Product.Name</td>
-                <td>@item.Price</td>
-                <td>@item.Quantity</td>
-                <td>@(item.Price * item.Quantity)</td>
+                <th>Товар</th>
+                <th>Ціна</th>
+                <th>Кількість</th>
+                <th>Загальна сума</th>
             </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderItems)
+            {
+                <tr>
+                    <td>@item.Product.Name</td>
+                    <td>@item.Price</td>
+                    <td>@item.Quantity</td>
+                    <td>@(item.Price * item.Quantity)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <p class="total-price">Загальна вартість: <strong>@Model.OrderItems.Sum(i => i.Price * i.Quantity)</strong> грн</p>
+
+    <a href="/" class="btn btn-primary return-btn">Повернутися до каталогу</a>
+</div>
+
+<style>
+    /* Основные стили контейнера */
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        font-family: Arial, sans-serif;
+    }
+
+    h2 {
+        color: #ff3333;
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+
+    h3 {
+        margin-top: 20px;
+        color: #333;
+        font-size: 1.4em;
+    }
+
+    /* Таблица */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table-bordered {
+        border: 1px solid #ddd;
+    }
+
+    .table th, .table td {
+        padding: 12px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+
+    .table th {
+        background-color: #ff3333;
+        color: white;
+        font-weight: bold;
+    }
+
+    /* Общая стоимость */
+    .total-price {
+        font-size: 1.2em;
+        color: #333;
+        margin-top: 10px;
+    }
+
+    /* Стили для кнопки возврата */
+    .btn-primary {
+        background-color: #28a745;
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 20px;
+    }
+
+        .btn-primary:hover {
+            background-color: #218838;
         }
-    </tbody>
-</table>
 
-<p>Загальна вартість: <strong>@Model.OrderItems.Sum(i => i.Price * i.Quantity)</strong></p>
+    /* Стили для ссылки "Повернутися до каталогу" */
+    .return-btn {
+        background-color: #ff3333;
+        color: #fff;
+        text-decoration: none;
+    }
 
-<a href="/" class="btn btn-primary">Повернутися до каталогу</a>
+        .return-btn:hover {
+            background-color: #cc0000;
+        }
+</style>
+

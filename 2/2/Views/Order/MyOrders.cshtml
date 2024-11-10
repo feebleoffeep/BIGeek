@@ -1,0 +1,89 @@
+﻿@model List<Order>
+
+@{
+    ViewData["Title"] = "BIGeek";
+}
+
+<h3>Мої замовлення</h3>
+
+@if (Model.Count == 0)
+{
+    <p>У вас немає замовлень.</p>
+}
+else
+{
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Номер замовлення</th>
+                <th>Ім'я</th>
+                <th>Прізвище</th>
+                <th>Дата замовлення</th>
+                <th>Сума замовлення</th>
+                <th>Статус</th>
+                <th>Метод доставки</th>
+                <th>Дії</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.Id</td>
+                    <td>@order.FirstName</td>
+                    <td>@order.LastName</td>
+                    <td>@order.OrderDate.ToString("yyyy-MM-dd HH:mm")</td>
+                    <td>@order.OrderItems.Sum(oi => oi.Quantity * oi.Price)</td>
+                    <td>@order.OrderStatus.Name</td>
+                    <td>@order.DeliveryMethod.Name</td>
+                    <td>
+                        <a href="@Url.Action("OrderDetails", "Order", new { orderId = order.Id })" class="btn btn-info">Переглянути</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<style>
+    .table {
+        width: 100%;
+        margin: 20px 0;
+        border-collapse: collapse;
+        font-family: 'Arial', sans-serif;
+    }
+
+        .table thead tr {
+            background-color: #ff4d4d;
+            color: white;
+            font-weight: bold;
+        }
+
+        .table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .table tbody tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        .table td, .table th {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+    .btn-info {
+        background-color: #ff4d4d;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        text-decoration: none;
+        font-size: 14px;
+        border-radius: 3px;
+    }
+
+        .btn-info:hover {
+            background-color: #e63939;
+        }
+</style>

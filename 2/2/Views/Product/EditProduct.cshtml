@@ -74,8 +74,15 @@
     </div>
 
     <div class="form-group">
-        <label for="GraphicsType">@((Model.Category.Name == "Ноутбук") ? "Відеокарта" : "Відеоядро")</label>
-        <input asp-for="GraphicsType" class="form-control" />
+        @if (Model.Category != null && Model.Category.Name == "Ноутбук")
+        {
+            <label for="GraphicsType">Відеокарта</label>
+        }
+        else
+        {
+            <label for="GraphicsType">Відеоядро</label>
+        }
+        <input type="text" class="form-control" asp-for="GraphicsType" />
         <span asp-validation-for="GraphicsType" class="text-danger"></span>
     </div>
 
@@ -94,7 +101,6 @@
 </form>
 
 <a asp-action="ManageProducts" class="btn btn-back">Назад до списку продукції</a>
-
 <style>
     /* Input field styles */
     input[type="text"],
@@ -166,3 +172,4 @@
         font-size: 12px;
     }
 </style>
+

@@ -29,7 +29,6 @@ else
                     <td>@item.Name</td>
                     <td class="price">@item.Price</td>
                     <td>
-                        <!-- Ползунок для вибору кількості -->
                         <input type="number" class="quantity-input" data-product-id="@item.ProductId" value="@item.Quantity" min="1" />
                     </td>
                     <td class="total">@(@item.Price * item.Quantity)</td>
@@ -48,6 +47,50 @@ else
         <a href="/Checkout" class="btn btn-success">Оформити замовлення</a>
     </div>
 }
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>$(document).ready(function () {
+        function updateTotal() {
+            var grandTotal = 0;
+            $('.total').each(function () {
+                grandTotal += parseFloat($(this).text()) || 0;
+            });
+            $('.grand-total').text(grandTotal.toFixed(2)); 
+        }
+
+        $('.quantity-input').on('input', function () {
+            var quantity = $(this).val();
+            var productId = $(this).data('product-id');
+            var price = parseFloat($(this).closest('tr').find('.price').text());
+            var total = (price * quantity).toFixed(2);
+
+            $(this).closest('tr').find('.total').text(total); 
+
+            if (quantity < 1) {
+                alert('Кількість має бути принаймні 1.');
+                return;
+            }
+
+            $.ajax({
+                url: '/Cart/UpdateCart', 
+                type: 'POST',
+                data: { productId: productId, quantity: quantity },
+                success: function (response) {
+                    if (response.success) {
+                        console.log('Кількість оновлена');
+                        updateTotal(); 
+                    } else {
+                        alert('Сталася помилка при оновленні кількості товару.');
+                    }
+                },
+                error: function () {
+                    alert('Сталася помилка при оновленні кількості товару.');
+                }
+            });
+        });
+
+        updateTotal(); // Ініціалізація загальної вартості при завантаженні
+    });</script>
 
 <style>
     .table {
@@ -109,48 +152,3 @@ else
                 background-color: #218838;
             }
 </style>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>$(document).ready(function () {
-        function updateTotal() {
-            var grandTotal = 0;
-            $('.total').each(function () {
-                grandTotal += parseFloat($(this).text()) || 0;
-            });
-            $('.grand-total').text(grandTotal.toFixed(2)); // Оновлюємо загальну вартість
-        }
-
-        $('.quantity-input').on('input', function () {
-            var quantity = $(this).val();
-            var productId = $(this).data('product-id');
-            var price = parseFloat($(this).closest('tr').find('.price').text());
-            var total = (price * quantity).toFixed(2);
-
-            $(this).closest('tr').find('.total').text(total); // Оновлюємо загальну вартість для товару
-
-            // Перевіряємо, що кількість більша за 0
-            if (quantity < 1) {
-                alert('Кількість має бути принаймні 1.');
-                return;
-            }
-
-            $.ajax({
-                url: '/Cart/UpdateCart', // URL вашого методу контролера
-                type: 'POST',
-                data: { productId: productId, quantity: quantity },
-                success: function (response) {
-                    if (response.success) {
-                        console.log('Кількість оновлена');
-                        updateTotal(); // Оновлюємо загальну вартість після успішного оновлення
-                    } else {
-                        alert('Сталася помилка при оновленні кількості товару.');
-                    }
-                },
-                error: function () {
-                    alert('Сталася помилка при оновленні кількості товару.');
-                }
-            });
-        });
-
-        updateTotal(); // Ініціалізація загальної вартості при завантаженні
-    });</script>

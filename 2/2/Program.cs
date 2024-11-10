@@ -1,39 +1,53 @@
+using System.Globalization;
 using _2.Data;
 using _2.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Налаштування підключення до бази даних
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Додаємо сервіс Identity з підтримкою ролей та налаштуваннями паролів
+builder.Services.AddLocalization(options =>
+{
+    options.ResourcesPath = "Resources";
+});
+
+const string defaultCulture = "ua";
+
+var supportedCultures = new[]
+{
+    new CultureInfo(defaultCulture),
+    new CultureInfo("en")
+};
+
+builder.Services.Configure<RequestLocalizationOptions>(options => {
+    options.DefaultRequestCulture = new RequestCulture(defaultCulture);
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+});
+
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
-    // Змінюємо вимоги до паролів
-    options.Password.RequireDigit = false; // Вимога на наявність цифри
-    options.Password.RequireLowercase = false; // Вимога на наявність маленької літери
-    options.Password.RequireUppercase = false; // Вимога на наявність великої літери
-    options.Password.RequireNonAlphanumeric = false; // Вимога на наявність небуквенно-цифрового символу
-    options.Password.RequiredLength = 6; // Мінімальна довжина пароля
+    options.Password.RequireDigit = false; 
+    options.Password.RequireLowercase = false; 
+    options.Password.RequireUppercase = false; 
+    options.Password.RequireNonAlphanumeric = false; 
+    options.Password.RequiredLength = 6; 
 })
 .AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders();
 
-// Додаємо сесію
 builder.Services.AddSession();
 
-// Оновлюємо сторінку не перезапускаючи проект
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
-// Додаємо контролери з представленнями
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Перехоплення 404 помилок і перенаправлення на NotFound сторінку
 app.Use(async (context, next) =>
 {
     await next();
@@ -46,13 +60,13 @@ app.Use(async (context, next) =>
 
 app.UseStaticFiles();
 
-// Використовуємо сесію
 app.UseSession();
 
-// Налаштування маршрутизації
 app.UseRouting();
-app.UseAuthentication(); // Додано аутентифікацію
-app.UseAuthorization();  // Додано авторизацію
+app.UseAuthentication(); 
+app.UseAuthorization();
+
+app.UseRequestLocalization();
 
 app.UseEndpoints(endpoints =>
 {
@@ -61,15 +75,14 @@ app.UseEndpoints(endpoints =>
         pattern: "{controller=Home}/{action=Index}/{id?}");
 });
 
-// Ініціалізація бази даних з міграціями і seed
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     try
     {
         var context = services.GetRequiredService<ApplicationDbContext>();
-        context.Database.Migrate(); // Застосування міграцій до бази даних
-        await DbInitializer.Seed(services); // Seed метод для додавання ролей та адміністратора
+        context.Database.Migrate(); 
+        await DbInitializer.Seed(services); 
     }
     catch (Exception ex)
     {
@@ -78,5 +91,4 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-// Запуск програми
 app.Run();

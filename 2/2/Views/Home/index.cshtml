@@ -5,7 +5,7 @@
 @model IEnumerable<_2.Models.Product>
 
 <div class="content-wrapper">
-    <!-- Sidebar with clickable categories -->
+
     <aside class="sidebar">
         <section class="categories">
             <h2>Категорії</h2>
@@ -17,7 +17,6 @@
         </section>
     </aside>
 
-    <!-- Products Section -->
     <section class="products">
         @foreach (var product in Model)
         {
@@ -33,7 +32,6 @@
     </section>
 </div>
 
-<!-- jQuery for Add to Cart functionality -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>$(document).ready(function () {
         $('.add-to-cart').click(function (e) {
@@ -47,7 +45,6 @@
                 data: { productId: productId },
                 success: function (response) {
                     alert('Товар доданий у кошик!');
-                    // Оновити значок кошика або лічильник товарів у кошику
                     var cartCount = $('#cart-count');
                     cartCount.text(parseInt(cartCount.text()) + 1);
                 },
@@ -57,16 +54,12 @@
             });
         });
     });</script>
-
-<!-- CSS Styling -->
 <style>
-    /* Main layout styling */
     .content-wrapper {
         display: flex;
         gap: 20px;
     }
 
-    /* Sidebar styling */
     .sidebar {
         width: 250px;
         padding: 20px;
@@ -100,6 +93,5 @@
 
         .categories a:hover {
             color: #0056b3;
-        }    
+        }
 </style>
-

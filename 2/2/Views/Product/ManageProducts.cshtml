@@ -10,10 +10,8 @@
     </div>
     <h2 class="title">Керування продукцією</h2>
 
-    <!-- Додати кнопку "Додати товар" -->
     <a href="@Url.Action("CreateProduct", "Product")" class="btn btn-success">Додати товар</a>
 
-    <!-- Search Form -->
     <form asp-action="ManageProducts" method="get" class="search-form">
         <input type="text" name="searchTerm" placeholder="Пошук за назвою товару" value="@ViewData["SearchTerm"]" class="search-input" />
         <button type="submit" class="btn btn-search">Шукати</button>
@@ -74,7 +72,6 @@ else
 </table>
 
 }
-
 <style>
     h2 {
         color: #333;

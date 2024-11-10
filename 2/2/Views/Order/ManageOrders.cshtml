@@ -1,0 +1,179 @@
+﻿@model IEnumerable<_2.Models.Order>
+
+@{
+    ViewData["Title"] = "BIGeek";
+}
+<div class="container">
+    <h2>Керування замовленнями</h2>
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success">@TempData["Message"]</div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+
+    @if (Model.Any())
+    {
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>ID Замовлення</th>
+                    <th>Користувач</th>
+                    <th>Дата</th>
+                    <th>Статус</th>
+                    <th>Метод доставки</th>
+                    <th>Дії</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td>@order.Id</td>
+                        <td>@($"{order.FirstName} {order.LastName}")</td>
+                        <td>@order.OrderDate.ToString("dd.MM.yyyy")</td>
+                        <td>
+                            <span class="badge @(order.OrderStatus?.Name == "Очікується" ? "Pending" : (order.OrderStatus?.Name == "Підтверджено" ? "Confirmed" : (order.OrderStatus?.Name == "Відправлено" ? "Shipped" : (order.OrderStatus?.Name == "Відхилено" ? "Canceled" : ""))))">
+                                @order.OrderStatus?.Name
+                            </span>
+                        </td>
+                        <td>@order.DeliveryMethod?.Name</td>
+                        <td>
+                            <a asp-action="OrderDetails" asp-route-orderId="@order.Id" class="btn btn-info btn-sm">Деталі</a>
+                            @if (User.IsInRole("Admin") && order.OrderStatus?.Name == "Відхилено")
+                            {
+                                <form asp-action="DeleteCancelledOrder" asp-route-orderId="@order.Id" method="post" style="display:inline;">
+                                    <button type="submit" class="btn btn-danger btn-sm">Видалити</button>
+                                </form>
+                            }
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>Немає доступних замовлень для відображення.</p>
+    }
+</div>
+
+<style>
+    .container {
+        max-width: 1000px;
+        margin: 30px auto;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        color: #ff3333;
+        font-size: 2em;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+
+    .table-striped tbody tr:nth-child(odd) {
+        background-color: #f9f9f9;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .table th, .table td {
+        padding: 12px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+
+    .table th {
+        background-color: #ff3333;
+        color: white;
+        font-weight: bold;
+    }
+
+    .table td {
+        background-color: #fff;
+    }
+
+    .badge {
+        padding: 5px 10px;
+        border-radius: 12px;
+        font-size: 14px;
+    }
+
+        .badge.Pending {
+            background-color: #ffbf00;
+        }
+
+        .badge.Confirmed {
+            background-color: #28a745; /* Зелений для "Підтверджено" */
+        }
+
+        .badge.Shipped {
+            background-color: #28a745;
+        }
+
+        .badge.Canceled {
+            background-color: #dc3545;
+        }
+
+    .alert-success {
+        color: #155724;
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+    }
+
+    .alert-danger {
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+    }
+
+    .btn-info {
+        background-color: #17a2b8;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+        .btn-info:hover {
+            background-color: #138496;
+        }
+
+    .btn-danger {
+        background-color: #ff3333;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 5px;
+        font-size: 14px;
+        border: none;
+        cursor: pointer;
+    }
+
+        .btn-danger:hover {
+            background-color: #cc0000;
+        }
+</style>

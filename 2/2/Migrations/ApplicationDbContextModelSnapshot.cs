@@ -254,26 +254,6 @@ namespace _2.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("_2.Models.City", b =>
-                {
-                    b.Property<int>("CityId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<double>("Latitude")
-                        .HasColumnType("double");
-
-                    b.Property<double>("Longitude")
-                        .HasColumnType("double");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("CityId");
-
-                    b.ToTable("Cities");
-                });
-
             modelBuilder.Entity("_2.Models.DeliveryMethod", b =>
                 {
                     b.Property<int>("Id")
@@ -302,7 +282,12 @@ namespace _2.Migrations
                         .HasColumnType("double");
 
                     b.Property<string>("DeliveryTime")
-                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("LastName")
                         .HasColumnType("longtext");
 
                     b.Property<DateTime>("OrderDate")
@@ -311,10 +296,7 @@ namespace _2.Migrations
                     b.Property<int>("OrderStatusId")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("UserId1")
+                    b.Property<string>("UserId")
                         .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
@@ -323,7 +305,7 @@ namespace _2.Migrations
 
                     b.HasIndex("OrderStatusId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -346,11 +328,16 @@ namespace _2.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(255)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("OrderId");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("OrderItems");
                 });
@@ -361,10 +348,6 @@ namespace _2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -372,6 +355,28 @@ namespace _2.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("OrderStatuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Очікується"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Відхилено"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Підтверджено"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Відправлено"
+                        });
                 });
 
             modelBuilder.Entity("_2.Models.Payment", b =>
@@ -531,7 +536,7 @@ namespace _2.Migrations
 
                     b.HasOne("_2.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId");
 
                     b.Navigation("DeliveryMethod");
 
@@ -554,9 +559,15 @@ namespace _2.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("_2.Models.ApplicationUser", "UserName")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
                     b.Navigation("Order");
 
                     b.Navigation("Product");
+
+                    b.Navigation("UserName");
                 });
 
             modelBuilder.Entity("_2.Models.Payment", b =>

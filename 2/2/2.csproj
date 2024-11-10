@@ -22,6 +22,7 @@
     <Folder Include="Areas\Identity\" />
     <Folder Include="Areas\Identity\Pages\Account\" />
     <Folder Include="Views\Product\" />
+    <Folder Include="Resourses\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Data\" />
@@ -30,6 +31,9 @@
     <None Remove="Areas\Identity\" />
     <None Remove="Areas\Identity\Pages\Account\" />
     <None Remove="Views\Product\" />
+    <None Remove="Resourses\" />
+    <None Remove="Resourses\SharedResource.en-US" />
+    <None Remove="Resourses\SharedResource.uk-UA" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
@@ -51,5 +55,16 @@
   <ItemGroup>
     <Compile Remove="Migrations\20241017085501_Initial.cs" />
     <Compile Remove="Migrations\20241017085501_Initial.Designer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Resourses\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Resourses\Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

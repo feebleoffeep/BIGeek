@@ -54,6 +54,13 @@ namespace _2.Data
                 .WithMany()
                 .HasForeignKey(oi => oi.ProductId);
             modelBuilder.Entity<CartItem>().HasNoKey();
+
+            modelBuilder.Entity<OrderStatus>().HasData(
+            new OrderStatus { Id = 1, Name = "Очікується" },
+            new OrderStatus { Id = 2, Name = "Відхилено" },
+            new OrderStatus { Id = 3, Name = "Підтверджено" },
+            new OrderStatus { Id = 4, Name = "Відправлено" }
+        );
         }
     }
 }

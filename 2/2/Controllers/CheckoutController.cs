@@ -1,15 +1,19 @@
 ﻿using _2.Data;
 using _2.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
 public class CheckoutController : Controller
 {
     private readonly ApplicationDbContext _context;
+    private readonly UserManager<ApplicationUser> userManager;
 
-    public CheckoutController(ApplicationDbContext context)
+    public CheckoutController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
     {
         _context = context;
+        this.userManager = userManager;
     }
 
     public IActionResult Index()
@@ -20,7 +24,6 @@ public class CheckoutController : Controller
             return RedirectToAction("Index", "Cart");
         }
 
-        // Отримання всіх доступних методів доставки
         ViewBag.DeliveryMethods = _context.DeliveryMethods.ToList();
 
         return View(cart);
@@ -37,38 +40,44 @@ public class CheckoutController : Controller
             return RedirectToAction("Index", "Cart");
         }
 
-        // Отримання вибраного методу доставки
         var selectedDeliveryMethod = _context.DeliveryMethods.FirstOrDefault(m => m.Id == deliveryMethodId);
-
         if (selectedDeliveryMethod == null)
         {
             ModelState.AddModelError("", "Невірно вибраний метод доставки.");
             return RedirectToAction("Index");
         }
 
-        // Ініціалізація змінних для ціни та часу доставки
         double deliveryPrice = 0;
         string deliveryTime = "";
 
-        // Розрахунок ціни і часу доставки для кур'єра
-        if (selectedDeliveryMethod.Id == 2 && distance.HasValue) // ID кур'єра = 2
+        if (selectedDeliveryMethod.Id == 2 && distance.HasValue)
         {
-            deliveryPrice = distance.Value * 5; // Ціна доставки: 5 грн за км
-            deliveryTime = (distance.Value / 50).ToString("F1") + " год."; // Час доставки: 1 година на 50 км
+            deliveryPrice = distance.Value * 5;
+            double deliveryTimeInHours = distance.Value / 50;
+            int hours = (int)deliveryTimeInHours;
+            int minutes = (int)((deliveryTimeInHours - hours) * 60);
+            deliveryTime = $"{hours} год. {minutes} хв.";
         }
-        else if (selectedDeliveryMethod.Id == 1) // Самовивіз
+        else if (selectedDeliveryMethod.Id == 1)
         {
             deliveryPrice = 0;
             deliveryTime = "Не потрібно";
         }
 
-        // Створення нового замовлення
+        var defaultOrderStatusId = 1;
+        var userId = userManager.GetUserId(User);
+        var user = await userManager.FindByIdAsync(userId);
+
         var order = new Order
         {
+            UserId = userId,
+            FirstName = user?.FirstName,
+            LastName = user?.LastName,
             OrderDate = DateTime.Now,
-            DeliveryMethodId = deliveryMethodId, // Збереження вибраного методу доставки
-            DeliveryPrice = deliveryPrice,       // Збереження ціни доставки
-            DeliveryTime = deliveryTime,         // Збереження часу доставки
+            DeliveryMethodId = deliveryMethodId,
+            DeliveryPrice = deliveryPrice,
+            DeliveryTime = deliveryTime,
+            OrderStatusId = defaultOrderStatusId,
             OrderItems = cart.Select(i => new OrderItem
             {
                 ProductId = i.ProductId,
@@ -77,20 +86,20 @@ public class CheckoutController : Controller
             }).ToList()
         };
 
-        // Збереження замовлення в базу даних
         _context.Orders.Add(order);
         await _context.SaveChangesAsync();
 
-        // Очищення кошика після успішного замовлення
         SaveCart(new List<CartItem>());
 
         return RedirectToAction("OrderConfirmation", new { orderId = order.Id });
     }
 
+
     public IActionResult OrderConfirmation(int orderId)
     {
         var order = _context.Orders
             .Where(o => o.Id == orderId)
+            .Include(o => o.OrderItems).ThenInclude(o => o.Product)
             .FirstOrDefault();
 
         if (order == null)

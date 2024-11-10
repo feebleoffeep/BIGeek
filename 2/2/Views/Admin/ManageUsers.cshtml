@@ -9,8 +9,6 @@
     </div>
     <h2 class="title">Керування користувачами</h2>
 
-    <!-- Search Form -->
-    <!-- Search Form -->
     <form asp-action="ManageUsers" method="get" class="search-form">
         <input type="text" name="searchTerm" placeholder="Пошук користувача" value="@ViewData["SearchTerm"]" class="search-input" />
         <button type="submit" class="btn btn-search">Шукати</button>
@@ -42,92 +40,94 @@
             }
         </tbody>
     </table>
-<style>
-    .header-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
 
-    .back-button {
-        text-align: left;
-    }
-
-        .back-button a {
-            background-color: #ff3333; 
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
+    <style>
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-            .back-button a:hover {
-                background-color: #cc0000; 
+        .back-button {
+            text-align: left;
+        }
+
+            .back-button a {
+                background-color: #ff3333;
+                color: white;
+                padding: 10px 20px;
+                text-decoration: none;
+                border-radius: 5px;
             }
 
-    .title {
-        text-align: center;
-        flex-grow: 1;
-    }
+                .back-button a:hover {
+                    background-color: #cc0000;
+                }
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    th, td {
-        padding: 10px;
-        text-align: left;
-        border: 1px solid #ddd;
-    }
-
-    th {
-        background-color: #f2f2f2;
-    }
-
-    td a:hover {
-        text-decoration: underline;
-    }
-
-    a {
-        color: #0066cc;
-        text-decoration: none;
-    }
-    /* Search form */
-    .search-form {
-        margin-bottom: 20px;
-    }
-
-    .search-input {
-        padding: 10px;
-        width: 200px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-    }
-    .btn-search {
-        background-color: #f53e3e;
-        color: white;
-        padding: 8px 16px;
-        border: none;
-        border-radius: 4px;
-        margin-left: 10px;
-    }
-
-        .btn-search:hover {
-            background-color: #d43b2f;
-        }
-    .btn-reset {
-        background-color: #007bff; /* Блакитний колір */
-        color: white;
-        padding: 8px 16px;
-        border: none;
-        border-radius: 4px;
-        margin-left: 10px;
-        text-decoration: none; /* Убрати підкреслення */
-    }
-
-        .btn-reset:hover {
-            background-color: #0056b3; /* Темніший блакитний при наведенні */
+        .title {
+            text-align: center;
+            flex-grow: 1;
         }
 
-</style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        td a:hover {
+            text-decoration: underline;
+        }
+
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        /* Search form */
+        .search-form {
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            padding: 10px;
+            width: 200px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .btn-search {
+            background-color: #f53e3e;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            margin-left: 10px;
+        }
+
+            .btn-search:hover {
+                background-color: #d43b2f;
+            }
+
+        .btn-reset {
+            background-color: #007bff; /* Блакитний колір */
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            margin-left: 10px;
+            text-decoration: none; /* Убрати підкреслення */
+        }
+
+            .btn-reset:hover {
+                background-color: #0056b3; /* Темніший блакитний при наведенні */
+            }
+    </style>

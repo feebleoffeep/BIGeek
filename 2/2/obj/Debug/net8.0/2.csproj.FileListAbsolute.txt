@@ -1134,3 +1134,5 @@
 /Users/koliakrutoy/Projects/2/BIGeek/2/2/obj/Debug/net8.0/2.pdb
 /Users/koliakrutoy/Projects/2/BIGeek/2/2/obj/Debug/net8.0/2.genruntimeconfig.cache
 /Users/koliakrutoy/Projects/2/BIGeek/2/2/obj/Debug/net8.0/ref/2.dll
+/Users/koliakrutoy/Projects/2/BIGeek/2/2/obj/Debug/net8.0/2.csproj.GenerateResource.cache
+/Users/koliakrutoy/Projects/2/BIGeek/2/2/obj/Debug/net8.0/_2.Resourses.Resources.resources

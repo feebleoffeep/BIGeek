@@ -76,7 +76,7 @@ header nav {
     }
 
         header nav a:hover {
-            text-decoration: underline;
+            text-decoration: none;
         }
 
 main {
@@ -297,5 +297,5 @@ a:hover {
     margin-bottom: 30px; /* Відступ знизу */
     letter-spacing: 1px; /* Трохи більше відстань між літерами */
     text-transform: uppercase; /* Всі букви заголовні */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Легка тінь для об'єму */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); 
 }

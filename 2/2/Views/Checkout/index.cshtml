@@ -1,54 +1,69 @@
 ﻿@model IEnumerable<_2.Models.CartItem>
 
-<h2>Оформлення замовлення</h2>
+@{
+    ViewData["Title"] = "Оформлення замовлення";
+}
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Товар</th>
-            <th>Ціна</th>
-            <th>Кількість</th>
-            <th>Загальна сума</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Name</td>
-                <td>@item.Price</td>
-                <td>@item.Quantity</td>
-                <td>@(item.Price * item.Quantity)</td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="container">
+    <h2>Оформлення замовлення</h2>
 
-<p>Загальна вартість: <strong>@Model.Sum(i => i.Price * i.Quantity)</strong></p>
+    <!-- Поля для імені та прізвища користувача -->
+    <form asp-action="PlaceOrder" method="post">
+        <div class="form-group">
+            <label for="FirstName">Ім'я:</label>
+            <input type="text" name="FirstName" id="FirstName" class="form-control" value="@User.Identity?.Name" required />
+        </div>
 
-<h3>Вибір методу доставки</h3>
-<form asp-action="PlaceOrder" method="post">
-    <select name="DeliveryMethodId" class="form-control" id="DeliveryMethodId" onchange="updateDeliveryDetails()">
-        @foreach (var deliveryMethod in ViewBag.DeliveryMethods as IEnumerable<_2.Models.DeliveryMethod>)
-        {
-            <option value="@deliveryMethod.Id">@deliveryMethod.Name</option>
-        }
-    </select>
+        <div class="form-group">
+            <label for="LastName">Прізвище:</label>
+            <input type="text" name="LastName" id="LastName" class="form-control" value="@ViewBag.LastName" required />
+        </div>
 
-    <!-- Вибір відстані (тільки якщо вибрано "Кур'єр") -->
-    <div class="form-group" id="DistanceDiv" style="display:none;">
-        <label for="Distance">Відстань (км):</label>
-        <input type="number" name="distance" id="Distance" class="form-control" step="0.1" />
-    </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Товар</th>
+                    <th>Ціна</th>
+                    <th>Кількість</th>
+                    <th>Загальна сума</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Price</td>
+                        <td>@item.Quantity</td>
+                        <td>@(item.Price * item.Quantity)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
-    <!-- Виведення ціни і часу доставки (тільки якщо вибрано "Кур'єр") -->
-    <div id="DeliveryInfo" style="margin-top: 20px; display:none;">
-        <p>Ціна доставки: <span id="DeliveryPrice">0</span> грн</p>
-        <p>Час доставки: <span id="DeliveryTime">0</span> годин</p>
-    </div>
+        <p class="total-price">Загальна вартість: <strong>@Model.Sum(i => i.Price * i.Quantity)</strong> грн</p>
 
-    <button type="submit" class="btn btn-success">Підтвердити замовлення</button>
-</form>
+        <h3>Вибір методу доставки</h3>
+        <select name="DeliveryMethodId" class="form-control" id="DeliveryMethodId" onchange="updateDeliveryDetails()">
+            @foreach (var deliveryMethod in ViewBag.DeliveryMethods as IEnumerable<_2.Models.DeliveryMethod>)
+            {
+                <option value="@deliveryMethod.Id">@deliveryMethod.Name</option>
+            }
+        </select>
+
+        <div class="form-group" id="DistanceDiv" style="display:none; margin-top: 15px;">
+            <label for="Distance">Відстань (км):</label>
+            <input type="number" name="distance" id="Distance" class="form-control" step="0.1" />
+        </div>
+
+        <div id="DeliveryInfo" style="margin-top: 20px; display:none;">
+            <p>Ціна доставки: <span id="DeliveryPrice">0</span> грн</p>
+            <p>Час доставки: <span id="DeliveryTime">0</span></p>
+        </div>
+
+        <button type="submit" class="btn btn-success confirm-btn">Підтвердити замовлення</button>
+    </form>
+</div>
 
 <script>function updateDeliveryDetails() {
         var deliveryMethodId = document.getElementById('DeliveryMethodId').value;
@@ -56,17 +71,20 @@
         var deliveryInfo = document.getElementById('DeliveryInfo');
         var distanceInput = document.getElementById('Distance');
 
-        if (deliveryMethodId == "2") { // ID кур'єра = 2
+        if (deliveryMethodId == "2") {
             distanceDiv.style.display = "block";
             deliveryInfo.style.display = "block";
             distanceInput.addEventListener('input', function () {
                 var distance = parseFloat(this.value);
                 if (!isNaN(distance)) {
-                    var deliveryPrice = distance * 5; // Ціна доставки: 5 грн за км
-                    var deliveryTime = distance / 50; // Час доставки: 1 година на 50 км
+                    var deliveryPrice = distance * 5;
+                    var deliveryTimeInHours = distance / 50;
+
+                    var hours = Math.floor(deliveryTimeInHours);
+                    var minutes = Math.round((deliveryTimeInHours - hours) * 60);
 
                     document.getElementById('DeliveryPrice').textContent = deliveryPrice.toFixed(2);
-                    document.getElementById('DeliveryTime').textContent = deliveryTime.toFixed(1);
+                    document.getElementById('DeliveryTime').textContent = hours + " год. " + minutes + " хв.";
                 }
             });
         } else {
@@ -74,3 +92,113 @@
             deliveryInfo.style.display = "none";
         }
     }</script>
+
+
+<style>
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        font-family: Arial, sans-serif;
+    }
+
+    h2 {
+        color: #ff3333;
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+
+    h3 {
+        margin-top: 20px;
+        color: #333;
+        font-size: 1.4em;
+    }
+
+    /* Таблица */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table-bordered {
+        border: 1px solid #ddd;
+    }
+
+    .table th, .table td {
+        padding: 12px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+
+    .table th {
+        background-color: #ff3333;
+        color: white;
+        font-weight: bold;
+    }
+
+    /* Общая стоимость */
+    .total-price {
+        font-size: 1.2em;
+        color: #333;
+        margin-top: 10px;
+    }
+
+    /* Сообщение об ошибке и успехе */
+    .alert {
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+    }
+
+    .alert-success {
+        color: #155724;
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+    }
+
+    .alert-danger {
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+    }
+
+    /* Стили для кнопок */
+    .btn-success {
+        background-color: #28a745;
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        display: block;
+        margin-top: 20px;
+    }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+    .confirm-btn {
+        background-color: #ff3333;
+        border: none;
+        color: #fff;
+    }
+
+        .confirm-btn:hover {
+            background-color: #cc0000;
+        }
+
+    .form-control {
+        padding: 8px;
+        font-size: 14px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        width: 100%;
+        margin-top: 10px;
+    }
+</style>

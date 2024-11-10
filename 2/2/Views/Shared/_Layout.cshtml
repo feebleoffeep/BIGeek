@@ -1,4 +1,5 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@using System.Globalization
+@using Microsoft.AspNetCore.Identity
 @using _2.Models
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
@@ -12,6 +13,7 @@
     <link rel="icon" type="image/png" href="images/logo-icon-removebg-preview.png">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
@@ -27,43 +29,70 @@
                 <button type="submit" class="search-btn">Пошук</button>
             </form>
 
+            <div class="language-dropdown">
+                <button id="languageButton" class="language-button">
+                    @if (CultureInfo.CurrentCulture.Name == "uk-UA")
+                    {
+                        @:UA
+                    }
+                    else
+                    {
+                        @:EN
+                    }
+                </button>
+                <div class="language-content">
+                    <a asp-controller="Language" asp-action="SetLanguage" asp-route-culture="uk-UA" asp-route-returnUrl="@Context.Request.Path">Українська</a>
+                    <a asp-controller="Language" asp-action="SetLanguage" asp-route-culture="en-US" asp-route-returnUrl="@Context.Request.Path">English</a>
+                </div>
+            </div>
 
-            <a asp-controller="Cart">Кошик </a>
+            <a asp-controller="Cart" class="button">
+                <i class="fas fa-shopping-cart"></i>
+            </a>
+
             <ul>
-                @if (SignInManager.IsSignedIn(User))
+    @if (SignInManager.IsSignedIn(User))
+    {
+        var currentUser = await UserManager.GetUserAsync(User);
+
+        <li class="dropdown">
+            <a href="javascript:void(0)" id="profileLink" class="dropdown-toggle button">
+                <i class="fas fa-user"></i> 
+            </a>
+            <div class="dropdown-content">
+                <a asp-controller="Account" asp-action="Profile" class="view-profile-button">Мій профіль</a>
+
+                @if (await UserManager.IsInRoleAsync(currentUser, "Admin"))
                 {
-                    var currentUser = await UserManager.GetUserAsync(User);
-                    string userFullName = $"{currentUser.FirstName} {currentUser.LastName}";
-
-                    <li class="dropdown">
-                        <a href="javascript:void(0)" id="profileLink" class="dropdown-toggle">@userFullName</a>
-                        <div class="dropdown-content">
-                            @if (await UserManager.IsInRoleAsync(currentUser, "Admin"))
-                            {
-                                <div class="edit-options">
-                                    <a asp-controller="Admin" asp-action="ManageUsers" class="edit-button">Редагувати користувачів</a>
-                                    <a asp-controller="Product" asp-action="ManageProducts" class="edit-button">Редагувати продукцію</a>
-                                    <a asp-controller="Category" asp-action="ManageCategories" class="edit-button">Редагувати категорії</a>
-                                    <a asp-controller="DeliveryMethod" asp-action="ManageDeliveryMethod" class="edit-button">Редагувати способи доставки</a>
-                                </div>
-
-                            }
-                            <form asp-controller="Account" asp-action="Logout" method="post">
-                                <button type="submit">Вийти</button>
-                            </form>
-                        </div>
-                    </li>
+                    <a asp-controller="Order" asp-action="ManageOrders" class="manage-orders-button">Керування замовленнями</a>
+                    <div class="edit-options">
+                        <a asp-controller="Admin" asp-action="ManageUsers" class="edit-button">Редагувати користувачів</a>
+                        <a asp-controller="Product" asp-action="ManageProducts" class="edit-button">Редагувати продукцію</a>
+                        <a asp-controller="Category" asp-action="ManageCategories" class="edit-button">Редагувати категорії</a>
+                        <a asp-controller="DeliveryMethod" asp-action="ManageDeliveryMethod" class="edit-button">Редагувати способи доставки</a>
+                    </div>
                 }
                 else
                 {
-                    <a asp-controller="Account" asp-action="Login" id="loginLink">Ввійти</a>
+                    <a asp-controller="Order" asp-action="MyOrders" class="view-orders-button">Мої замовлення</a>
                 }
-            </ul>
+
+                <form asp-controller="Account" asp-action="Logout" method="post">
+                    <button type="submit">Вийти</button>
+                </form>
+            </div>
+        </li>
+    }
+    else
+    {
+        <a asp-controller="Account" asp-action="Login" id="loginLink" class="button">Ввійти</a>
+    }
+</ul>
+
         </nav>
     </header>
 
     <div class="main-container">
-
         <main class="products-container">
             @RenderBody()
         </main>
@@ -71,55 +100,115 @@
 
     @await RenderSectionAsync("Scripts", required: false)
 
-    <script>// JavaScript для відкриття/закриття випадаючого меню
-        document.getElementById("profileLink").addEventListener("click", function () {
-            var dropdown = document.querySelector(".dropdown-content");
-            dropdown.classList.toggle("show");
+    <script>document.getElementById("languageButton").addEventListener("click", function () {
+            document.querySelector(".language-content").classList.toggle("show");
         });
 
-        // Закриття випадаючого меню, якщо користувач натискає поза ним
         window.onclick = function (event) {
-            if (!event.target.matches('#profileLink')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                for (var i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
+            if (!event.target.matches('#languageButton')) {
+                document.querySelector(".language-content").classList.remove("show");
             }
         };</script>
-    <footer>
-        <div class="footer-container">
-            <div class="footer-links">
-                <h3>Швидкі посилання</h3>
-                <ul>
-                    <li><a href="/">Головна</a></li>
-                    <li><a href="/Account/Login">Увійти</a></li>
-                    <li><a href="/Account/Register">Реєстрація</a></li>
-                </ul>
-            </div>
-            <div class="footer-contact">
-                <h3>Контакти</h3>
-                <p>Email: support@bigeek.com</p>
-                <p>Телефон: +38 (044) 123-45-67</p>
-            </div>
-            <div class="footer-social">
-                <h3>Слідкуйте за нами</h3>
-                <ul>
-                    <li><a href="https://www.facebook.com/BIGeek" target="_blank">Facebook</a></li>
-                    <li><a href="https://www.instagram.com/BIGeek" target="_blank">Instagram</a></li>
-                    <li><a href="https://www.twitter.com/BIGeek" target="_blank">Twitter</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 BIGeek. Всі права захищені.</p>
-        </div>
-    </footer>
-
     <style>
-        /* Стиль для випадаючого меню */
+
+        .language-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .language-button {
+            padding: 10px 20px;
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Montserrat', sans-serif;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            .language-button:hover {
+                background-color: #45a049;
+            }
+
+        .language-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 100px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+            .language-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                .language-content a:hover {
+                    background-color: #f1f1f1;
+                }
+
+            .language-content.show {
+                display: block;
+            }
+
+        .dropdown-toggle {
+            cursor: pointer;
+        }
+
+        .button i {
+            font-size: 24px;
+            color: white;
+            vertical-align: middle;
+            transition: color 0.3s;
+        }
+
+            .button i:hover {
+                color: #cccccc;
+            }
+
+        .button i {
+            font-size: 24px;
+            color: white;
+            vertical-align: middle;
+        }
+
+        .profile-button {
+            display: inline-block;
+            padding: 10px 20px;
+            color: white;
+            background-color: #ff3b3b;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+
+            .profile-button:hover {
+                background-color: #d60000;
+            }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            color: white;
+            background-color: #ff3b3b;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+
+            .button:hover {
+                background-color: #d60000;
+            }
+
         .dropdown-content {
             display: none;
             position: absolute;
@@ -147,81 +236,6 @@
         .dropdown-toggle {
             cursor: pointer;
         }
-        footer {
-            background-color: #ff3b3b; /* Основний червоний колір сайту */
-            color: white; /* Білий текст */
-
-            font-family: 'Montserrat', sans-serif;
-            text-align: center;
-        }
-
-        .footer-container {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-            flex-wrap: wrap;
-        }
-
-        .footer-links, .footer-contact, .footer-social {
-            flex: 1;
-            min-width: 180px;
-            margin: 10px;
-        }
-
-            .footer-links h3, .footer-contact h3, .footer-social h3 {
-                border-bottom: 2px solid white; /* Білий роздільник */
-                padding-bottom: 8px;
-                font-size: 1.1em;
-            }
-
-            .footer-links ul {
-                list-style-type: none; /* Прибираємо маркери */
-                padding: 0;
-                margin: 10px 0;
-            }
-
-                .footer-links ul li, .footer-social ul li {
-                    margin: 8px 0;
-                }
-
-            .footer-links a, .footer-social a {
-                color: white;
-                text-decoration: none;
-                transition: color 0.3s; /* Додаємо анімацію зміни кольору */
-            }
-
-                .footer-links a:hover, .footer-social a:hover {
-                    color: #cccccc; /* Легкий сірий при наведенні */
-                }
-
-        .footer-bottom {
-            background-color: #d60000; /* Темніший червоний колір для нижнього розділу */
-            padding: 10px 0;
-            font-size: 0.9em;
-            color: #f0f0f0; /* Трохи світліший відтінок для тексту */
-        }
-
-            .footer-bottom p {
-                margin: 0;
-            }
-
-        .footer-contact p {
-            margin: 5px 0;
-            font-size: 0.9em;
-        }
-
-        .footer-social ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-            .footer-social ul li {
-                display: inline; /* Горизонтальне розташування посилань на соціальні мережі */
-                margin-right: 15px;
-
-
     </style>
 </body>
 </html>
