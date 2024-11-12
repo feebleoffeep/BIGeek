@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using _2.Models;
-using System.Threading.Tasks;
 
 namespace _2.Controllers
 {

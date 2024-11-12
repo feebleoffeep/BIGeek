@@ -1,14 +1,16 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
+@{
     ViewData["Title"] = "BIGeek";
 }
-
-@model IEnumerable<_2.Models.Product>
 
 <div class="content-wrapper">
 
     <aside class="sidebar">
         <section class="categories">
-            <h2>Категорії</h2>
+            <h2>@Localizer["Категорії"]</h2>
             <ul class="categories-list">
                 <li><a asp-controller="Product" asp-action="ByCategory" asp-route-category="Смартфон">Смартфони</a></li>
                 <li><a asp-controller="Product" asp-action="ByCategory" asp-route-category="Ноутбук">Ноутбуки</a></li>
@@ -25,12 +27,35 @@
                 <h2>@product.Name</h2>
                 <div class="product-info">
                     <p>Ціна: $@product.Price</p>
-                    <button class="buy-btn add-to-cart" data-product-id="@product.Id">Додати в кошик</button>
+                    <button class="buy-btn add-to-cart" data-product-id="@product.Id">@Localizer["Додати до кошика"]</button>
                 </div>
             </div>
         }
     </section>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>$(document).ready(function () {
+        $('.add-to-cart').click(function (e) {
+            e.preventDefault();
+
+            var productId = $(this).data('product-id');
+
+            $.ajax({
+                url: '/Cart/AddToCart',
+                type: 'POST',
+                data: { productId: productId },
+                success: function (response) {
+                    alert('Товар доданий у кошик!');
+                    var cartCount = $('#cart-count');
+                    cartCount.text(parseInt(cartCount.text()) + 1);
+                },
+                error: function () {
+                    alert('Сталася помилка при додаванні товару у кошик.');
+                }
+            });
+        });
+    });</script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>$(document).ready(function () {

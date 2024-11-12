@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace _2.Resourses {
+namespace _2.Resourses.Views.Home {
     using System;
     
     
@@ -19,14 +19,14 @@ namespace _2.Resourses {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Build.Tasks.StronglyTypedResourceBuilder", "15.1.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    internal class index_uk_UA {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal index_uk_UA() {
         }
         
         /// <summary>
@@ -36,7 +36,7 @@ namespace _2.Resourses {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("_2.Resourses.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("_2.Resourses.Views.Home.index.uk-UA", typeof(index_uk_UA).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -54,6 +54,24 @@ namespace _2.Resourses {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Додати до кошика.
+        /// </summary>
+        internal static string Додати_до_кошика {
+            get {
+                return ResourceManager.GetString("Додати до кошика", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Категорії.
+        /// </summary>
+        internal static string Категорії {
+            get {
+                return ResourceManager.GetString("Категорії", resourceCulture);
             }
         }
     }

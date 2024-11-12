@@ -1,36 +1,79 @@
 ﻿<Properties StartupConfiguration="{09F60CB1-6C4B-4910-8848-FD89EBC17BED}|https">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="2/Resourses/Resources.resx">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.2 PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="2/Resourses/Views/Home/index.en-US.resx">
     <Files>
-      <File FileName="2/Resourses/Resources.resx" Line="17" Column="1" />
-      <File FileName="2/Views/Shared/_Layout.cshtml" Line="1" Column="28" />
+      <File FileName="2/Views/Shared/_Layout.cshtml" Line="95" Column="71" />
+      <File FileName="2/Program.cs" Line="23" Column="57" />
+      <File FileName="2/appsettings.json" />
+      <File FileName="2/wwwroot/css/site.css" />
+      <File FileName="2/Views/Home/index.cshtml" Line="30" Column="115" />
+      <File FileName="2/Views/Product/SearchResults.cshtml" />
+      <File FileName="2/Views/Product/EditProduct.cshtml" />
+      <File FileName="2/Views/Product/ManageProducts.cshtml" />
+      <File FileName="2/Controllers/AccountController.cs" />
+      <File FileName="2/Controllers/CheckoutController.cs" />
+      <File FileName="2/Controllers/DeliveryMethodController.cs" />
+      <File FileName="2/Views/Checkout/OrderConfirmation.cshtml" />
+      <File FileName="2/Views/Checkout/index.cshtml" />
+      <File FileName="2/Controllers/OrderController.cs" />
+      <File FileName="2/Views/Order/OrderDetails.cshtml" />
+      <File FileName="2/Models/ProfileViewModel.cs" />
+      <File FileName="2/Models/LoginViewModel.cs" />
+      <File FileName="2/Models/Category.cs" />
+      <File FileName="2/Models/CartItem.cs" />
+      <File FileName="2/Models/Cart.cs" />
+      <File FileName="2/Models/Orders/Order.cs" />
+      <File FileName="2/Models/Orders/OrderStatus.cs" />
+      <File FileName="2/Models/Orders/Payment.cs" />
+      <File FileName="2/Models/Orders/OrderItem.cs" />
+      <File FileName="2/Views/Order/ManageOrders.cshtml" />
+      <File FileName="2/Models/RegisterViewModel.cs" />
+      <File FileName="2/Views/Shared/_LoginPartial.cshtml" />
+      <File FileName="2/Migrations/20241110203654_changeOrder2.0.cs" />
+      <File FileName="2/Migrations/20241109133402_db3.cs" />
+      <File FileName="2/Migrations/20241110212426_changeOrder3.cs" />
+      <File FileName="2/Models/Orders/DeliveryMethod.cs" />
+      <File FileName="2/Resourses/Resources.en-US.resx" Line="1" Column="1" />
+      <File FileName="2/Views/Product/ByCategory.cshtml" />
+      <File FileName="2/Controllers/HomeController.cs" Line="49" Column="1" />
+      <File FileName="2/Views/Product/CreateProduct.cshtml" />
+      <File FileName="2/Models/LanguageService.cs" />
+      <File FileName="2/Views/Shared/PageNotFound.cshtml" />
+      <File FileName="2/Models/ShareResource.cs" />
+      <File FileName="2/Resourses/Views/Shared/_Layout.uk-UA.resx" Line="3" Column="20" />
+      <File FileName="2/Resourses/Views/Shared/_Layout.uk-UA.Designer.cs" />
+      <File FileName="2/Resourses/Views/Shared/_Layout.en-US.resx" Line="3" Column="20" />
+      <File FileName="2/ScaffoldingReadMe.txt" Line="1" Column="1" />
+      <File FileName="2/Resourses/Views/Home/index.en-US.resx" Line="6" Column="30" />
+      <File FileName="2/Resourses/Views/Home/index.uk-UA.resx" Line="6" Column="11" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="2" expanded="True">
             <Node name="2">
+              <Node name="Dependencies" expanded="True" />
               <Node name="Controllers" expanded="True" />
               <Node name="Resourses" expanded="True">
-                <Node name="Resources.resx" selected="True" />
+                <Node name="Views" expanded="True">
+                  <Node name="Home" expanded="True" selected="True" />
+                  <Node name="Shared" expanded="True" />
+                </Node>
               </Node>
               <Node name="Views" expanded="True">
+                <Node name="Home" expanded="True" />
                 <Node name="Shared" expanded="True" />
               </Node>
-              <Node name="wwwroot" expanded="True" />
             </Node>
           </Node>
         </State>
       </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
-      </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.2 PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>
