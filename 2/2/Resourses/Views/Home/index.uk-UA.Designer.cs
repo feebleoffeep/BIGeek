@@ -60,18 +60,18 @@ namespace _2.Resourses.Views.Home {
         /// <summary>
         ///   Looks up a localized string similar to Додати до кошика.
         /// </summary>
-        internal static string Додати_до_кошика {
+        internal static string Add_to_cart {
             get {
-                return ResourceManager.GetString("Додати до кошика", resourceCulture);
+                return ResourceManager.GetString("Add to cart", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Категорії.
         /// </summary>
-        internal static string Категорії {
+        internal static string Categories {
             get {
-                return ResourceManager.GetString("Категорії", resourceCulture);
+                return ResourceManager.GetString("Categories", resourceCulture);
             }
         }
     }

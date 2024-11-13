@@ -16,7 +16,6 @@ public class OrderController : Controller
         _userManager = userManager;
     }
 
-    // Метод для перегляду замовлень звичайного користувача
     [Authorize]
     public async Task<IActionResult> MyOrders()
     {

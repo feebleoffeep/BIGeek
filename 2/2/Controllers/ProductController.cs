@@ -1,13 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using _2.Models;
-using System.Linq;
-using System.Threading.Tasks;
 using _2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Org.BouncyCastle.Tsp;
-using Microsoft.IdentityModel.Tokens;
 
 public class ProductController : Controller
 {
@@ -22,12 +18,10 @@ public class ProductController : Controller
     {
         var products = _context.Products.Include(c => c.Category).AsQueryable();
 
-        // Якщо введено термін пошуку, фільтруємо продукти
         if (!string.IsNullOrWhiteSpace(searchTerm))
         {
-            searchTerm = searchTerm.ToLower(); // Переводимо пошуковий термін у нижній регістр
+            searchTerm = searchTerm.ToLower(); 
 
-            // Завантажуємо продукти в пам'ять, щоб обробити альтернативні назви
             products = products.ToList().Where(p =>
                 p.Name.ToLower().Contains(searchTerm) ||
                 (p.AlternativeNames != null && p.AlternativeNames
@@ -36,7 +30,7 @@ public class ProductController : Controller
             ).AsQueryable();
         }
 
-        ViewData["SearchTerm"] = searchTerm; // Зберігаємо термін для відображення в полі вводу
+        ViewData["SearchTerm"] = searchTerm; 
         return View(products.ToList());
     }
 

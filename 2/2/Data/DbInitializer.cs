@@ -32,7 +32,7 @@ public class DbInitializer
                 LastName = "Krutoy"
             };
 
-            var createAdmin = await userManager.CreateAsync(adminUser, "17082005kolia");
+            var createAdmin = await userManager.CreateAsync(adminUser, "Qwerty17082005");
             if (createAdmin.Succeeded)
             {
                 await userManager.AddToRoleAsync(adminUser, "Admin");

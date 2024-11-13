@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-	<data name="Категорії" xml:space="preserve">
+	<data name="Categories" xml:space="preserve">
 		<value>Categories</value>
 	</data>
-	<data name="Додати до кошика" xml:space="preserve">
+	<data name="Add to cart" xml:space="preserve">
 		<value>Add to cart</value>
 	</data>
 </root>

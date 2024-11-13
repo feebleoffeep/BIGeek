@@ -19,12 +19,11 @@ namespace _2.Data
         public DbSet<OrderStatus> OrderStatuses { get; set; }
         public DbSet<DeliveryMethod> DeliveryMethods { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
-        // Метод конфігурації контексту бази даних
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                // Використовуйте цей метод, лише якщо не використовуєте Dependency Injection для рядка підключення
                 optionsBuilder.UseSqlServer("Your_Connection_String_Here", b => b.MigrationsAssembly("_2"));
             }
         }
@@ -33,7 +32,6 @@ namespace _2.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // Налаштування зв’язків, якщо необхідно
             modelBuilder.Entity<Order>()
                 .HasMany(o => o.OrderItems)
                 .WithOne(oi => oi.Order)
@@ -55,12 +53,16 @@ namespace _2.Data
                 .HasForeignKey(oi => oi.ProductId);
             modelBuilder.Entity<CartItem>().HasNoKey();
 
+         
+
             modelBuilder.Entity<OrderStatus>().HasData(
             new OrderStatus { Id = 1, Name = "Очікується" },
             new OrderStatus { Id = 2, Name = "Відхилено" },
             new OrderStatus { Id = 3, Name = "Підтверджено" },
-            new OrderStatus { Id = 4, Name = "Відправлено" }
-        );
+            new OrderStatus { Id = 4, Name = "Відправлено" });
+
+      
+
         }
     }
 }

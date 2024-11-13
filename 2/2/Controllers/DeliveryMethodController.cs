@@ -14,79 +14,73 @@ namespace _2.Controllers
             _context = context;
         }
 
-        // GET: DeliveryMethod/CreateDeliveryMethod
         public IActionResult CreateDeliveryMethod()
         {
             return View();
         }
 
-        // POST: DeliveryMethod/CreateDeliveryMethod
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult CreateDeliveryMethod(DeliveryMethod deliveryMethod)
         {
             if (ModelState.IsValid)
             {
-                // Додаємо новий спосіб доставки
                 _context.DeliveryMethods.Add(deliveryMethod);
                 _context.SaveChanges();
 
                 return RedirectToAction("ManageDeliveryMethod");
             }
 
-            return View(deliveryMethod); // Якщо не валідно, повертаємо форму
+            return View(deliveryMethod); 
         }
 
-        // GET: DeliveryMethod/ManageDeliveryMethod
         public IActionResult ManageDeliveryMethod()
         {
             var deliveryMethods = _context.DeliveryMethods.ToList();
             return View(deliveryMethods);
         }
-        // GET: DeliveryMethod/Edit/5
+
         public IActionResult EditDeliveryMethod(int id)
         {
             var deliveryMethod = _context.DeliveryMethods.FirstOrDefault(d => d.Id == id);
             if (deliveryMethod == null)
             {
-                return NotFound(); // Якщо не знайдено доставку з таким ID
+                return NotFound(); 
             }
             return View(deliveryMethod);
         }
 
-        // POST: DeliveryMethod/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult EditDeliveryMethod(int id, DeliveryMethod deliveryMethod)
         {
             if (id != deliveryMethod.Id)
             {
-                return NotFound(); // Якщо ID не збігається
+                return NotFound();
             }
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(deliveryMethod); // Оновлюємо доставку
+                    _context.Update(deliveryMethod); 
                     _context.SaveChanges();
                 }
                 catch (Exception)
                 {
-                    // Якщо сталася помилка збереження
                     if (!_context.DeliveryMethods.Any(d => d.Id == deliveryMethod.Id))
                     {
                         return NotFound();
                     }
                     else
                     {
-                        throw; // Якщо інша помилка, то викидаємо її
+                        throw; 
                     }
                 }
 
-                return RedirectToAction(nameof(ManageDeliveryMethod)); // Після збереження перенаправляємо до списку
+                return RedirectToAction(nameof(ManageDeliveryMethod)); 
             }
-            return View(deliveryMethod); // Якщо модель не валідна, повертаємо на форму редагування
+            return View(deliveryMethod); 
         }
 
         public async Task<IActionResult> DeleteDeliveryMethod(int id)

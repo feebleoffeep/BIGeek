@@ -11,8 +11,8 @@ using _2.Data;
 namespace _2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241109093452_changedelmethod")]
-    partial class changedelmethod
+    [Migration("20241112222049_City1")]
+    partial class City1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -257,26 +257,206 @@ namespace _2.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("_2.Models.City", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<double>("Latitude")
+                        .HasColumnType("double");
+
+                    b.Property<double>("Longitude")
+                        .HasColumnType("double");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cities");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Latitude = 49.421599999999998,
+                            Longitude = 26.996500000000001,
+                            Name = "Хмельницький"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Latitude = 50.450099999999999,
+                            Longitude = 30.523399999999999,
+                            Name = "Київ"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Latitude = 49.839700000000001,
+                            Longitude = 24.029699999999998,
+                            Name = "Львів"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Latitude = 46.482500000000002,
+                            Longitude = 30.723299999999998,
+                            Name = "Одеса"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Latitude = 49.993499999999997,
+                            Longitude = 36.230400000000003,
+                            Name = "Харків"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Latitude = 48.464700000000001,
+                            Longitude = 35.046199999999999,
+                            Name = "Дніпро"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Latitude = 47.838799999999999,
+                            Longitude = 35.139600000000002,
+                            Name = "Запоріжжя"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Latitude = 49.232799999999997,
+                            Longitude = 28.481000000000002,
+                            Name = "Вінниця"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Latitude = 49.588299999999997,
+                            Longitude = 34.551400000000001,
+                            Name = "Полтава"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Latitude = 49.444400000000002,
+                            Longitude = 32.059800000000003,
+                            Name = "Черкаси"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Latitude = 48.290799999999997,
+                            Longitude = 25.9346,
+                            Name = "Чернівці"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Latitude = 51.498199999999997,
+                            Longitude = 31.289300000000001,
+                            Name = "Чернігів"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Latitude = 50.619900000000001,
+                            Longitude = 26.2516,
+                            Name = "Рівне"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Latitude = 48.922600000000003,
+                            Longitude = 24.711099999999998,
+                            Name = "Івано-Франківськ"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Latitude = 49.5535,
+                            Longitude = 25.594799999999999,
+                            Name = "Тернопіль"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Latitude = 50.2547,
+                            Longitude = 28.6587,
+                            Name = "Житомир"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Latitude = 48.620800000000003,
+                            Longitude = 22.2879,
+                            Name = "Ужгород"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Latitude = 50.907699999999998,
+                            Longitude = 34.798099999999998,
+                            Name = "Суми"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Latitude = 48.9482,
+                            Longitude = 38.492400000000004,
+                            Name = "Сєвєродонецьк"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Latitude = 48.722999999999999,
+                            Longitude = 37.5563,
+                            Name = "Краматорськ"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Latitude = 48.507899999999999,
+                            Longitude = 32.262300000000003,
+                            Name = "Кропивницький"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Latitude = 46.975000000000001,
+                            Longitude = 31.994599999999998,
+                            Name = "Миколаїв"
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Latitude = 46.635399999999997,
+                            Longitude = 32.616900000000001,
+                            Name = "Херсон"
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Latitude = 50.747199999999999,
+                            Longitude = 25.325399999999998,
+                            Name = "Луцьк"
+                        });
+                });
+
             modelBuilder.Entity("_2.Models.DeliveryMethod", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("EstimatedDeliveryTime")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("double");
 
                     b.HasKey("Id");
 
@@ -289,8 +469,23 @@ namespace _2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
                     b.Property<int>("DeliveryMethodId")
                         .HasColumnType("int");
+
+                    b.Property<double>("DeliveryPrice")
+                        .HasColumnType("double");
+
+                    b.Property<string>("DeliveryTime")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime(6)");
@@ -298,19 +493,18 @@ namespace _2.Migrations
                     b.Property<int>("OrderStatusId")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("UserId1")
+                    b.Property<string>("UserId")
                         .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CityId");
 
                     b.HasIndex("DeliveryMethodId");
 
                     b.HasIndex("OrderStatusId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -333,11 +527,16 @@ namespace _2.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(255)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("OrderId");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("OrderItems");
                 });
@@ -348,10 +547,6 @@ namespace _2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -359,6 +554,28 @@ namespace _2.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("OrderStatuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Очікується"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Відхилено"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Підтверджено"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Відправлено"
+                        });
                 });
 
             modelBuilder.Entity("_2.Models.Payment", b =>
@@ -504,6 +721,12 @@ namespace _2.Migrations
 
             modelBuilder.Entity("_2.Models.Order", b =>
                 {
+                    b.HasOne("_2.Models.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("_2.Models.DeliveryMethod", "DeliveryMethod")
                         .WithMany("Orders")
                         .HasForeignKey("DeliveryMethodId")
@@ -518,7 +741,9 @@ namespace _2.Migrations
 
                     b.HasOne("_2.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("City");
 
                     b.Navigation("DeliveryMethod");
 
@@ -541,9 +766,15 @@ namespace _2.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("_2.Models.ApplicationUser", "UserName")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
                     b.Navigation("Order");
 
                     b.Navigation("Product");
+
+                    b.Navigation("UserName");
                 });
 
             modelBuilder.Entity("_2.Models.Payment", b =>

@@ -1,4 +1,3 @@
-using System.Globalization;
 using _2.Data;
 using _2.Models;
 using Microsoft.AspNetCore.Identity;
@@ -19,9 +18,8 @@ builder.Services.AddControllersWithViews()
 
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
-
-var supportedCultureCodes = new List<string> { "uk-UA", "en-US" };
-var supportedCultures = supportedCultureCodes.Select(culture => new CultureInfo(culture)).ToList();
+var supportedCultureCodes = new List<string> { "en-US", "uk-UA" };
+var supportedCultures = supportedCultureCodes.Select(culture => new System.Globalization.CultureInfo(culture)).ToList();
 
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
@@ -51,12 +49,12 @@ builder.Services.AddSession(options =>
 });
 
 // Реєстрація LanguageService
-builder.Services.AddScoped<LanguageService>();
+//builder.Services.AddScoped<LanguageService>();
 
-// Налаштування Razor та локалізації для Views
-builder.Services.AddControllersWithViews()
-    .AddRazorRuntimeCompilation() // Використовувати тільки під час розробки
-    .AddViewLocalization();
+// // Налаштування Razor та локалізації для Views
+// builder.Services.AddControllersWithViews()
+//     .AddRazorRuntimeCompilation() // Використовувати тільки під час розробки
+//     .AddViewLocalization();
 
 var app = builder.Build();
 

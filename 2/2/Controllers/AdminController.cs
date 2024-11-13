@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using System.Threading.Tasks;
 using _2.Models;
 using Microsoft.EntityFrameworkCore;
 using _2.Data;
@@ -11,7 +9,7 @@ using _2.Data;
 public class AdminController : Controller
 {
     private readonly UserManager<ApplicationUser> _userManager;
-    private readonly ApplicationDbContext _context; // Додаємо контекст бази даних
+    private readonly ApplicationDbContext _context;
 
     public AdminController(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
     {
@@ -22,10 +20,8 @@ public class AdminController : Controller
     [HttpGet]
     public IActionResult AdminDashboard()
     {
-        return View(); // Повертаємо представлення для адмінської панелі
+        return View(); 
     }
-
-    // Методи для управління користувачами
 
     [HttpGet]
     public async Task<IActionResult> ManageUsers(string searchTerm)
@@ -34,18 +30,15 @@ public class AdminController : Controller
 
         if (!string.IsNullOrEmpty(searchTerm))
         {
-            // Розділіть searchTerm на слова
             var searchTerms = searchTerm.Split(' ', StringSplitOptions.RemoveEmptyEntries);
             users = users.Where(u => searchTerms.All(term =>
                 u.FirstName.Contains(term, StringComparison.OrdinalIgnoreCase) ||
                 u.LastName.Contains(term, StringComparison.OrdinalIgnoreCase))).ToList();
         }
 
-        ViewData["SearchTerm"] = searchTerm; // Зберігаємо значення для повернення в представлення
+        ViewData["SearchTerm"] = searchTerm; 
         return View(users);
     }
-
-
 
     public async Task<IActionResult> EditUser(string id)
     {

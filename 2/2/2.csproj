@@ -22,9 +22,6 @@
     <Folder Include="Areas\Identity\" />
     <Folder Include="Areas\Identity\Pages\Account\" />
     <Folder Include="Views\Product\" />
-    <Folder Include="Resourses\" />
-    <Folder Include="Resourses\Views\" />
-    <Folder Include="Resourses\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Data\" />
@@ -33,11 +30,8 @@
     <None Remove="Areas\Identity\" />
     <None Remove="Areas\Identity\Pages\Account\" />
     <None Remove="Views\Product\" />
-    <None Remove="Resourses\" />
     <None Remove="Resourses\SharedResource.en-US" />
     <None Remove="Resourses\SharedResource.uk-UA" />
-    <None Remove="Resourses\Views\" />
-    <None Remove="Resourses\Views\Shared\" />
     <None Remove="Resourses\Views\Shared\_Layout.en-Us" />
     <None Remove="Resourses\Views\Home\" />
   </ItemGroup>
@@ -63,41 +57,23 @@
   <ItemGroup>
     <Compile Remove="Migrations\20241017085501_Initial.cs" />
     <Compile Remove="Migrations\20241017085501_Initial.Designer.cs" />
+    <Compile Remove="Resourses\Views\Home\index.en-US.Designer.cs" />
+    <Compile Remove="Resourses\Views\Home\index.uk-UA.Designer.cs" />
+    <Compile Remove="Resourses\Views\Shared\_Layout.en-US.Designer.cs" />
+    <Compile Remove="Resourses\Views\Shared\_Layout.uk-UA.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="Resourses\Resources.resx" />
     <EmbeddedResource Remove="Resourses\Resources %28копия%29.uk-UA.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Update="Resourses\Views\Shared\_Layout.uk-UA.Designer.cs">
-      <DependentUpon>_Layout.uk-UA.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Resourses\Views\Shared\_Layout.en-US.Designer.cs">
-      <DependentUpon>_Layout.en-US.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Resourses\Views\Home\index.en-US.Designer.cs">
-      <DependentUpon>index.en-US.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Resourses\Views\Home\index.uk-UA.Designer.cs">
-      <DependentUpon>index.uk-UA.resx</DependentUpon>
-    </Compile>
+    <EmbeddedResource Remove="Resourses\Views\Home\index.en-US.resx" />
+    <EmbeddedResource Remove="Resourses\Views\Home\index.uk-UA.resx" />
+    <EmbeddedResource Remove="Resourses\Views\Shared\_Layout.en-US.resx" />
+    <EmbeddedResource Remove="Resourses\Views\Shared\_Layout.uk-UA.resx" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Resourses\Views\Shared\_Layout %28копия%29.en-US.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>_Layout.uk-UA.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resourses\Views\Shared\_Layout.en-US.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>_Layout.en-US.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resourses\Views\Home\index.en-US.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>index.en-US.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resourses\Views\Home\index.uk-UA.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>index.uk-UA.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 </Project>

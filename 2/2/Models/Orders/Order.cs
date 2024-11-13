@@ -23,9 +23,9 @@ namespace _2.Models
         public virtual DeliveryMethod? DeliveryMethod { get; set; }
         public virtual ICollection<OrderItem>? OrderItems { get; set; }
         public virtual ICollection<Payment>? Payments { get; set; }
-
     }
 }
+
 
 
 

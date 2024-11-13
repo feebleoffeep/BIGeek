@@ -1,30 +1,26 @@
 ﻿using _2.Data;
 using _2.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 public class CategoryController : Controller
 {
-    private readonly ApplicationDbContext _context; // Додайте ваш контекст бази даних
+    private readonly ApplicationDbContext _context; 
     public CategoryController(ApplicationDbContext context)
     {
         _context = context;
     }
 
-    // Дія для відображення всіх категорій
     public IActionResult ManageCategories()
     {
         var categories = _context.Categories.ToList();
         return View(categories);
     }
 
-    // Дія для відображення форми додавання нової категорії
     public IActionResult CreateCategory()
     {
         return View();
     }
 
-    // Дія для обробки POST-запиту на додавання нової категорії
     [HttpPost]
     public IActionResult CreateCategory(Category category)
     {
@@ -35,7 +31,7 @@ public class CategoryController : Controller
             return RedirectToAction("ManageCategories");
         }
 
-        return View(category); // Якщо не валідно, повертаємо ту ж саму форму
+        return View(category); 
     }
 
     public async Task<IActionResult> EditCategory(int id)
@@ -55,7 +51,7 @@ public class CategoryController : Controller
         {
             _context.Categories.Update(category);
             await _context.SaveChangesAsync();
-            return RedirectToAction("ManageCategories"); // Змінено з ManageProducts на ManageCategories
+            return RedirectToAction("ManageCategories");
         }
         return View(category);
     }

@@ -11,13 +11,14 @@
     <form asp-action="PlaceOrder" method="post">
         <div class="form-group">
             <label for="FirstName">Ім'я:</label>
-            <input type="text" name="FirstName" id="FirstName" class="form-control" value="@User.Identity?.Name" required />
+            <input type="text" name="FirstName" id="FirstName" class="form-control" value="@ViewBag.FirstName" required />
         </div>
 
         <div class="form-group">
             <label for="LastName">Прізвище:</label>
             <input type="text" name="LastName" id="LastName" class="form-control" value="@ViewBag.LastName" required />
         </div>
+
 
         <table class="table table-bordered">
             <thead>

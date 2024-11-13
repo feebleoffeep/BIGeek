@@ -14,49 +14,42 @@ namespace _2.Controllers
             _context = context;
         }
 
-        // Метод для отримання кошика з сесії
         private List<CartItem> GetCart()
         {
             var cart = HttpContext.Session.GetString("Cart");
             return cart == null ? new List<CartItem>() : JsonConvert.DeserializeObject<List<CartItem>>(cart);
         }
 
-        // Метод для збереження кошика в сесію
         private void SaveCart(List<CartItem> cart)
         {
             HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(cart));
         }
 
-        // GET: Cart/Index
         public IActionResult Index()
         {
             var cart = GetCart();
             return View(cart);
         }
 
-        // Додати продукт до кошика
         public IActionResult AddToCart(int productId)
         {
             var product = _context.Products.FirstOrDefault(p => p.Id == productId);
 
             if (product == null)
             {
-                return NotFound(); // Якщо продукт не знайдено, повертаємо 404
+                return NotFound(); 
             }
 
             var cart = GetCart();
 
-            // Шукаємо, чи вже є такий продукт у кошику
             var existingItem = cart.FirstOrDefault(i => i.ProductId == productId);
 
             if (existingItem != null)
             {
-                // Якщо продукт вже є, збільшуємо кількість
                 existingItem.Quantity++;
             }
             else
             {
-                // Якщо продукту немає, додаємо його як новий елемент кошика
                 var cartItem = new CartItem
                 {
                     ProductId = product.Id,
@@ -70,13 +63,9 @@ namespace _2.Controllers
 
             SaveCart(cart);
 
-            // Повертаємо успішну відповідь
             return Ok(new { success = true, message = "Товар доданий у кошик!" });
         }
 
-
-
-        // Видалити продукт з кошика
         public IActionResult RemoveFromCart(int productId)
         {
             var cart = GetCart();
@@ -90,7 +79,6 @@ namespace _2.Controllers
 
             return RedirectToAction("Index");
         }
-
 
         [HttpPost]
         public IActionResult UpdateCart(int productId, int quantity)
@@ -110,17 +98,12 @@ namespace _2.Controllers
                 }
                 SaveCart(cart);
 
-                // Повертаємо відповідь про успішне оновлення
                 return Json(new { success = true });
             }
 
-            // Якщо товар не знайдено, повертаємо невдалу відповідь
             return Json(new { success = false });
         }
 
-
-
-        // Очистити кошик
         public IActionResult ClearCart()
         {
             SaveCart(new List<CartItem>());
@@ -130,7 +113,6 @@ namespace _2.Controllers
         [HttpGet]
         public IActionResult Search()
         {
-            // Перенаправлення з /Cart/Search на /Cart
             return RedirectToAction("Index");
         }
     }

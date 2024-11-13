@@ -11,8 +11,8 @@ using _2.Data;
 namespace _2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241109123101_db")]
-    partial class db
+    [Migration("20241112225531_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -285,7 +285,12 @@ namespace _2.Migrations
                         .HasColumnType("double");
 
                     b.Property<string>("DeliveryTime")
-                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("LastName")
                         .HasColumnType("longtext");
 
                     b.Property<DateTime>("OrderDate")
@@ -326,11 +331,16 @@ namespace _2.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(255)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("OrderId");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("OrderItems");
                 });
@@ -552,9 +562,15 @@ namespace _2.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("_2.Models.ApplicationUser", "UserName")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
                     b.Navigation("Order");
 
                     b.Navigation("Product");
+
+                    b.Navigation("UserName");
                 });
 
             modelBuilder.Entity("_2.Models.Payment", b =>

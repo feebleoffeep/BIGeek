@@ -16,12 +16,20 @@ public class CheckoutController : Controller
         this.userManager = userManager;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> IndexAsync()
     {
         var cart = GetCart();
         if (!cart.Any())
         {
             return RedirectToAction("Index", "Cart");
+        }
+
+        var userId = userManager.GetUserId(User);
+        var user = await userManager.FindByIdAsync(userId);
+        if (user != null)
+        {
+            ViewBag.FirstName = user.FirstName;
+            ViewBag.LastName = user.LastName;
         }
 
         ViewBag.DeliveryMethods = _context.DeliveryMethods.ToList();
@@ -123,6 +131,11 @@ public class CheckoutController : Controller
         HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(cart));
     }
 }
+
+
+
+
+
 
 
 

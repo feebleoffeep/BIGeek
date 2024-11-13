@@ -1,15 +1,14 @@
-﻿@using System.Globalization
-@using Microsoft.AspNetCore.Identity
-@using Microsoft.AspNetCore.Mvc.Localization
+﻿@using Microsoft.AspNetCore.Identity
 @using _2.Models
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
-@inject IViewLocalizer Localizer
+@RenderSection("Scripts", required: false)
+
 
 
 
 <!DOCTYPE html>
-<html lang="@CultureInfo.CurrentCulture.Name">
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -30,7 +29,7 @@
         <nav>
             <form class="search-form" asp-controller="Product" asp-action="Search" method="GET">
                 <input type="search" name="query" />
-                <button type="submit" class="search-btn">@Localizer["Пошук"]</button>
+                <button type="submit" class="search-btn">Пошук</button>
             </form>
 
 
@@ -85,28 +84,6 @@
             @RenderBody()
         </main>
     </div>
-    <footer class="footer">
-        <div class="container">&copy; 2024 - BIGeek</div>
-
-        <div class="me-5">
-            <form asp-controller="Home" asp-action="SetLanguage" method="post" id="languageForm" class="d-inline">
-                <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
-                <select name="culture" class="form-select" id="language" onchange="this.form.submit()">
-                    @if (CultureInfo.CurrentUICulture.Name == "en-US")
-                    {
-                        <option value="en-US" selected>English</option>
-                        <option value="uk-UA">Українська</option>
-                    }
-                    else if (CultureInfo.CurrentUICulture.Name == "uk-UA")
-                    {
-                        <option value="en-US">English</option>
-                        <option value="uk-UA" selected>Українська</option>
-                    }
-                </select>
-            </form>
-        </div>
-    </footer>
-
 </body>
 </html>
 
