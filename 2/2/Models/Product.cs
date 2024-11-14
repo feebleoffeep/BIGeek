@@ -14,7 +14,6 @@ namespace _2.Models
         [StringLength(1000, ErrorMessage = "Опис не повинен перевищувати 1000 символів")]
         public string? Description { get; set; }
 
-        [Url(ErrorMessage = "Невірний формат URL зображення")]
         public string? ImageUrl { get; set; }
 
         [Required(ErrorMessage = "Ціна є обов'язковою")]

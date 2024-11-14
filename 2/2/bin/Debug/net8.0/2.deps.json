@@ -343,6 +343,14 @@
         "runtime": {
           "2.dll": {}
         },
+        "resources": {
+          "en-US/2.resources.dll": {
+            "locale": "en-US"
+          },
+          "uk-UA/2.resources.dll": {
+            "locale": "uk-UA"
+          }
+        },
         "compile": {
           "2.dll": {}
         }

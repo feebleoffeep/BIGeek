@@ -73,101 +73,126 @@ else
 
 }
 <style>
-    h2 {
-        color: #333;
-        font-weight: bold;
-        margin: 20px 0;
+    .header-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        padding: 10px;
     }
+
+        .header-container .back-button {
+            margin-right: auto;
+        }
+
+        .header-container h2.title {
+            font-size: 26px;
+            font-weight: 700;
+            color: #ff4a4a;
+            text-align: center;
+        }
+
+        .header-container .btn {
+            font-size: 15px;
+            padding: 10px 15px;
+            margin: 0 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .header-container .btn-primary {
+            background-color: #ff4a4a;
+            color: #fff;
+        }
+
+            .header-container .btn-primary:hover {
+                background-color: #ff6666;
+            }
+
+        .header-container .btn-success {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+            .header-container .btn-success:hover {
+                background-color: #218838;
+            }
+
+        .header-container .search-form {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-container .search-input {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            width: 200px;
+            margin-right: 8px;
+        }
+
+        .header-container .btn-search {
+            background-color: #007bff;
+            color: #fff;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            .header-container .btn-search:hover {
+                background-color: #0056b3;
+            }
 
     .table {
         width: 100%;
         border-collapse: collapse;
-        margin-bottom: 20px;
-        background-color: white;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 15px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        overflow-x: auto;
     }
 
         .table th, .table td {
-            padding: 10px;
+            padding: 12px 8px;
             text-align: left;
-            border: 1px solid #ddd;
+            font-size: 14px;
+            color: #333;
+            border-bottom: 1px solid #ddd;
         }
 
         .table th {
-            background-color: #f2f2f2;
-            color: #333;
-        }
-
-        .table td {
+            background-color: #f8f9fa;
+            font-weight: bold;
             color: #555;
         }
 
-    .btn {
-        padding: 8px 12px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-    .btn-primary {
-        background-color: #f53e3e;
-        color: white;
-        text-decoration: none;
-    }
-
-    .btn-success {
-        background-color: #28a745; /* Зелений колір для кнопки "Додати товар" */
-        color: white;
-    }
-
-    .btn-search {
-        background-color: #f53e3e;
-        color: white;
-        padding: 8px 16px;
-        border: none;
-        border-radius: 4px;
-        margin-left: 10px;
-    }
-
-        .btn-search:hover {
-            background-color: #d43b2f;
+        .table td {
+            background-color: #fff;
         }
 
-    .btn:hover {
-        opacity: 0.9;
-    }
-
-    form {
-        display: inline;
-    }
-
-    a {
-        color: #0066cc;
-        text-decoration: none;
-    }
-
-        a:hover {
-            text-decoration: underline;
+        .table tr:hover td {
+            background-color: #f1f1f1;
         }
 
-    p {
+        .table .actions a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: 500;
+            margin-right: 10px;
+        }
+
+            .table .actions a:hover {
+                color: #0056b3;
+            }
+
+    .no-products-message {
         font-size: 16px;
-        color: #777;
+        color: #666;
+        text-align: center;
+        margin-top: 20px;
     }
 
-    .back-button {
-        margin-bottom: 20px;
-    }
-
-    /* Search form */
-    .search-form {
-        margin-bottom: 20px;
-    }
-
-    .search-input {
-        padding: 10px;
-        margin-right: 10px; /* Додано відступ між полями */
-        border: 1px solid #ddd;
-        border-radius: 4px;
-    }
 </style>

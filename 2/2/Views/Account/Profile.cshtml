@@ -4,13 +4,63 @@
     ViewData["Title"] = "Мій профіль";
 }
 
-<h2>Мій профіль</h2>
+<main>
+    <div class="profile-container">
+        <h2>Мій профіль</h2>
 
-<div>
-    <p><strong>Ім'я:</strong> @Model.FirstName</p>
-    <p><strong>Прізвище:</strong> @Model.LastName</p>
-    <p><strong>Email:</strong> @Model.Email</p>
-</div>
+        <div class="profile-info">
+            <p><strong>Ім'я:</strong> @Model.FirstName</p>
+            <p><strong>Прізвище:</strong> @Model.LastName</p>
+            <p><strong>Email:</strong> @Model.Email</p>
+        </div>
+
+        <div>
+            <a asp-controller="Account" asp-action="EditProfile" class="btn-link">Редагувати профіль</a>
+        </div>
+    </div>
+</main>
+<style>
+    .profile-container {
+        max-width: 380px;
+        margin: 20px auto;
+        background-color: #ffffff;
+        padding: 30px 25px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    }
+        .profile-container h2 {
+            font-family: Arial, sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: #ff4a4a;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+    .profile-info p {
+        font-size: 16px;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .profile-info strong {
+        color: #ff4a4a;
+    }
+
+    .profile-container .btn-link {
+        color: #ff4a4a;
+        text-decoration: none;
+        font-size: 16px;
+        display: block;
+        text-align: center;
+        margin-top: 15px;
+    }
+
+        .profile-container .btn-link:hover {
+            text-decoration: none;
+        }
+
+</style>
 
 
 

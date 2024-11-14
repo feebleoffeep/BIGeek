@@ -1136,3 +1136,13 @@
 /Users/koliakrutoy/Projects/2/BIGeek/2/2/bin/Debug/net8.0/Microsoft.Extensions.Localization.Abstractions.dll
 /Users/koliakrutoy/Projects/2/BIGeek/2/2/bin/Debug/net8.0/Microsoft.AspNetCore.JsonPatch.dll
 /Users/koliakrutoy/Projects/2/BIGeek/2/2/bin/Debug/net8.0/Newtonsoft.Json.Bson.dll
+/Users/koliakrutoy/Projects/2/BIGeek/2/2/obj/Debug/net8.0/2.csproj.GenerateResource.cache
+/Users/koliakrutoy/Projects/2/BIGeek/2/2/bin/Debug/net8.0/en-US/2.resources.dll
+/Users/koliakrutoy/Projects/2/BIGeek/2/2/bin/Debug/net8.0/uk-UA/2.resources.dll
+/Users/koliakrutoy/Projects/2/BIGeek/2/2/obj/Debug/net8.0/_2.Resources.Views.Home.index.resources
+/Users/koliakrutoy/Projects/2/BIGeek/2/2/obj/Debug/net8.0/_2.Resources.Views.Home.index.en-US.resources
+/Users/koliakrutoy/Projects/2/BIGeek/2/2/obj/Debug/net8.0/_2.Resources.Views.Home.index.uk-UA.resources
+/Users/koliakrutoy/Projects/2/BIGeek/2/2/obj/Debug/net8.0/en-US/2.resources.cs
+/Users/koliakrutoy/Projects/2/BIGeek/2/2/obj/Debug/net8.0/en-US/2.resources.dll
+/Users/koliakrutoy/Projects/2/BIGeek/2/2/obj/Debug/net8.0/uk-UA/2.resources.cs
+/Users/koliakrutoy/Projects/2/BIGeek/2/2/obj/Debug/net8.0/uk-UA/2.resources.dll

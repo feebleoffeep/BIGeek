@@ -120,14 +120,12 @@ public class CheckoutController : Controller
 
     private List<CartItem> GetCart()
     {
-        // Використовуємо сесію для отримання кошика
         var cart = HttpContext.Session.GetString("Cart");
         return cart == null ? new List<CartItem>() : JsonConvert.DeserializeObject<List<CartItem>>(cart);
     }
 
     private void SaveCart(List<CartItem> cart)
     {
-        // Збереження кошика в сесію
         HttpContext.Session.SetString("Cart", JsonConvert.SerializeObject(cart));
     }
 }

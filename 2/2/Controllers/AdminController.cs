@@ -39,7 +39,7 @@ public class AdminController : Controller
         ViewData["SearchTerm"] = searchTerm; 
         return View(users);
     }
-
+    
     public async Task<IActionResult> EditUser(string id)
     {
         var user = await _userManager.FindByIdAsync(id);
@@ -100,5 +100,7 @@ public class AdminController : Controller
 
         return View("EditUser", user);
     }
+
+
 
 }

@@ -34,18 +34,12 @@ public class ProductController : Controller
         return View(products.ToList());
     }
 
-
-
-
-
-    // Створення продукту (Форма)
     public IActionResult CreateProduct()
     {
-        ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name"); // Завантаження категорій
+        ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name"); 
         return View();
     }
 
-    // Створення продукту (Дані)
     [HttpPost]
     public async Task<IActionResult> CreateProduct(Product product)
     {
@@ -55,11 +49,10 @@ public class ProductController : Controller
             await _context.SaveChangesAsync();
             return RedirectToAction("ManageProducts");
         }
-        ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name"); // Перезавантаження категорій у разі помилки
+        ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name"); 
         return View(product);
     }
 
-    // Оновлення продукту (Форма)
     public async Task<IActionResult> EditProduct(int id)
     {
         var product = await _context.Products.FindAsync(id);
@@ -67,11 +60,10 @@ public class ProductController : Controller
         {
             return NotFound();
         }
-        ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name", product.CategoryId); // Встановлення вибраної категорії
+        ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name", product.CategoryId); 
         return View(product);
     }
 
-    // Оновлення продукту (Дані)
     [HttpPost]
     public async Task<IActionResult> EditProduct(Product product)
     {
@@ -81,31 +73,31 @@ public class ProductController : Controller
             await _context.SaveChangesAsync();
             return RedirectToAction("ManageProducts");
         }
-        ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name", product.CategoryId); // Перезавантаження категорій у разі помилки
+        ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name", product.CategoryId); 
         return View(product);
     }
-    // Метод для відображення продуктів за категорією
+
     public async Task<IActionResult> ByCategory(string category)
     {
-        // Отримуємо продукти, що належать до вказаної категорії
+
         var products = await _context.Products
-            .Include(c => c.Category) // Включаємо категорії для відображення
-            .Where(p => p.Category.Name == category) // Фільтруємо за назвою категорії
+            .Include(c => c.Category) 
+            .Where(p => p.Category.Name == category) 
             .ToListAsync();
 
         if (products == null || !products.Any())
         {
-            return NotFound(); // Якщо не знайдено, повертаємо NotFound
+            return NotFound(); 
         }
 
-        ViewBag.Category = category; // Зберігаємо назву категорії для відображення в заголовку
-        return View(products); // Повертаємо знайдені продукти до представлення
+        ViewBag.Category = category; 
+        return View(products); 
     }
-    // Видалення продукту (Підтвердження видалення)
+
     public async Task<IActionResult> DeleteProduct(int id)
     {
         var product = await _context.Products
-            .Include(c => c.Category) // Включаємо категорію для відображення
+            .Include(c => c.Category) 
             .FirstOrDefaultAsync(p => p.Id == id);
 
         if (product == null)
@@ -113,10 +105,9 @@ public class ProductController : Controller
             return NotFound();
         }
 
-        return View(product); // Повертаємо до представлення для підтвердження видалення
+        return View(product); 
     }
 
-    // Видалення продукту (Обробка запиту)
     [HttpPost, ActionName("DeleteProduct")]
     public async Task<IActionResult> DeleteProductConfirmed(int id)
     {
@@ -127,9 +118,9 @@ public class ProductController : Controller
             await _context.SaveChangesAsync();
         }
 
-        return RedirectToAction("ManageProducts"); // Повернення до списку продуктів після видалення
+        return RedirectToAction("ManageProducts"); 
     }
-    [AllowAnonymous] // Дозволяє доступ для всіх користувачів, не тільки для адміністраторів
+    [AllowAnonymous] 
 
     public IActionResult Search(string query)
     {
@@ -155,7 +146,7 @@ public class ProductController : Controller
             )
             .ToList();
 
-        ViewBag.Query = query; // Додаємо запит до ViewBag
+        ViewBag.Query = query; 
         return View("SearchResults", filteredProducts);
     }
 
@@ -165,29 +156,25 @@ public class ProductController : Controller
     string color,
     int? priceMin,
     int? priceMax,
-    string screenSize, // Тип double для зберігання розміру екрану
+    string screenSize, 
     int? ram,
     int? storage,
     string resolution)
 {
-    // Ініціалізуємо запит до бази даних
     var products = _context.Products.AsQueryable();
 
-    // Отримуємо унікальні значення для фільтрів
     var colors = _context.Products.Select(p => p.Color).Distinct().ToList();
     var screenSizes = _context.Products.Select(p => p.ScreenDiagonal).Distinct().ToList();
     var rams = _context.Products.Select(p => p.RamSize).Distinct().ToList();
     var storages = _context.Products.Select(p => p.StorageSize).Distinct().ToList();
     var resolutions = _context.Products.Select(p => p.ScreenResolution).Distinct().ToList();
 
-    // Передаємо значення для фільтрів у ViewBag
     ViewBag.Colors = colors;
     ViewBag.ScreenSizes = screenSizes;
     ViewBag.Rams = rams;
     ViewBag.Storages = storages;
     ViewBag.Resolutions = resolutions;
 
-    // Фільтруємо за запитом, кольором, ціною, екраном і т.д.
     if (!string.IsNullOrEmpty(query))
     {
         var searchQuery = query.ToLower();
@@ -237,7 +224,6 @@ public class ProductController : Controller
         products = products.Where(p => p.ScreenResolution.Contains(resolution, StringComparison.OrdinalIgnoreCase));
     }
 
-    // Передаємо результат в представлення
     ViewBag.Query = query;
 
     return View("SearchResults", products.ToList());

@@ -22,6 +22,7 @@
     <Folder Include="Areas\Identity\" />
     <Folder Include="Areas\Identity\Pages\Account\" />
     <Folder Include="Views\Product\" />
+    <Folder Include="ViewsModels\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Data\" />
@@ -34,6 +35,7 @@
     <None Remove="Resourses\SharedResource.uk-UA" />
     <None Remove="Resourses\Views\Shared\_Layout.en-Us" />
     <None Remove="Resourses\Views\Home\" />
+    <None Remove="ViewsModels\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
@@ -61,6 +63,21 @@
     <Compile Remove="Resourses\Views\Home\index.uk-UA.Designer.cs" />
     <Compile Remove="Resourses\Views\Shared\_Layout.en-US.Designer.cs" />
     <Compile Remove="Resourses\Views\Shared\_Layout.uk-UA.Designer.cs" />
+    <Compile Update="Resources\Views\Home\index.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>index.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Views\Home\index.en-US.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>index.en-US.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Views\Home\index.uk-UA.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>index.uk-UA.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="Resourses\Resources.resx" />
@@ -69,6 +86,18 @@
     <EmbeddedResource Remove="Resourses\Views\Home\index.uk-UA.resx" />
     <EmbeddedResource Remove="Resourses\Views\Shared\_Layout.en-US.resx" />
     <EmbeddedResource Remove="Resourses\Views\Shared\_Layout.uk-UA.resx" />
+    <EmbeddedResource Update="Resources\Views\Home\index.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>index.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Views\Home\index.en-US.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>index.en-US.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Views\Home\index.uk-UA.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>index.uk-UA.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Resourses\Views\Shared\_Layout %28копия%29.en-US.resx">

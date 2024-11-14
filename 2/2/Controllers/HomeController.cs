@@ -25,8 +25,16 @@ namespace _2.Controllers
             return View(products);
         }
 
+        [AllowAnonymous]
+        [Route("/NotFound")]
+
+        public IActionResult PageNotFound()
+        {
+            return View();
+        }
+        
         [HttpPost]
-        public IActionResult SetLanguage(string culture, string? returnUrl = null)
+        public IActionResult SetLanguage(string culture, string returnUrl = null)
         {
             Response.Cookies.Append(
                 CookieRequestCultureProvider.DefaultCookieName,
@@ -35,14 +43,6 @@ namespace _2.Controllers
             );
 
             return returnUrl != null ? LocalRedirect(returnUrl) : RedirectToAction("Index");
-        }
-
-        [AllowAnonymous]
-        [Route("/NotFound")]
-
-        public IActionResult PageNotFound()
-        {
-            return View();
         }
 
     }

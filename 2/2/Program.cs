@@ -1,17 +1,15 @@
 using _2.Data;
 using _2.Models;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Localization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Налаштування бази даних
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseMySQL(connectionString: builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Налаштування локалізації
 builder.Services.AddControllersWithViews()
     .AddViewLocalization(Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.Suffix)
     .AddDataAnnotationsLocalization();
@@ -28,72 +26,59 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.SupportedUICultures = supportedCultures;
 });
 
-// Налаштування Identity
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
-    options.Password.RequireDigit = true;
-    options.Password.RequireLowercase = true;
-    options.Password.RequireUppercase = true;
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
     options.Password.RequireNonAlphanumeric = false;
-    options.Password.RequiredLength = 8; // Мінімальна довжина пароля
+    options.Password.RequiredLength = 8;
 })
 .AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders();
 
-// Налаштування сесій
+builder.Services.AddDistributedMemoryCache();
+
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(30); // Сесія завершиться після 30 хв бездіяльності
-    options.Cookie.HttpOnly = true; // Захист від доступу до куків через JavaScript
-    options.Cookie.IsEssential = true; // Куки є обов’язковими
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
 });
 
-// Реєстрація LanguageService
-//builder.Services.AddScoped<LanguageService>();
+builder.Services.AddAuthorization();
 
-// // Налаштування Razor та локалізації для Views
-// builder.Services.AddControllersWithViews()
-//     .AddRazorRuntimeCompilation() // Використовувати тільки під час розробки
-//     .AddViewLocalization();
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Обробка статусу 404
+var localizationOptions = app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value;
+app.UseRequestLocalization(localizationOptions);
+
 app.Use(async (context, next) =>
 {
     await next();
     if (context.Response.StatusCode == 404 && !context.Request.Path.Value.Contains("/NotFound"))
     {
         context.Request.Path = "/NotFound";
-        context.Response.StatusCode = 200; // Повертаємо 200, щоб уникнути циклів
+        context.Response.StatusCode = 200;
         await next();
     }
 });
 
-// Використання статичних файлів
 app.UseStaticFiles();
 
-// Використання сесій
 app.UseSession();
 
-var localizationOptions = app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value;
-app.UseRequestLocalization(localizationOptions);
-// Маршрутизація
 app.UseRouting();
 
-// Аутентифікація та авторизація
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Налаштування маршрутів
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllerRoute(
+app.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
-});
 
-// Ініціалізація бази даних
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
@@ -101,8 +86,8 @@ using (var scope = app.Services.CreateScope())
     try
     {
         var context = services.GetRequiredService<ApplicationDbContext>();
-        await context.Database.MigrateAsync(); // Асинхронна міграція
-        await DbInitializer.Seed(services); // Ініціалізація даних
+        await context.Database.MigrateAsync();
+        await DbInitializer.Seed(services);
     }
     catch (Exception ex)
     {
@@ -111,4 +96,3 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.Run();
-

@@ -4,44 +4,115 @@
     ViewData["Title"] = "Реєстрація";
 }
 
-<h2>Реєстрація</h2>
+<main>
+    <div class="register-form-container">
+        <h2>Реєстрація</h2>
 
-<form method="post" asp-action="Register">
-    <div class="form-group">
-        <label for="FirstName">Ім'я</label>
-        <input asp-for="FirstName" class="form-control" />
-        <span asp-validation-for="FirstName" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label for="LastName">Прізвище</label>
-        <input asp-for="LastName" class="form-control" />
-        <span asp-validation-for="LastName" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label for="Email">Email</label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label for="Password">Пароль</label>
-        <input asp-for="Password" class="form-control" type="password" />
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label for="ConfirmPassword">Підтвердіть пароль</label>
-        <input asp-for="ConfirmPassword" class="form-control" />
-        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary">Зареєструватися</button>
-</form>
+        <form method="post" asp-action="Register">
+            <div class="form-group">
+                <label for="FirstName">Ім'я</label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="LastName">Прізвище</label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Email">Email</label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Password">Пароль</label>
+                <input asp-for="Password" class="form-control" type="password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="ConfirmPassword">Підтвердіть пароль</label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Зареєструватися</button>
+        </form>
 
-<div>
-    <a href="/Account/Login">Увійти</a>
-</div>
+        <div>
+            <a href="/Account/Login">Увійти</a>
+        </div>
+    </div>
+</main>
+<style>
+    .register-form-container form {
+        max-width: 380px;
+        margin: 20px auto;
+        background-color: #ffffff;
+        padding: 30px 25px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    }
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    .register-form-container h2 {
+        font-family: Arial, sans-serif;
+        font-size: 26px;
+        font-weight: 700;
+        color: #ff4a4a;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .register-form-container .form-control {
+        margin-bottom: 15px;
+        padding: 10px;
+        font-size: 16px;
+        color: #333;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        width: 100%;
+        transition: border-color 0.3s ease;
+    }
+
+        .register-form-container .form-control:focus {
+            border-color: #ff4a4a;
+            box-shadow: 0 0 5px rgba(255, 74, 74, 0.2);
+            outline: none;
+        }
+
+    .register-form-container .btn-primary {
+        background-color: #ff4a4a;
+        border: none;
+        padding: 12px;
+        font-size: 17px;
+        font-weight: bold;
+        border-radius: 5px;
+        width: 100%;
+        cursor: pointer;
+        color: #fff;
+        transition: background-color 0.3s ease;
+    }
+
+        .register-form-container .btn-primary:hover {
+            background-color: #ff6666;
+        }
+
+    .register-form-container .text-danger {
+        font-size: 13px;
+        color: #e74c3c;
+    }
+
+    .register-form-container a {
+        color: #ff4a4a;
+        text-decoration: none;
+        font-size: 14px;
+        display: block;
+        text-align: center;
+        margin-top: 15px;
+    }
+
+        .register-form-container a:hover {
+            text-decoration: underline;
+        }
+</style>
 
 
 

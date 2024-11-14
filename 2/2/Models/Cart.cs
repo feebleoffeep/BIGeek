@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
+﻿
 namespace _2.Models
 {
     public class Cart

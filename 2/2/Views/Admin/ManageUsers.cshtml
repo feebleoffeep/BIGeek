@@ -42,92 +42,125 @@
     </table>
 
     <style>
+        /* Container styling for the header */
         .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+            text-align: center;
         }
 
-        .back-button {
-            text-align: left;
-        }
-
-            .back-button a {
-                background-color: #ff3333;
-                color: white;
-                padding: 10px 20px;
-                text-decoration: none;
-                border-radius: 5px;
+            .header-container .title {
+                font-family: Arial, sans-serif;
+                font-size: 26px;
+                font-weight: 700;
+                color: #ff4a4a;
+                margin-bottom: 15px;
             }
 
-                .back-button a:hover {
-                    background-color: #cc0000;
+            .header-container .back-button {
+                margin-bottom: 15px;
+            }
+
+                .header-container .back-button .btn-primary {
+                    background-color: #ff4a4a;
+                    color: #fff;
+                    border: none;
+                    padding: 8px 12px;
+                    font-size: 14px;
+                    border-radius: 5px;
+                    text-decoration: none;
+                    transition: background-color 0.3s ease;
                 }
 
-        .title {
-            text-align: center;
-            flex-grow: 1;
-        }
+                    .header-container .back-button .btn-primary:hover {
+                        background-color: #ff6666;
+                    }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: left;
-            border: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        td a:hover {
-            text-decoration: underline;
-        }
-
-        a {
-            color: #0066cc;
-            text-decoration: none;
-        }
-        /* Search form */
+        /* Search form styling */
         .search-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             margin-bottom: 20px;
         }
 
         .search-input {
-            padding: 10px;
             width: 200px;
+            padding: 8px;
+            font-size: 14px;
             border: 1px solid #ddd;
-            border-radius: 4px;
+            border-radius: 5px;
+            margin-right: 10px;
+            transition: border-color 0.3s ease;
+        }
+
+            .search-input:focus {
+                border-color: #ff4a4a;
+                outline: none;
+                box-shadow: 0 0 5px rgba(255, 74, 74, 0.2);
+            }
+
+        .btn-search, .btn-reset {
+            padding: 8px 12px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
         .btn-search {
-            background-color: #f53e3e;
-            color: white;
-            padding: 8px 16px;
-            border: none;
-            border-radius: 4px;
-            margin-left: 10px;
+            background-color: #ff4a4a;
+            margin-right: 5px;
         }
 
             .btn-search:hover {
-                background-color: #d43b2f;
+                background-color: #ff6666;
             }
 
         .btn-reset {
-            background-color: #007bff; /* Блакитний колір */
-            color: white;
-            padding: 8px 16px;
-            border: none;
-            border-radius: 4px;
-            margin-left: 10px;
-            text-decoration: none; /* Убрати підкреслення */
+            background-color: #ccc;
         }
 
             .btn-reset:hover {
-                background-color: #0056b3; /* Темніший блакитний при наведенні */
+                background-color: #b3b3b3;
             }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            font-family: Arial, sans-serif;
+        }
+
+            table th, table td {
+                padding: 10px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+                font-size: 16px;
+            }
+
+            table th {
+                background-color: #ff4a4a;
+                color: #fff;
+                font-weight: bold;
+            }
+
+            table tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+
+            table a {
+                color: #ff4a4a;
+                text-decoration: none;
+                font-weight: bold;
+            }
+
+                table a:hover {
+                    text-decoration: none;
+                }
+
     </style>

@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@{
     ViewData["Title"] = "BIGeek";
 }
 
@@ -6,7 +8,7 @@
 
     <aside class="sidebar">
         <section class="categories">
-            <h2>Категорії</h2>
+            <h2>@Localizer["Categories"]</h2>
             <ul class="categories-list">
                 <li><a asp-controller="Product" asp-action="ByCategory" asp-route-category="Смартфон">Смартфони</a></li>
                 <li><a asp-controller="Product" asp-action="ByCategory" asp-route-category="Ноутбук">Ноутбуки</a></li>
@@ -23,7 +25,7 @@
                 <h2>@product.Name</h2>
                 <div class="product-info">
                     <p>Ціна: $@product.Price</p>
-                    <button class="buy-btn add-to-cart" data-product-id="@product.Id">Додати до кошика</button>
+                    <button class="buy-btn add-to-cart" data-product-id="@product.Id">@Localizer["AddToCart"]</button>
                 </div>
             </div>
         }

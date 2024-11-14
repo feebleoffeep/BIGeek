@@ -36,7 +36,6 @@ public class OrderController : Controller
         return View(orders);
     }
 
-    // Метод для перегляду замовлень адміністратором
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> ManageOrders()
     {
@@ -50,7 +49,6 @@ public class OrderController : Controller
         return View("ManageOrders", orders);
     }
 
-    // Деталі конкретного замовлення
     public IActionResult OrderDetails(int orderId)
     {
         var order = _context.Orders
@@ -70,7 +68,6 @@ public class OrderController : Controller
         return View(order);
     }
 
-    // Скасування замовлення
     [HttpPost]
     public async Task<IActionResult> CancelOrder(int orderId)
     {
@@ -100,7 +97,6 @@ public class OrderController : Controller
         return RedirectToAction("MyOrders");
     }
 
-    // Видалення скасованого замовлення
     [HttpPost]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> DeleteCancelledOrder(int orderId)
@@ -123,7 +119,6 @@ public class OrderController : Controller
         return RedirectToAction("ManageOrders");
     }
 
-    // Відправка замовлення
     [HttpPost]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> SendOrder(int orderId)
@@ -154,7 +149,6 @@ public class OrderController : Controller
         return RedirectToAction("OrderDetails", new { orderId });
     }
 
-    // Підтвердження замовлення
     [HttpPost]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> ConfirmOrder(int orderId)
