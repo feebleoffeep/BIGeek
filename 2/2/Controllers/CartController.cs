@@ -33,15 +33,13 @@ namespace _2.Controllers
 
         public IActionResult AddToCart(int productId)
         {
-            var product = _context.Products.FirstOrDefault(p => p.Id == productId);
-
-            if (product == null)
+            if (!User.Identity.IsAuthenticated)
             {
-                return NotFound(); 
+                return Unauthorized(new { success = false, message = "Спершу увійдіть у систему." });
             }
 
+            var product = _context.Products.FirstOrDefault(p => p.Id == productId);
             var cart = GetCart();
-
             var existingItem = cart.FirstOrDefault(i => i.ProductId == productId);
 
             if (existingItem != null)
@@ -65,6 +63,7 @@ namespace _2.Controllers
 
             return Ok(new { success = true, message = "Товар доданий у кошик!" });
         }
+
 
         public IActionResult RemoveFromCart(int productId)
         {

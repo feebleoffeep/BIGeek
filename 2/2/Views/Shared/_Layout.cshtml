@@ -81,80 +81,92 @@
 
         </nav>
     </header>
-
-<div class="main-container">
-    <main class="products-container">
-        @RenderBody()
-    </main>
-</div>
-    <footer class="footer">
-        <div class="container">&copy; 2024 - BoardGamesStore</div>
-
-        <div class="me-5">
-            <form asp-controller="Home" asp-action="SetLanguage" method="post" id="languageForm" class="d-inline">
-                <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
-                <select name="culture" class="form-select" id="language" onchange="this.form.submit()">
-                    @if (CultureInfo.CurrentUICulture.Name == "en-US") {
-                    <option value="en-US" selected>English</option>
-                    <option value="uk-UA">Українська</option>
-                    }
-                    else if (CultureInfo.CurrentUICulture.Name == "uk-UA")
-                    {
-                    <option value="en-US">English</option>
-                    <option value="uk-UA" selected>Українська</option>
-                    }
-                </select>
-            </form>
-        </div>
-    </footer>
+    <div class="main-container">
+        <main class="products-container">
+            @RenderBody()
+        </main>
+    </div>
 </body>
 </html>
-
 <style>
 
-    .language-dropdown {
-        position: relative;
-        display: inline-block;
+    header {
+        color: #f44236;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #FFFFFF;
+        border-bottom: 2px solid #800;
     }
 
-    .language-button {
-        padding: 10px 20px;
-        color: white;
-        background-color: #4CAF50;
-        border: none;
-        border-radius: 5px;
+    .logo a {
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        align-items: center;
+    }
+
+    .logo img {
+        height: 65px;
+        background-color: transparent;
+    }
+
+    .logo a:hover, .logo a:focus, .logo a:active {
+        color: inherit;
+    }
+
+    header .logo {
+        font-weight: 600;
+        font-size: 45px;
         font-family: 'Montserrat', sans-serif;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    header form.search-form {
+        display: flex;
+        align-items: center;
+        margin: 0 50px;
+    }
+
+    input[type="search"] {
+        padding: 6px;
+        font-size: 16px;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        width: 650px;
+        position: static;
+    }
+
+    button.search-btn {
+        padding: 9px 10px;
+        margin-left: 5px;
+        background-color: #f44236;
+        color: white;
+        border: none;
+        border-radius: 4px;
         cursor: pointer;
-        transition: background-color 0.3s;
     }
 
-        .language-button:hover {
-            background-color: #45a049;
+        button.search-btn:hover {
+            background-color: #d43b2f;
         }
 
-    .language-content {
-        display: none;
-        position: absolute;
-        background-color: #f9f9f9;
-        min-width: 100px;
-        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-        z-index: 1;
+    header nav {
+        display: flex;
+        align-items: center;
     }
 
-        .language-content a {
-            color: black;
-            padding: 12px 16px;
+        header nav a {
+            color: #000000;
             text-decoration: none;
-            display: block;
+            margin-left: 15px;
         }
 
-            .language-content a:hover {
-                background-color: #f1f1f1;
+            header nav a:hover {
+                text-decoration: none;
             }
-
-        .language-content.show {
-            display: block;
-        }
 
     .dropdown-toggle {
         cursor: pointer;

@@ -1,27 +1,11 @@
 ﻿<Properties StartupConfiguration="{09F60CB1-6C4B-4910-8848-FD89EBC17BED}|https">
-  <MonoDevelop.Ide.Workbench ActiveDocument="2/Resources/Views/Home/index.Designer.cs">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.2 PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="2/Models/Product.cs">
     <Files>
-      <File FileName="2/Controllers/CheckoutController.cs" Line="1" Column="1" />
-      <File FileName="2/Views/Checkout/Index.cshtml" />
-      <File FileName="2/Views/Shared/_Layout.cshtml" />
-      <File FileName="2/Data/DbInitializer.cs" />
-      <File FileName="2/Program.cs" Line="1" Column="1" />
-      <File FileName="2/Data/ApplicationDbContext.cs" />
-      <File FileName="2/Controllers/DeliveryMethodController.cs" />
-      <File FileName="2/Views/Checkout/OrderConfirmation.cshtml" />
-      <File FileName="2/Controllers/AdminController.cs" />
-      <File FileName="2/Controllers/AccountController.cs" />
-      <File FileName="2/Controllers/OrderController.cs" />
-      <File FileName="2/Controllers/ProductController.cs" />
-      <File FileName="2/Models/Orders/Order.cs" />
-      <File FileName="2/Migrations/20241112225531_initial.cs" />
-      <File FileName="2/Views/Home/index.cshtml" />
-      <File FileName="2/Views/Account/Login.cshtml" />
-      <File FileName="2/Models/ApplicationUser.cs" />
-      <File FileName="2/Models/Cart.cs" />
-      <File FileName="2/Models/CartItem.cs" />
-      <File FileName="2/Models/Product.cs" />
-      <File FileName="2/Models/Category.cs" />
+      <File FileName="2/Models/Product.cs" Line="1" Column="1" />
+      <File FileName="2/Models/Category.cs" Line="7" Column="16" />
       <File FileName="2/Controllers/HomeController.cs" />
       <File FileName="2/Controllers/CategoryController.cs" />
       <File FileName="2/Controllers/CartController.cs" />
@@ -38,8 +22,13 @@
       <File FileName="2/Views/Admin/ManageUsers.cshtml" />
       <File FileName="2/Views/Admin/EditUser.cshtml" />
       <File FileName="2/ViewsModels/ProfileViewModel.cs" />
-      <File FileName="2/Resources/Views/Home/index.resx" Line="1" Column="1" />
-      <File FileName="2/Resources/Views/Home/index.Designer.cs" Line="1" Column="1" />
+      <File FileName="2/Resources/Views/Home/index.resx" />
+      <File FileName="2/Resources/Views/Home/index.Designer.cs" />
+      <File FileName="2/Views/Order/ManageOrders.cshtml" />
+      <File FileName="2/Views/Order/MyOrders.cshtml" />
+      <File FileName="2/Views/Order/OrderDetails.cshtml" />
+      <File FileName="2/Views/Category/CreateCategory.cshtml" />
+      <File FileName="2/Views/Shared/_LoginPartial.cshtml" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -47,31 +36,22 @@
           <Node name="2" expanded="True">
             <Node name="2">
               <Node name="Controllers" expanded="True" />
-              <Node name="Resources" expanded="True" selected="True">
-                <Node name="Views" expanded="True">
-                  <Node name="Home" expanded="True" />
-                </Node>
+              <Node name="Data" expanded="True" />
+              <Node name="Models" expanded="True">
+                <Node name="Product.cs" selected="True" />
               </Node>
               <Node name="Views" expanded="True">
-                <Node name="Account" expanded="True" />
-                <Node name="Admin" expanded="True" />
-                <Node name="Product" expanded="True" />
+                <Node name="Shared" expanded="True" />
               </Node>
-              <Node name="ViewsModels" expanded="True" />
-              <Node name="wwwroot" expanded="True">
-                <Node name="css" expanded="True" />
-              </Node>
+              <Node name="wwwroot" expanded="True" />
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.2 PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>
