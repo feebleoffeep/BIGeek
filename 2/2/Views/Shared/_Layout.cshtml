@@ -1,17 +1,14 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using _2.Models
-@using Microsoft.AspNetCore.Mvc.Localization
-@using System.Globalization
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
-@inject IViewLocalizer Localizer
 @RenderSection("Scripts", required: false)
 
 
 
 
 <!DOCTYPE html>
-<html lang="@CultureInfo.CurrentCulture.Name">
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -249,4 +246,10 @@
     .dropdown-toggle {
         cursor: pointer;
     }
+
+    .products-container {
+        width: 100%;
+        padding: 20px;
+    }
+
 </style>

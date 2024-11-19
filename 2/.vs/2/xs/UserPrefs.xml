@@ -1,57 +1,34 @@
 ﻿<Properties StartupConfiguration="{09F60CB1-6C4B-4910-8848-FD89EBC17BED}|https">
-  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.MyApp.Tests FirstBuild="True" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints />
   <MonoDevelop.Ide.ItemProperties.2 PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="2/Models/Product.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench ActiveDocument="2/Views/Product/SearchResults.cshtml">
     <Files>
-      <File FileName="2/Models/Product.cs" Line="1" Column="1" />
-      <File FileName="2/Models/Category.cs" Line="7" Column="16" />
-      <File FileName="2/Controllers/HomeController.cs" />
-      <File FileName="2/Controllers/CategoryController.cs" />
-      <File FileName="2/Controllers/CartController.cs" />
-      <File FileName="2/Models/Orders/DeliveryMethod.cs" />
-      <File FileName="2/Models/Orders/OrderItem.cs" />
-      <File FileName="2/Models/Orders/OrderStatus.cs" />
-      <File FileName="2/Models/Orders/Payment.cs" />
-      <File FileName="2/Views/Account/Profile.cshtml" />
-      <File FileName="2/Views/Product/CreateProduct.cshtml" />
-      <File FileName="2/Views/Product/EditProduct.cshtml" />
-      <File FileName="2/Views/Account/Register.cshtml" />
-      <File FileName="2/Views/Product/ManageProducts.cshtml" />
-      <File FileName="2/wwwroot/css/site.css" />
-      <File FileName="2/Views/Admin/ManageUsers.cshtml" />
-      <File FileName="2/Views/Admin/EditUser.cshtml" />
-      <File FileName="2/ViewsModels/ProfileViewModel.cs" />
-      <File FileName="2/Resources/Views/Home/index.resx" />
-      <File FileName="2/Resources/Views/Home/index.Designer.cs" />
-      <File FileName="2/Views/Order/ManageOrders.cshtml" />
-      <File FileName="2/Views/Order/MyOrders.cshtml" />
-      <File FileName="2/Views/Order/OrderDetails.cshtml" />
-      <File FileName="2/Views/Category/CreateCategory.cshtml" />
-      <File FileName="2/Views/Shared/_LoginPartial.cshtml" />
+      <File FileName="2/Views/Product/ByCategory.cshtml" Line="68" Column="1" />
+      <File FileName="2/Views/Home/index.cshtml" Line="90" Column="1" />
+      <File FileName="2/wwwroot/css/site.css" Line="17" Column="1" />
+      <File FileName="2/Views/Product/SearchResults.cshtml" Line="228" Column="21" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="2" expanded="True">
-            <Node name="2">
-              <Node name="Controllers" expanded="True" />
-              <Node name="Data" expanded="True" />
-              <Node name="Models" expanded="True">
-                <Node name="Product.cs" selected="True" />
-              </Node>
+            <Node name="2" expanded="True">
               <Node name="Views" expanded="True">
-                <Node name="Shared" expanded="True" />
+                <Node name="Home" expanded="True" />
+                <Node name="Product" expanded="True" />
               </Node>
-              <Node name="wwwroot" expanded="True" />
+              <Node name="ViewsModels" expanded="True" />
+              <Node name="wwwroot" expanded="True">
+                <Node name="css" expanded="True" />
+              </Node>
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>

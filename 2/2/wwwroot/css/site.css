@@ -3,18 +3,6 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-main {
-    width: 80%;
-    padding: 15px 10%;
-}
-
-.products {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: start;
-    gap: 30px;
-}
-
 .main-container {
     width: 100%;
 }
@@ -38,10 +26,6 @@ main {
             color: #f44236;
         }
 
-.products-container {
-    width: 100%;
-    padding: 20px;
-}
 .logout-btn {
     background-color: #ff4d4d; /* Червоний колір кнопки */
     color: white;
