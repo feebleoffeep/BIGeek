@@ -1,32 +1,46 @@
 ﻿@model IEnumerable<_2.Models.CartItem>
+@inject IHttpContextAccessor HttpContextAccessor
 
 @{
     ViewData["Title"] = "Оформлення замовлення";
+
+    var language = HttpContextAccessor.HttpContext?.Request.Cookies["Language"] ?? "uk";
+
+    var titleText = language == "uk" ? "Оформлення замовлення" : "Order Checkout";
+    var firstNameText = language == "uk" ? "Ім'я:" : "First Name:";
+    var lastNameText = language == "uk" ? "Прізвище:" : "Last Name:";
+    var itemText = language == "uk" ? "Товар" : "Item";
+    var priceText = language == "uk" ? "Ціна" : "Price";
+    var quantityText = language == "uk" ? "Кількість" : "Quantity";
+    var totalText = language == "uk" ? "Загальна сума" : "Total";
+    var deliveryMethodText = language == "uk" ? "Вибір методу доставки" : "Select Delivery Method";
+    var distanceText = language == "uk" ? "Відстань (км):" : "Distance (km):";
+    var deliveryPriceText = language == "uk" ? "Ціна доставки:" : "Delivery Price:";
+    var deliveryTimeText = language == "uk" ? "Час доставки:" : "Delivery Time:";
+    var confirmOrderText = language == "uk" ? "Підтвердити замовлення" : "Confirm Order";
 }
 
 <div class="container">
-    <h2>Оформлення замовлення</h2>
+    <h2>@titleText</h2>
 
-    <!-- Поля для імені та прізвища користувача -->
     <form asp-action="PlaceOrder" method="post">
         <div class="form-group">
-            <label for="FirstName">Ім'я:</label>
+            <label for="FirstName">@firstNameText</label>
             <input type="text" name="FirstName" id="FirstName" class="form-control" value="@ViewBag.FirstName" required />
         </div>
 
         <div class="form-group">
-            <label for="LastName">Прізвище:</label>
+            <label for="LastName">@lastNameText</label>
             <input type="text" name="LastName" id="LastName" class="form-control" value="@ViewBag.LastName" required />
         </div>
-
 
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Товар</th>
-                    <th>Ціна</th>
-                    <th>Кількість</th>
-                    <th>Загальна сума</th>
+                    <th>@itemText</th>
+                    <th>@priceText</th>
+                    <th>@quantityText</th>
+                    <th>@totalText</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,9 +56,9 @@
             </tbody>
         </table>
 
-        <p class="total-price">Загальна вартість: <strong>@Model.Sum(i => i.Price * i.Quantity)</strong> грн</p>
+        <p class="total-price">@totalText: <strong>@Model.Sum(i => i.Price * i.Quantity)</strong> $</p>
 
-        <h3>Вибір методу доставки</h3>
+        <h3>@deliveryMethodText</h3>
         <select name="DeliveryMethodId" class="form-control" id="DeliveryMethodId" onchange="updateDeliveryDetails()">
             @foreach (var deliveryMethod in ViewBag.DeliveryMethods as IEnumerable<_2.Models.DeliveryMethod>)
             {
@@ -53,16 +67,16 @@
         </select>
 
         <div class="form-group" id="DistanceDiv" style="display:none; margin-top: 15px;">
-            <label for="Distance">Відстань (км):</label>
+            <label for="Distance">@distanceText</label>
             <input type="number" name="distance" id="Distance" class="form-control" step="0.1" />
         </div>
 
         <div id="DeliveryInfo" style="margin-top: 20px; display:none;">
-            <p>Ціна доставки: <span id="DeliveryPrice">0</span> грн</p>
-            <p>Час доставки: <span id="DeliveryTime">0</span></p>
+            <p>@deliveryPriceText <span id="DeliveryPrice">0</span> грн</p>
+            <p>@deliveryTimeText: <span id="DeliveryTime">0</span></p>
         </div>
 
-        <button type="submit" class="btn btn-success confirm-btn">Підтвердити замовлення</button>
+        <button type="submit" class="btn btn-success confirm-btn">@confirmOrderText</button>
     </form>
 </div>
 
@@ -93,6 +107,7 @@
             deliveryInfo.style.display = "none";
         }
     }</script>
+
 
 
 <style>

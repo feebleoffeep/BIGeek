@@ -1,28 +1,38 @@
 ﻿@model _2.Models.ProfileViewModel
+@inject IHttpContextAccessor HttpContextAccessor
 
 @{
-    ViewData["Title"] = "Редагування";
+    var language = HttpContextAccessor.HttpContext?.Request.Cookies["Language"] ?? "uk";
+
+    var pageTitle = language == "uk" ? "Редагування профілю" : "Edit Profile";
+    var firstNameLabel = language == "uk" ? "Ім'я" : "First Name";
+    var lastNameLabel = language == "uk" ? "Прізвище" : "Last Name";
+    var emailLabel = language == "uk" ? "Електронна пошта" : "Email";
+    var saveButtonText = language == "uk" ? "Зберегти зміни" : "Save Changes";
+
+    ViewData["Title"] = pageTitle;
 }
 
 <main>
     <div class="edit-profile-container">
-        <h2>Редагування профілю</h2>
+        <h2>@pageTitle</h2>
 
         <form asp-action="EditProfile" method="post">
             <div class="form-group">
-                <label for="FirstName">Ім'я</label>
+                <label for="FirstName">@firstNameLabel</label>
                 <input type="text" class="form-control" id="FirstName" name="FirstName" value="@Model.FirstName" required />
             </div>
             <div class="form-group">
-                <label for="LastName">Прізвище</label>
+                <label for="LastName">@lastNameLabel</label>
                 <input type="text" class="form-control" id="LastName" name="LastName" value="@Model.LastName" required />
             </div>
             <div class="form-group">
-                <label for="Email">Електронна пошта</label>
+                <label for="Email">@emailLabel</label>
                 <input type="email" class="form-control" id="Email" name="Email" value="@Model.Email" required />
             </div>
-            <button type="submit" class="btn btn-primary">Зберегти зміни</button>
+            <button type="submit" class="btn btn-primary">@saveButtonText</button>
         </form>
     </div>
 </main>
+
 

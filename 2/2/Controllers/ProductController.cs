@@ -228,7 +228,4 @@ public class ProductController : Controller
 
     return View("SearchResults", products.ToList());
 }
-
-
-
 }

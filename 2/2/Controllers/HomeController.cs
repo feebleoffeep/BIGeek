@@ -1,7 +1,6 @@
 ﻿using _2.Data;
 using _2.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace _2.Controllers
@@ -32,19 +31,19 @@ namespace _2.Controllers
         {
             return View();
         }
-        
-        [HttpPost]
-        public IActionResult SetLanguage(string culture, string returnUrl = null)
+
+        public IActionResult SetLanguage(string lang)
         {
-            Response.Cookies.Append(
-                CookieRequestCultureProvider.DefaultCookieName,
-                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
-                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
-            );
+            if (lang == "en" || lang == "uk")
+            {
+                Response.Cookies.Append("Language", lang, new CookieOptions
+                {
+                    Expires = DateTimeOffset.UtcNow.AddYears(1)
+                });
+            }
 
-            return returnUrl != null ? LocalRedirect(returnUrl) : RedirectToAction("Index");
+            return Redirect(Request.Headers["Referer"].ToString());
         }
-
     }
 }
 

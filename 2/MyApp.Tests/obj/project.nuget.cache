@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "zgizejUIUAc=",
+  "dgSpecHash": "ZCCH9SJyowAWXI96LlsKoVEBoqZU/qZxV5WL4ULJE1Juyelizzuzo9FyHXkHJ5+pmDtZo7UXjhgWSXrscX/3Ow==",
   "success": true,
   "projectFilePath": "/Users/koliakrutoy/Projects/2/BIGeek/2/MyApp.Tests/MyApp.Tests.csproj",
   "expectedPackageFiles": [
@@ -323,12 +323,5 @@
     "/Users/koliakrutoy/.nuget/packages/xunit.runner.visualstudio/2.5.3/xunit.runner.visualstudio.2.5.3.nupkg.sha512",
     "/Users/koliakrutoy/.nuget/packages/zstdsharp.port/0.8.0/zstdsharp.port.0.8.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Error occurred while getting package vulnerability data: nodename nor servname provided, or not known (api.nuget.org:443)"
-    }
-  ]
+  "logs": []
 }

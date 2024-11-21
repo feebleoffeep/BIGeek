@@ -2,13 +2,11 @@
 @using _2.Models
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
+@inject IHttpContextAccessor HttpContextAccessor
 @RenderSection("Scripts", required: false)
 
-
-
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="@(HttpContextAccessor.HttpContext?.Request.Cookies["Language"] ?? "uk")">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -27,52 +25,78 @@
             </a>
         </span>
         <nav>
+            @{
+                var language = HttpContextAccessor.HttpContext?.Request.Cookies["Language"] ?? "uk";
+                var searchButtonText = language == "uk" ? "Пошук" : "Search";
+                var searchPlaceholder = language == "uk" ? "Введіть запит" : "Enter query";
+                var profileText = language == "uk" ? "Мій профіль" : "My Profile";
+                var manageOrdersText = language == "uk" ? "Керування замовленнями" : "Manage Orders";
+                var manageUsersText = language == "uk" ? "Редагувати користувачів" : "Edit Users";
+                var manageProductsText = language == "uk" ? "Редагувати продукцію" : "Edit Products";
+                var manageCategoriesText = language == "uk" ? "Редагувати категорії" : "Edit Categories";
+                var manageDeliveryText = language == "uk" ? "Редагувати способи доставки" : "Edit Delivery Methods";
+                var myOrdersText = language == "uk" ? "Мої замовлення" : "My Orders";
+                var logoutText = language == "uk" ? "Вийти" : "Logout";
+                var loginText = language == "uk" ? "Ввійти" : "Login";
+            }
             <form class="search-form" asp-controller="Product" asp-action="Search" method="GET">
-                <input type="search" name="query" />
-                <button type="submit" class="search-btn">Пошук</button>
+                <input type="search" name="query" placeholder="@searchPlaceholder" />
+                <button type="submit" class="search-btn">@searchButtonText</button>
             </form>
-
 
             <a asp-controller="Cart" class="button">
                 <i class="fas fa-shopping-cart"></i>
             </a>
 
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropdown-toggle button">
+                    <i class="fas fa-globe"></i>
+                </a>
+                <div class="dropdown-content">
+                    <a asp-controller="Home" asp-action="SetLanguage" asp-route-lang="en">English</a>
+                    <a asp-controller="Home" asp-action="SetLanguage" asp-route-lang="uk">Українська</a>
+                </div>
+            </li>
+
             <ul>
                 @if (SignInManager.IsSignedIn(User))
                 {
                     var currentUser = await UserManager.GetUserAsync(User);
+                    var isAdmin = await UserManager.IsInRoleAsync(currentUser, "Admin");
+
+                 
 
                     <li class="dropdown">
                         <a href="javascript:void(0)" id="profileLink" class="dropdown-toggle button">
                             <i class="fas fa-user"></i>
                         </a>
                         <div class="dropdown-content">
-                            <a asp-controller="Account" asp-action="Profile" class="view-profile-button">Мій профіль</a>
+                            <a asp-controller="Account" asp-action="Profile" class="view-profile-button">@profileText</a>
 
-                            @if (await UserManager.IsInRoleAsync(currentUser, "Admin"))
+                            @if (isAdmin)
                             {
-                                <a asp-controller="Order" asp-action="ManageOrders" class="manage-orders-button">Керування замовленнями</a>
+                                <a asp-controller="Order" asp-action="ManageOrders" class="manage-orders-button">@manageOrdersText</a>
                                 <div class="edit-options">
-                                    <a asp-controller="Admin" asp-action="ManageUsers" class="edit-button">Редагувати користувачів</a>
-                                    <a asp-controller="Product" asp-action="ManageProducts" class="edit-button">Редагувати продукцію</a>
-                                    <a asp-controller="Category" asp-action="ManageCategories" class="edit-button">Редагувати категорії</a>
-                                    <a asp-controller="DeliveryMethod" asp-action="ManageDeliveryMethod" class="edit-button">Редагувати способи доставки</a>
+                                    <a asp-controller="Admin" asp-action="ManageUsers" class="edit-button">@manageUsersText</a>
+                                    <a asp-controller="Product" asp-action="ManageProducts" class="edit-button">@manageProductsText</a>
+                                    <a asp-controller="Category" asp-action="ManageCategories" class="edit-button">@manageCategoriesText</a>
+                                    <a asp-controller="DeliveryMethod" asp-action="ManageDeliveryMethod" class="edit-button">@manageDeliveryText</a>
                                 </div>
                             }
                             else
                             {
-                                <a asp-controller="Order" asp-action="MyOrders" class="view-orders-button">Мої замовлення</a>
+                                <a asp-controller="Order" asp-action="MyOrders" class="view-orders-button">@myOrdersText</a>
                             }
 
                             <form asp-controller="Account" asp-action="Logout" method="post">
-                                <button type="submit">Вийти</button>
+                                <button type="submit">@logoutText</button>
                             </form>
                         </div>
                     </li>
                 }
                 else
                 {
-                    <a asp-controller="Account" asp-action="Login" id="loginLink" class="button">Ввійти</a>
+                    <a asp-controller="Account" asp-action="Login" id="loginLink" class="button">@loginText</a>
                 }
             </ul>
 
@@ -85,6 +109,23 @@
     </div>
 </body>
 </html>
+
+<script>document.querySelectorAll('.dropdown-toggle').forEach(function (dropdown) {
+        dropdown.addEventListener('click', function () {
+            const dropdownContent = this.nextElementSibling;
+            dropdownContent.classList.toggle('show');
+        });
+    });
+
+    window.addEventListener('click', function (e) {
+        if (!e.target.matches('.dropdown-toggle')) {
+            document.querySelectorAll('.dropdown-content').forEach(function (content) {
+                content.classList.remove('show');
+            });
+        }
+    });</script>
+
+
 <style>
 
     header {
@@ -252,4 +293,24 @@
         padding: 20px;
     }
 
+    .language-button {
+        background-color: #f44236; /* Основний колір кнопки */
+        color: #ffffff; /* Колір тексту */
+        border: none; /* Відсутність рамки */
+        border-radius: 5px; /* Згладжені кути */
+        padding: 8px 16px; /* Внутрішні відступи */
+        font-size: 16px; /* Розмір шрифту */
+        font-family: 'Montserrat', sans-serif; /* Сучасний шрифт */
+        cursor: pointer; /* Зміна курсора на вказівник */
+        transition: background-color 0.3s ease; /* Плавний перехід кольору */
+        margin: 0 5px; /* Відступ між кнопками */
+    }
+
+        .language-button:hover {
+            background-color: #d60000; /* Темніший відтінок при наведенні */
+        }
+
+        .language-button:active {
+            background-color: #a80000; /* Ще темніший відтінок при натисканні */
+        }
 </style>

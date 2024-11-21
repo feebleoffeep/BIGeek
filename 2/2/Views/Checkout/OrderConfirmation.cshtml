@@ -1,27 +1,43 @@
 ﻿@model _2.Models.Order
+@inject IHttpContextAccessor HttpContextAccessor
 
 @{
     ViewData["Title"] = "Підтвердження замовлення";
+
+    var language = HttpContextAccessor.HttpContext?.Request.Cookies["Language"] ?? "uk";
+
+    var titleText = language == "uk" ? "Підтвердження замовлення" : "Order Confirmation";
+    var orderNumberText = language == "uk" ? "Ваше замовлення номер" : "Your order number";
+    var orderNumberTextContinue = language == "uk" ? "було успішно оформлено." : "was successfully processed.";
+    var userInfoText = language == "uk" ? "Інформація про користувача" : "User Information";
+    var firstNameText = language == "uk" ? "Ім'я" : "First Name";
+    var lastNameText = language == "uk" ? "Прізвище" : "Last Name";
+    var orderInfoText = language == "uk" ? "Інформація про замовлення" : "Order Information";
+    var itemText = language == "uk" ? "Товар" : "Item";
+    var priceText = language == "uk" ? "Ціна" : "Price";
+    var quantityText = language == "uk" ? "Кількість" : "Quantity";
+    var totalText = language == "uk" ? "Загальна сума" : "Total";
+    var returnCatalogText = language == "uk" ? "Повернутися до каталогу" : "Return to Catalog";
 }
 
 <div class="container">
-    <h2>Підтвердження замовлення</h2>
+    <h2>@titleText</h2>
 
-    <p>Ваше замовлення номер <strong>@Model.Id</strong> було успішно оформлено.</p>
+    <p>@orderNumberText <strong>@Model.Id</strong> @orderNumberTextContinue</p>
 
-    <h3>Інформація про користувача</h3>
-    <p>Ім'я: <strong>@Model.FirstName</strong></p>
-    <p>Прізвище: <strong>@Model.LastName</strong></p>
+    <h3>@userInfoText</h3>
+    <p>@firstNameText: <strong>@Model.FirstName</strong></p>
+    <p>@lastNameText: <strong>@Model.LastName</strong></p>
 
-    <h3>Інформація про замовлення</h3>
+    <h3>@orderInfoText</h3>
 
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Товар</th>
-                <th>Ціна</th>
-                <th>Кількість</th>
-                <th>Загальна сума</th>
+                <th>@itemText</th>
+                <th>@priceText</th>
+                <th>@quantityText</th>
+                <th>@totalText</th>
             </tr>
         </thead>
         <tbody>
@@ -37,13 +53,13 @@
         </tbody>
     </table>
 
-    <p class="total-price">Загальна вартість: <strong>@Model.OrderItems.Sum(i => i.Price * i.Quantity)</strong> грн</p>
+    <p class="total-price">@totalText: <strong>@Model.OrderItems.Sum(i => i.Price * i.Quantity)</strong> $</p>
 
-    <a href="/" class="btn btn-primary return-btn">Повернутися до каталогу</a>
+    <a href="/" class="btn btn-primary return-btn">@returnCatalogText</a>
 </div>
 
+
 <style>
-    /* Основные стили контейнера */
     .container {
         max-width: 800px;
         margin: 20px auto;
@@ -66,7 +82,6 @@
         font-size: 1.4em;
     }
 
-    /* Таблица */
     .table {
         width: 100%;
         border-collapse: collapse;
@@ -88,14 +103,12 @@
         font-weight: bold;
     }
 
-    /* Общая стоимость */
     .total-price {
         font-size: 1.2em;
         color: #333;
         margin-top: 10px;
     }
 
-    /* Стили для кнопки возврата */
     .btn-primary {
         background-color: #28a745;
         color: #fff;
@@ -114,7 +127,6 @@
             background-color: #218838;
         }
 
-    /* Стили для ссылки "Повернутися до каталогу" */
     .return-btn {
         background-color: #ff3333;
         color: #fff;

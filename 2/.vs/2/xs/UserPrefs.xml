@@ -1,25 +1,54 @@
 ﻿<Properties StartupConfiguration="{09F60CB1-6C4B-4910-8848-FD89EBC17BED}|https">
-  <MonoDevelop.Ide.ItemProperties.MyApp.Tests FirstBuild="True" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints />
   <MonoDevelop.Ide.ItemProperties.2 PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.ItemProperties.MyApp.Tests FirstBuild="True" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workbench ActiveDocument="2/Views/Product/SearchResults.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="2/Views/Order/OrderDetails.cshtml">
     <Files>
-      <File FileName="2/Views/Product/ByCategory.cshtml" Line="68" Column="1" />
-      <File FileName="2/Views/Home/index.cshtml" Line="90" Column="1" />
-      <File FileName="2/wwwroot/css/site.css" Line="17" Column="1" />
-      <File FileName="2/Views/Product/SearchResults.cshtml" Line="228" Column="21" />
+      <File FileName="2/Views/Home/index.cshtml" Line="9" Column="5" />
+      <File FileName="2/Views/Shared/_Layout.cshtml" />
+      <File FileName="2/Views/Product/ByCategory.cshtml" Line="68" Column="17" />
+      <File FileName="2/Views/Product/SearchResults.cshtml" Line="128" Column="17" />
+      <File FileName="2/Views/Cart/index.cshtml" Line="7" Column="89" />
+      <File FileName="2/Controllers/HomeController.cs" />
+      <File FileName="2/Views/Account/Profile.cshtml" Line="8" Column="1" />
+      <File FileName="2/Views/Account/EditProfile.cshtml" Line="6" Column="1" />
+      <File FileName="2/Views/Account/Login.cshtml" Line="41" Column="1" />
+      <File FileName="2/Views/Account/Register.cshtml" Line="6" Column="1" />
+      <File FileName="2/Views/Admin/EditUser.cshtml" Line="6" Column="1" />
+      <File FileName="2/Views/Admin/ManageUsers.cshtml" Line="7" Column="5" />
+      <File FileName="2/Views/Category/CreateCategory.cshtml" Line="27" Column="1" />
+      <File FileName="2/Views/Category/EditCategory.cshtml" Line="37" Column="1" />
+      <File FileName="2/Views/Category/ManageCategories.cshtml" Line="52" Column="1" />
+      <File FileName="2/Views/Checkout/index.cshtml" Line="59" Column="100" />
+      <File FileName="2/Views/Checkout/OrderConfirmation.cshtml" Line="56" Column="107" />
+      <File FileName="2/Views/DeliveryMethod/CreateDeliveryMethod.cshtml" Line="27" Column="1" />
+      <File FileName="2/Views/DeliveryMethod/EditDeliveryMethod.cshtml" Line="37" Column="1" />
+      <File FileName="2/Views/DeliveryMethod/ManageDeliveryMethod.cshtml" Line="52" Column="1" />
+      <File FileName="2/Views/Order/ManageOrders.cshtml" Line="83" Column="1" />
+      <File FileName="2/Views/Order/MyOrders.cshtml" Line="43" Column="77" />
+      <File FileName="2/Views/Order/OrderDetails.cshtml" Line="51" Column="56" />
+      <File FileName="2/Views/Product/CreateProduct.cshtml" Line="24" Column="58" />
+      <File FileName="2/Views/Product/EditProduct.cshtml" Line="1" Column="1" />
+      <File FileName="2/Views/Product/ManageProducts.cshtml" Line="24" Column="2" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="2" expanded="True">
-            <Node name="2" expanded="True">
+            <Node name="2">
               <Node name="Views" expanded="True">
+                <Node name="Admin" expanded="True" />
+                <Node name="Cart" expanded="True" />
+                <Node name="Category" expanded="True" />
+                <Node name="Checkout" expanded="True" />
                 <Node name="Home" expanded="True" />
+                <Node name="Order">
+                  <Node name="OrderDetails.cshtml" selected="True" />
+                </Node>
                 <Node name="Product" expanded="True" />
+                <Node name="Shared" expanded="True" />
               </Node>
               <Node name="ViewsModels" expanded="True" />
               <Node name="wwwroot" expanded="True">
@@ -31,4 +60,7 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>

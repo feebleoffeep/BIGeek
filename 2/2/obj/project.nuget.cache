@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "hsi0YJ69cig=",
+  "dgSpecHash": "yG9pkbb97YBvJpf/LWW8yiJF+KQj43g3ujQLUSqWZHbHkHBlDaFL5sltCjSi8Z4b5/ZChIc22WHzxiva19IRMw==",
   "success": true,
   "projectFilePath": "/Users/koliakrutoy/Projects/2/BIGeek/2/2/2.csproj",
   "expectedPackageFiles": [
@@ -289,12 +289,5 @@
     "/Users/koliakrutoy/.nuget/packages/system.xml.xdocument/4.3.0/system.xml.xdocument.4.3.0.nupkg.sha512",
     "/Users/koliakrutoy/.nuget/packages/zstdsharp.port/0.8.0/zstdsharp.port.0.8.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Error occurred while getting package vulnerability data: nodename nor servname provided, or not known (api.nuget.org:443)"
-    }
-  ]
+  "logs": []
 }

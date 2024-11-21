@@ -1,10 +1,26 @@
 ﻿@model IEnumerable<_2.Models.Order>
+@inject IHttpContextAccessor HttpContextAccessor
 
 @{
     ViewData["Title"] = "BIGeek";
+
+    var language = HttpContextAccessor.HttpContext?.Request.Cookies["Language"] ?? "uk";
+
+    // Локалізація тексту
+    var titleText = language == "uk" ? "Керування замовленнями" : "Order Management";
+    var noOrdersText = language == "uk" ? "Немає доступних замовлень для відображення." : "No orders available to display.";
+    var orderDetailsText = language == "uk" ? "Деталі" : "Details";
+    var deleteText = language == "uk" ? "Видалити" : "Delete";
+    var messageText = language == "uk" ? "Повідомлення" : "Message";
+    var errorText = language == "uk" ? "Помилка" : "Error";
+    var statusPending = language == "uk" ? "Очікується" : "Pending";
+    var statusConfirmed = language == "uk" ? "Підтверджено" : "Confirmed";
+    var statusShipped = language == "uk" ? "Відправлено" : "Shipped";
+    var statusCanceled = language == "uk" ? "Відхилено" : "Canceled";
 }
+
 <div class="container">
-    <h2>Керування замовленнями</h2>
+    <h2>@titleText</h2>
 
     @if (TempData["Message"] != null)
     {
@@ -37,21 +53,23 @@
                         <td>@($"{order.FirstName} {order.LastName}")</td>
                         <td>@order.OrderDate.ToString("dd.MM.yyyy")</td>
                         <td>
-                            <span class="badge @(order.OrderStatus?.Name == "Очікується" ? "Pending" : (order.OrderStatus?.Name == "Підтверджено" ? "Confirmed" : (order.OrderStatus?.Name == "Відправлено" ? "Shipped" : (order.OrderStatus?.Name == "Відхилено" ? "Canceled" : ""))))">
+                            <span class="badge @(order.OrderStatus?.Name == statusPending ? "Pending" :
+                                                 (order.OrderStatus?.Name == statusConfirmed ? "Confirmed" :
+                                                 (order.OrderStatus?.Name == statusShipped ? "Shipped" :
+                                                 (order.OrderStatus?.Name == statusCanceled ? "Canceled" : ""))))">
                                 @order.OrderStatus?.Name
                             </span>
                         </td>
                         <td>@order.DeliveryMethod?.Name</td>
                         <td>
-                            <a asp-action="OrderDetails" asp-route-orderId="@order.Id" class="btn btn-info btn-sm">Деталі</a>
-                            @if (User.IsInRole("Admin") && order.OrderStatus?.Name == "Відхилено")
+                            <a asp-action="OrderDetails" asp-route-orderId="@order.Id" class="btn btn-info btn-sm">@orderDetailsText</a>
+                            @if (User.IsInRole("Admin") && order.OrderStatus?.Name == statusCanceled)
                             {
                                 <form asp-action="DeleteCancelledOrder" asp-route-orderId="@order.Id" method="post" style="display:inline;">
-                                    <button type="submit" class="btn btn-danger btn-sm">Видалити</button>
+                                    <button type="submit" class="btn btn-danger btn-sm">@deleteText</button>
                                 </form>
                             }
                         </td>
-
                     </tr>
                 }
             </tbody>
@@ -59,9 +77,10 @@
     }
     else
     {
-        <p>Немає доступних замовлень для відображення.</p>
+        <p>@noOrdersText</p>
     }
 </div>
+
 
 <style>
     .container {

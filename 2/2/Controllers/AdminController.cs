@@ -100,7 +100,4 @@ public class AdminController : Controller
 
         return View("EditUser", user);
     }
-
-
-
 }

@@ -1,32 +1,44 @@
 ﻿@model _2.Models.LoginViewModel
+@inject IHttpContextAccessor HttpContextAccessor
 
 @{
-    ViewData["Title"] = "Вхід";
+    // Визначення мови
+    var language = HttpContextAccessor.HttpContext?.Request.Cookies["Language"] ?? "uk";
+
+    // Динамічний текст
+    var pageTitle = language == "uk" ? "Вхід" : "Login";
+    var emailLabel = language == "uk" ? "Електронна пошта" : "Email";
+    var passwordLabel = language == "uk" ? "Пароль" : "Password";
+    var loginButtonText = language == "uk" ? "Увійти" : "Log In";
+    var registerLinkText = language == "uk" ? "Ще немає акаунту? Зареєструйтесь." : "Don't have an account? Register.";
+
+    ViewData["Title"] = pageTitle;
 }
 
 <main>
     <div class="login-form-container">
-        <h1>Вхід</h1>
+        <h1>@pageTitle</h1>
 
         <form asp-action="Login" asp-controller="Account" method="post">
             <div class="form-group">
-                <label asp-for="Email"></label>
-                <input asp-for="Email" class="form-control" />
+                <label for="Email">@emailLabel</label>
+                <input asp-for="Email" class="form-control" id="Email" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Password"></label>
-                <input asp-for="Password" class="form-control" type="password" />
+                <label for="Password">@passwordLabel</label>
+                <input asp-for="Password" class="form-control" id="Password" type="password" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-primary">Увійти</button>
+            <button type="submit" class="btn btn-primary">@loginButtonText</button>
         </form>
 
         <div>
-            <a asp-action="Register">Ще немає акаунту? Зареєструйтесь.</a>
+            <a asp-action="Register">@registerLinkText</a>
         </div>
     </div>
 </main>
+
 <style>
     .login-form-container form {
         max-width: 380px;

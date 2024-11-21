@@ -1,25 +1,40 @@
 ﻿@model IEnumerable<_2.Models.CartItem>
+@inject IHttpContextAccessor HttpContextAccessor
 
 @{
     ViewData["Title"] = "Ваш кошик";
+
+    var language = HttpContextAccessor.HttpContext?.Request.Cookies["Language"] ?? "uk";
+
+    var titleText = language == "uk" ? "Ваш кошик" : "Your Cart";
+    var emptyCartText = language == "uk" ? "Кошик порожній. Перейдіть до" : "The cart is empty. Go to";
+    var catalogText = language == "uk" ? "каталогу" : "the catalog";
+    var itemText = language == "uk" ? "Товар" : "Item";
+    var priceText = language == "uk" ? "Ціна" : "Price";
+    var quantityText = language == "uk" ? "Кількість" : "Quantity";
+    var totalText = language == "uk" ? "Загальна сума" : "Total";
+    var actionsText = language == "uk" ? "Дії" : "Actions";
+    var removeText = language == "uk" ? "Видалити" : "Remove";
+    var grandTotalText = language == "uk" ? "Загальна вартість:" : "Grand Total:";
+    var checkoutText = language == "uk" ? "Оформити замовлення" : "Checkout";
 }
 
-<h2>Ваш кошик</h2>
+<h2>@titleText</h2>
 
 @if (!Model.Any())
 {
-    <p>Кошик порожній. Перейдіть до <a href="/">каталогу</a>, щоб додати товари.</p>
+    <p>@emptyCartText <a href="/">@(catalogText)</a>.</p>
 }
 else
 {
     <table class="table">
         <thead>
             <tr>
-                <th>Товар</th>
-                <th>Ціна</th>
-                <th>Кількість</th>
-                <th>Загальна сума</th>
-                <th>Дії</th>
+                <th>@itemText</th>
+                <th>@priceText</th>
+                <th>@quantityText</th>
+                <th>@totalText</th>
+                <th>@actionsText</th>
             </tr>
         </thead>
         <tbody>
@@ -34,7 +49,7 @@ else
                     <td class="total">@(@item.Price * item.Quantity)</td>
                     <td>
                         <form asp-action="RemoveFromCart" asp-route-productId="@item.ProductId" method="post">
-                            <button type="submit" class="btn btn-danger">Видалити</button>
+                            <button type="submit" class="btn btn-danger">@removeText</button>
                         </form>
                     </td>
                 </tr>
@@ -43,11 +58,10 @@ else
     </table>
 
     <div class="cart-summary">
-        <p>Загальна вартість: <strong class="grand-total">@Model.Sum(i => i.Price * i.Quantity)</strong></p>
-        <a href="/Checkout" class="btn btn-success">Оформити замовлення</a>
+        <p>@grandTotalText <strong class="grand-total">@Model.Sum(i => i.Price * i.Quantity)</strong></p>
+        <a href="/Checkout" class="btn btn-success">@checkoutText</a>
     </div>
 }
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>$(document).ready(function () {
         function updateTotal() {
@@ -55,7 +69,7 @@ else
             $('.total').each(function () {
                 grandTotal += parseFloat($(this).text()) || 0;
             });
-            $('.grand-total').text(grandTotal.toFixed(2)); 
+            $('.grand-total').text(grandTotal.toFixed(2));
         }
 
         $('.quantity-input').on('input', function () {
@@ -64,7 +78,7 @@ else
             var price = parseFloat($(this).closest('tr').find('.price').text());
             var total = (price * quantity).toFixed(2);
 
-            $(this).closest('tr').find('.total').text(total); 
+            $(this).closest('tr').find('.total').text(total);
 
             if (quantity < 1) {
                 alert('Кількість має бути принаймні 1.');
@@ -72,13 +86,13 @@ else
             }
 
             $.ajax({
-                url: '/Cart/UpdateCart', 
+                url: '/Cart/UpdateCart',
                 type: 'POST',
                 data: { productId: productId, quantity: quantity },
                 success: function (response) {
                     if (response.success) {
                         console.log('Кількість оновлена');
-                        updateTotal(); 
+                        updateTotal();
                     } else {
                         alert('Сталася помилка при оновленні кількості товару.');
                     }
@@ -88,8 +102,7 @@ else
                 }
             });
         });
-
-        updateTotal(); // Ініціалізація загальної вартості при завантаженні
+        updateTotal(); 
     });</script>
 
 <style>
@@ -115,8 +128,8 @@ else
         }
 
     .quantity-input {
-        width: 60px; /* Ширина поля вводу */
-        text-align: center; /* Центрування тексту */
+        width: 60px; 
+        text-align: center; 
     }
 
     .btn {

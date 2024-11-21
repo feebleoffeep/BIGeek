@@ -1,31 +1,41 @@
 ﻿@model _2.Models.Category
+@inject IHttpContextAccessor HttpContextAccessor
 
 @{
     ViewData["Title"] = "Редагування";
+
+    var language = HttpContextAccessor.HttpContext?.Request.Cookies["Language"] ?? "uk";
+
+    var titleText = language == "uk" ? "Редагувати категорії" : "Edit Category";
+    var nameLabelText = language == "uk" ? "Назва" : "Name";
+    var saveButtonText = language == "uk" ? "Зберегти зміни" : "Save Changes";
+    var deleteButtonText = language == "uk" ? "Видалити категорію" : "Delete Category";
+    var deleteConfirmText = language == "uk" ? "Ви впевнені, що хочете видалити цю категорію?" : "Are you sure you want to delete this category?";
+    var backButtonText = language == "uk" ? "Назад до списку категорій" : "Back to Category List";
 }
 
-<h2>Редагувати категорії</h2>
+<h2>@titleText</h2>
 
 <form asp-action="EditCategory" method="post">
     <input type="hidden" asp-for="Id" />
 
     <div class="input-field">
-        <label asp-for="Name"></label>
+        <label asp-for="Name">@nameLabelText</label>
         <input asp-for="Name" />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn-save">Зберегти зміни</button>
+    <button type="submit" class="btn-save">@saveButtonText</button>
 </form>
 
-<form asp-action="DeleteCategory" method="post" onsubmit="return confirm('Ви впевнені, що хочете видалити цю категорію?');">
+<form asp-action="DeleteCategory" method="post" onsubmit="return confirm('@deleteConfirmText');">
     <input type="hidden" asp-for="Id" />
-    <button type="submit" class="btn-delete">Видалити категорію</button>
+    <button type="submit" class="btn-delete">@deleteButtonText</button>
 </form>
 
-<a asp-action="ManageCategories" class="btn-back">Назад до списку категорій</a>
+<a asp-action="ManageCategories" class="btn-back">@backButtonText</a>
+
 <style>
-    /* Input field styles */
     input[type="text"] {
         width: 100%;
         padding: 10px;
@@ -36,14 +46,12 @@
         box-sizing: border-box;
     }
 
-    /* Labels for the form */
     label {
         font-weight: bold;
         font-size: 14px;
         color: #333;
     }
 
-    /* Button styles */
     button.btn-save {
         background-color: #FF4136;
         color: white;
@@ -58,7 +66,6 @@
             background-color: #FF6347;
         }
 
-    /* Delete button style */
     button.btn-delete {
         background-color: #333;
         color: white;
@@ -74,7 +81,6 @@
             background-color: #444;
         }
 
-    /* Back button styling */
     a.btn-back {
         display: inline-block;
         margin-top: 20px;
@@ -87,7 +93,6 @@
             text-decoration: underline;
         }
 
-    /* Error messages */
     .text-danger {
         color: red;
         font-size: 12px;

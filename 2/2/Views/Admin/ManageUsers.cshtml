@@ -1,166 +1,178 @@
 ﻿@model IEnumerable<_2.Models.ApplicationUser>
+@inject IHttpContextAccessor HttpContextAccessor
 
 @{
-    ViewData["Title"] = "Список користувачів";
+    var language = HttpContextAccessor.HttpContext?.Request.Cookies["Language"] ?? "uk";
+
+    var pageTitle = language == "uk" ? "Список користувачів" : "User List";
+    var backButtonText = language == "uk" ? "Повернутися назад" : "Go Back";
+    var manageUsersHeading = language == "uk" ? "Керування користувачами" : "Manage Users";
+    var searchPlaceholder = language == "uk" ? "Пошук користувача" : "Search user";
+    var searchButtonText = language == "uk" ? "Шукати" : "Search";
+    var resetButtonText = language == "uk" ? "Скинути" : "Reset";
+    var firstNameColumn = language == "uk" ? "Ім'я" : "First Name";
+    var lastNameColumn = language == "uk" ? "Прізвище" : "Last Name";
+    var emailColumn = language == "uk" ? "Email" : "Email";
+    var actionsColumn = language == "uk" ? "Дії" : "Actions";
+    var editActionText = language == "uk" ? "Редагувати" : "Edit";
+
+    ViewData["Title"] = pageTitle;
 }
+
 <div class="header-container">
     <div class="back-button">
-        <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Повернутися назад</a>
+        <a href="@Url.Action("Index", "Home")" class="btn btn-primary">@backButtonText</a>
     </div>
-    <h2 class="title">Керування користувачами</h2>
+    <h2 class="title">@manageUsersHeading</h2>
 
     <form asp-action="ManageUsers" method="get" class="search-form">
-        <input type="text" name="searchTerm" placeholder="Пошук користувача" value="@ViewData["SearchTerm"]" class="search-input" />
-        <button type="submit" class="btn btn-search">Шукати</button>
-        <a href="@Url.Action("ManageUsers", new { searchTerm = "" })" class="btn btn-reset">Скинути</a>
+        <input type="text" name="searchTerm" placeholder="@searchPlaceholder" value="@ViewData["SearchTerm"]" class="search-input" />
+        <button type="submit" class="btn btn-search">@searchButtonText</button>
+        <a href="@Url.Action("ManageUsers", new { searchTerm = "" })" class="btn btn-reset">@resetButtonText</a>
     </form>
-
 </div>
 
-    <table>
-        <thead>
+<table>
+    <thead>
+        <tr>
+            <th>@firstNameColumn</th>
+            <th>@lastNameColumn</th>
+            <th>@emailColumn</th>
+            <th>@actionsColumn</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
             <tr>
-                <th>Ім'я</th>
-                <th>Прізвище</th>
-                <th>Email</th>
-                <th>Дії</th>
+                <td>@user.FirstName</td>
+                <td>@user.LastName</td>
+                <td>@user.Email</td>
+                <td>
+                    <a asp-controller="Admin" asp-action="EditUser" asp-route-id="@user.Id">@editActionText</a>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var user in Model)
-            {
-                <tr>
-                    <td>@user.FirstName</td>
-                    <td>@user.LastName</td>
-                    <td>@user.Email</td>
-                    <td>
-                        <a asp-controller="Admin" asp-action="EditUser" asp-route-id="@user.Id">Редагувати</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-
-    <style>
-        /* Container styling for the header */
-        .header-container {
-            max-width: 800px;
-            margin: 0 auto 20px auto;
-            text-align: center;
         }
+    </tbody>
+</table>
 
-            .header-container .title {
-                font-family: Arial, sans-serif;
-                font-size: 26px;
-                font-weight: 700;
-                color: #ff4a4a;
-                margin-bottom: 15px;
-            }
 
-            .header-container .back-button {
-                margin-bottom: 15px;
-            }
+<style>
+    .header-container {
+        max-width: 800px;
+        margin: 0 auto 20px auto;
+        text-align: center;
+    }
 
-                .header-container .back-button .btn-primary {
-                    background-color: #ff4a4a;
-                    color: #fff;
-                    border: none;
-                    padding: 8px 12px;
-                    font-size: 14px;
-                    border-radius: 5px;
-                    text-decoration: none;
-                    transition: background-color 0.3s ease;
-                }
-
-                    .header-container .back-button .btn-primary:hover {
-                        background-color: #ff6666;
-                    }
-
-        /* Search form styling */
-        .search-form {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .search-input {
-            width: 200px;
-            padding: 8px;
-            font-size: 14px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-right: 10px;
-            transition: border-color 0.3s ease;
-        }
-
-            .search-input:focus {
-                border-color: #ff4a4a;
-                outline: none;
-                box-shadow: 0 0 5px rgba(255, 74, 74, 0.2);
-            }
-
-        .btn-search, .btn-reset {
-            padding: 8px 12px;
-            font-size: 14px;
-            border: none;
-            border-radius: 5px;
-            color: #fff;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn-search {
-            background-color: #ff4a4a;
-            margin-right: 5px;
-        }
-
-            .btn-search:hover {
-                background-color: #ff6666;
-            }
-
-        .btn-reset {
-            background-color: #ccc;
-        }
-
-            .btn-reset:hover {
-                background-color: #b3b3b3;
-            }
-
-        /* Table styling */
-        table {
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            border-collapse: collapse;
+        .header-container .title {
             font-family: Arial, sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: #ff4a4a;
+            margin-bottom: 15px;
         }
 
-            table th, table td {
-                padding: 10px;
-                text-align: left;
-                border-bottom: 1px solid #ddd;
-                font-size: 16px;
-            }
+        .header-container .back-button {
+            margin-bottom: 15px;
+        }
 
-            table th {
+            .header-container .back-button .btn-primary {
                 background-color: #ff4a4a;
                 color: #fff;
-                font-weight: bold;
-            }
-
-            table tr:nth-child(even) {
-                background-color: #f9f9f9;
-            }
-
-            table a {
-                color: #ff4a4a;
+                border: none;
+                padding: 8px 12px;
+                font-size: 14px;
+                border-radius: 5px;
                 text-decoration: none;
-                font-weight: bold;
+                transition: background-color 0.3s ease;
             }
 
-                table a:hover {
-                    text-decoration: none;
+                .header-container .back-button .btn-primary:hover {
+                    background-color: #ff6666;
                 }
 
-    </style>
+    .search-form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .search-input {
+        width: 200px;
+        padding: 8px;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-right: 10px;
+        transition: border-color 0.3s ease;
+    }
+
+        .search-input:focus {
+            border-color: #ff4a4a;
+            outline: none;
+            box-shadow: 0 0 5px rgba(255, 74, 74, 0.2);
+        }
+
+    .btn-search, .btn-reset {
+        padding: 8px 12px;
+        font-size: 14px;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-search {
+        background-color: #ff4a4a;
+        margin-right: 5px;
+    }
+
+        .btn-search:hover {
+            background-color: #ff6666;
+        }
+
+    .btn-reset {
+        background-color: #ccc;
+    }
+
+        .btn-reset:hover {
+            background-color: #b3b3b3;
+        }
+
+    table {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        border-collapse: collapse;
+        font-family: Arial, sans-serif;
+    }
+
+        table th, table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        table th {
+            background-color: #ff4a4a;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table a {
+            color: #ff4a4a;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+            table a:hover {
+                text-decoration: none;
+            }
+</style>

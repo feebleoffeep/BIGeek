@@ -1,28 +1,35 @@
-﻿@model List<Order>
+﻿@model List<_2.Models.Order>
+@inject IHttpContextAccessor HttpContextAccessor
 
 @{
     ViewData["Title"] = "BIGeek";
+
+    var language = HttpContextAccessor.HttpContext?.Request.Cookies["Language"] ?? "uk";
+
+    var titleText = language == "uk" ? "Мої замовлення" : "My Orders";
+    var noOrdersText = language == "uk" ? "У вас немає замовлень." : "You have no orders.";
+    var orderDetailsText = language == "uk" ? "Переглянути" : "View";
 }
 
-<h3>Мої замовлення</h3>
+<h3>@titleText</h3>
 
 @if (Model.Count == 0)
 {
-    <p>У вас немає замовлень.</p>
+    <p>@noOrdersText</p>
 }
 else
 {
     <table class="table table-striped table-bordered">
         <thead>
             <tr>
-                <th>Номер замовлення</th>
-                <th>Ім'я</th>
-                <th>Прізвище</th>
-                <th>Дата замовлення</th>
-                <th>Сума замовлення</th>
-                <th>Статус</th>
-                <th>Метод доставки</th>
-                <th>Дії</th>
+                <th>@(language == "uk" ? "Номер замовлення" : "Order Number")</th>
+                <th>@(language == "uk" ? "Ім'я" : "First Name")</th>
+                <th>@(language == "uk" ? "Прізвище" : "Last Name")</th>
+                <th>@(language == "uk" ? "Дата замовлення" : "Order Date")</th>
+                <th>@(language == "uk" ? "Сума замовлення" : "Order Total")</th>
+                <th>@(language == "uk" ? "Статус" : "Status")</th>
+                <th>@(language == "uk" ? "Метод доставки" : "Delivery Method")</th>
+                <th>@(language == "uk" ? "Дії" : "Actions")</th>
             </tr>
         </thead>
         <tbody>
@@ -33,17 +40,18 @@ else
                     <td>@order.FirstName</td>
                     <td>@order.LastName</td>
                     <td>@order.OrderDate.ToString("yyyy-MM-dd HH:mm")</td>
-                    <td>@order.OrderItems.Sum(oi => oi.Quantity * oi.Price)</td>
+                    <td>@order.OrderItems.Sum(oi => oi.Quantity * oi.Price)$</td>
                     <td>@order.OrderStatus.Name</td>
                     <td>@order.DeliveryMethod.Name</td>
                     <td>
-                        <a href="@Url.Action("OrderDetails", "Order", new { orderId = order.Id })" class="btn btn-info">Переглянути</a>
+                        <a href="@Url.Action("OrderDetails", "Order", new { orderId = order.Id })" class="btn btn-info">@orderDetailsText</a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 }
+
 
 <style>
     .table {

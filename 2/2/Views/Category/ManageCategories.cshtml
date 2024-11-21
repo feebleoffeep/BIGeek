@@ -1,27 +1,38 @@
 ﻿@model IEnumerable<_2.Models.Category>
+@inject IHttpContextAccessor HttpContextAccessor
 
 @{
     ViewData["Title"] = "Список категорій";
+
+    var language = HttpContextAccessor.HttpContext?.Request.Cookies["Language"] ?? "uk";
+
+    var titleText = language == "uk" ? "Керування категоріями" : "Manage Categories";
+    var addCategoryText = language == "uk" ? "Додати категорію" : "Add Category";
+    var noCategoriesText = language == "uk" ? "Немає жодних категорій. Додайте першу категорію:" : "No categories available. Add the first category:";
+    var idText = language == "uk" ? "ID" : "ID";
+    var nameText = language == "uk" ? "Назва категорії" : "Category Name";
+    var actionsText = language == "uk" ? "Дії" : "Actions";
+    var editText = language == "uk" ? "Редагувати" : "Edit";
 }
 
 <div class="header-container">
-    <h2 class="title">Керування категоріями</h2>
+    <h2 class="title">@titleText</h2>
 </div>
-<a href="@Url.Action("CreateCategory", "Category")" class="btn btn-success">Додати категорію</a>
+<a href="@Url.Action("CreateCategory", "Category")" class="btn btn-success">@addCategoryText</a>
 
 @if (!Model.Any())
 {
-    <p>Немає жодних категорій. Додайте першу категорію:</p>
-    <a href="@Url.Action("CreateCategory", "Category")" class="btn btn-success">Додати нову категорію</a>
+    <p>@noCategoriesText</p>
+    <a href="@Url.Action("CreateCategory", "Category")" class="btn btn-success">@addCategoryText</a>
 }
 else
 {
     <table class="table">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Назва категорії</th>
-                <th>Дії</th>
+                <th>@idText</th>
+                <th>@nameText</th>
+                <th>@actionsText</th>
             </tr>
         </thead>
         <tbody>
@@ -31,13 +42,14 @@ else
                     <td>@category.Id</td>
                     <td>@category.Name</td>
                     <td>
-                        <a asp-controller="Category" asp-action="EditCategory" asp-route-id="@category.Id">Редагувати</a>
+                        <a asp-controller="Category" asp-action="EditCategory" asp-route-id="@category.Id">@editText</a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 }
+
 <style>
     .header-container {
         display: flex;

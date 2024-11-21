@@ -1,26 +1,40 @@
-﻿@{
+﻿@inject IHttpContextAccessor HttpContextAccessor
+
+@{
     ViewData["Title"] = "BIGeek";
 }
+
+
+@{
+    var language = HttpContextAccessor.HttpContext?.Request.Cookies["Language"] ?? "uk";
+    var categories = language == "uk" ? "Категорії" : "Categories";
+    var categoriesSmartphones = language == "uk" ? "Смартфони" : "Smartphones";
+    var categoriesLaptops = language == "uk" ? "Ноутбуки" : "Laptops";
+    var categoriesTablets = language == "uk" ? "Планшети" : "Tablets";
+    var price = language == "uk" ? "Ціна:" : "Price:";
+    var AddToCart = language == "uk" ? "Додати у кошик" : "Add to Cart";
+}
+
 
 <div class="content-wrapper">
 
     <aside class="sidebar">
         <section class="categories">
-            <h2>Категорії</h2>
+            <h2>@(categories)</h2>
             <ul class="categories-list">
                 <li>
                     <a asp-controller="Product" asp-action="ByCategory" asp-route-category="Смартфон">
-                        <i class="fa fa-mobile-alt"></i> Смартфони
+                        <i class="fa fa-mobile-alt"></i> @(categoriesSmartphones)
                     </a>
                 </li>
                 <li>
                     <a asp-controller="Product" asp-action="ByCategory" asp-route-category="Ноутбук">
-                        <i class="fa fa-laptop"></i> Ноутбуки
+                        <i class="fa fa-laptop"></i> @(categoriesLaptops)
                     </a>
                 </li>
                 <li>
                     <a asp-controller="Product" asp-action="ByCategory" asp-route-category="Планшет">
-                        <i class="fa fa-tablet-alt"></i> Планшети
+                        <i class="fa fa-tablet-alt"></i> @(categoriesTablets)
                     </a>
                 </li>
             </ul>
@@ -29,7 +43,6 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
-
     <section class="products">
         @foreach (var product in Model)
         {
@@ -37,8 +50,8 @@
                 <img src="~/images/@product.ImageUrl" alt="@product.Name" class="product-img" />
                 <h2>@product.Name</h2>
                 <div class="product-info">
-                    <p>Ціна: $@product.Price</p>
-                    <button class="buy-btn add-to-cart" data-product-id="@product.Id">
+                    <p>@(price) $@product.Price</p>
+                    <button class="buy-btn add-to-cart" data-product-id="@product.Id" title="@(AddToCart)">
                         <i class="fa fa-shopping-cart"></i>
                     </button>
                 </div>
@@ -78,7 +91,11 @@
             });
         });
     });</script>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+
+
 <style>
 
     .products {
@@ -135,6 +152,7 @@
         color: #666;
         font-weight: bold;
     }
+
     .content-wrapper {
         display: flex;
         gap: 20px;
@@ -142,7 +160,7 @@
 
     .sidebar {
         position: sticky;
-        top: 20px; 
+        top: 20px;
         align-self: flex-start;
         width: 250px;
         padding: 20px;
@@ -213,7 +231,7 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        background: linear-gradient(135deg, #ff6f61, #ff8e53); 
+        background: linear-gradient(135deg, #ff6f61, #ff8e53);
         color: white;
         border: none;
         border-radius: 12px;
@@ -226,12 +244,12 @@
     }
 
         .buy-btn i {
-            margin-right: 8px; 
+            margin-right: 8px;
             font-size: 1.2rem;
         }
 
         .buy-btn:hover {
-            background: linear-gradient(135deg, #ff8e53, #ff6f61); 
+            background: linear-gradient(135deg, #ff8e53, #ff6f61);
             box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
             transform: scale(1.05);
         }
@@ -240,5 +258,4 @@
             transform: scale(1);
             box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
         }
-
 </style>

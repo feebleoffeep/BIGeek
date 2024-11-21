@@ -1,20 +1,29 @@
 ﻿@model _2.Models.DeliveryMethod
+@inject IHttpContextAccessor HttpContextAccessor
 
 @{
     ViewData["Title"] = "Додати нову доставку";
+
+    var language = HttpContextAccessor.HttpContext?.Request.Cookies["Language"] ?? "uk";
+
+    var titleText = language == "uk" ? "Додати нову доставку" : "Add New Delivery Method";
+    var nameLabelText = language == "uk" ? "Назва доставки" : "Delivery Method Name";
+    var addButtonText = language == "uk" ? "Додати доставку" : "Add Delivery Method";
+    var backButtonText = language == "uk" ? "Повернутися назад" : "Go Back";
 }
 
-<h2>Додати нову доставку</h2>
+<h2>@titleText</h2>
 
 <form asp-action="CreateDeliveryMethod" method="post">
     <div class="form-group">
-        <label asp-for="Name"></label>
+        <label asp-for="Name">@nameLabelText</label>
         <input asp-for="Name" class="form-control" />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-primary">Додати доставку</button>
-    <a asp-action="ManageDeliveryMethod" class="btn btn-secondary">Повернутися назад</a>
+    <button type="submit" class="btn btn-primary">@addButtonText</button>
+    <a asp-action="ManageDeliveryMethod" class="btn btn-secondary">@backButtonText</a>
 </form>
+
 
 

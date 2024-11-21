@@ -1,27 +1,44 @@
-﻿@model Order
+﻿@model _2.Models.Order
+@inject IHttpContextAccessor HttpContextAccessor
 
 @{
     ViewData["Title"] = "BIGeek";
+
+    var language = HttpContextAccessor.HttpContext?.Request.Cookies["Language"] ?? "uk";
+
+    var orderDetailsText = language == "uk" ? "Деталі замовлення" : "Order Details";
+    var userNameText = language == "uk" ? "Ім'я користувача" : "User Name";
+    var orderDateText = language == "uk" ? "Дата замовлення" : "Order Date";
+    var statusText = language == "uk" ? "Статус" : "Status";
+    var deliveryMethodText = language == "uk" ? "Метод доставки" : "Delivery Method";
+    var deliveryPriceText = language == "uk" ? "Ціна доставки" : "Delivery Price";
+    var deliveryTimeText = language == "uk" ? "Час доставки" : "Delivery Time";
+    var itemNameText = language == "uk" ? "Назва товару" : "Product Name";
+    var itemPriceText = language == "uk" ? "Ціна" : "Price";
+    var itemQuantityText = language == "uk" ? "Кількість" : "Quantity";
+    var itemTotalText = language == "uk" ? "Загальна ціна" : "Total Price";
+    var cancelOrderText = language == "uk" ? "Скасувати замовлення" : "Cancel Order";
+    var confirmOrderText = language == "uk" ? "Підтвердити замовлення" : "Confirm Order";
 }
 
 <div class="container">
-    <h3>Деталі замовлення #@Model.Id</h3>
+    <h3>@orderDetailsText #@Model.Id</h3>
 
-    <p><strong>Ім'я користувача:</strong> @Model.FirstName @Model.LastName</p>
-    <p><strong>Дата замовлення:</strong> @Model.OrderDate.ToString("yyyy-MM-dd HH:mm")</p>
-    <p><strong>Статус:</strong> @Model.OrderStatus.Name</p>
-    <p><strong>Метод доставки:</strong> @Model.DeliveryMethod.Name</p>
-    <p><strong>Ціна доставки:</strong> @Model.DeliveryPrice</p>
-    <p><strong>Час доставки:</strong> @Model.DeliveryTime</p>
+    <p><strong>@userNameText:</strong> @Model.FirstName @Model.LastName</p>
+    <p><strong>@orderDateText:</strong> @Model.OrderDate.ToString("yyyy-MM-dd HH:mm")</p>
+    <p><strong>@statusText:</strong> @Model.OrderStatus.Name</p>
+    <p><strong>@deliveryMethodText:</strong> @Model.DeliveryMethod.Name</p>
+    <p><strong>@deliveryPriceText:</strong> @Model.DeliveryPrice.ToString("0.00") грн</p>
+    <p><strong>@deliveryTimeText:</strong> @Model.DeliveryTime</p>
 
-    <h4>Товари в замовленні:</h4>
+    <h4>@(language == "uk" ? "Товари в замовленні:" : "Products in the Order:")</h4>
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Назва товару</th>
-                <th>Ціна</th>
-                <th>Кількість</th>
-                <th>Загальна ціна</th>
+                <th>@itemNameText</th>
+                <th>@itemPriceText</th>
+                <th>@itemQuantityText</th>
+                <th>@itemTotalText</th>
             </tr>
         </thead>
         <tbody>
@@ -29,9 +46,9 @@
             {
                 <tr>
                     <td>@item.Product.Name</td>
-                    <td>@item.Price</td>
+                    <td>@item.Price $</td>
                     <td>@item.Quantity</td>
-                    <td>@(item.Price * item.Quantity)</td>
+                    <td>@(item.Price * item.Quantity) $</td>
                 </tr>
             }
         </tbody>
@@ -43,22 +60,22 @@
         {
             <form asp-action="CancelOrder" asp-controller="Order" method="post">
                 <input type="hidden" name="orderId" value="@Model.Id" />
-                <button type="submit" class="button">Скасувати замовлення</button>
+                <button type="submit" class="btn btn-danger">@cancelOrderText</button>
             </form>
         }
         else
         {
-            @* Кнопка для підтвердження замовлення (тільки для адміністраторів) *@
             @if (Model.OrderStatus.Name != "Підтверджено")
             {
                 <form asp-action="ConfirmOrder" asp-controller="Order" method="post">
                     <input type="hidden" name="orderId" value="@Model.Id" />
-                    <button type="submit" class="button" style="background-color: #28a745; border-color: #28a745;">Підтвердити замовлення</button>
+                    <button type="submit" class="btn btn-success">@confirmOrderText</button>
                 </form>
             }
         }
     }
 </div>
+
 
 <style>
     .container {

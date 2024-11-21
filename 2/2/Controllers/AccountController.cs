@@ -148,7 +148,7 @@ namespace _2.Controllers
             user.FirstName = model.FirstName;
             user.LastName = model.LastName;
             user.Email = model.Email;
-            user.UserName = model.Email; // Якщо змінюється Email, то змінюємо і UserName
+            user.UserName = model.Email; 
 
             var result = await _userManager.UpdateAsync(user);
 

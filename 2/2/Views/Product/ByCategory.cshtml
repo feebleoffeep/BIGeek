@@ -1,10 +1,19 @@
 ﻿@model IEnumerable<_2.Models.Product>
+@inject IHttpContextAccessor HttpContextAccessor
 
 @{
     ViewData["Title"] = "BIGeek";
 }
 
-<h2>Товари в категорії: @ViewBag.Category</h2>
+@{
+    var language = HttpContextAccessor.HttpContext?.Request.Cookies["Language"] ?? "uk";
+    var price = language == "uk" ? "Ціна:" : "Price:";
+    var AddToCart = language == "uk" ? "Додати у кошик" : "Add to Cart";
+    var CategoryBy = language == "uk" ? "Товари в категорії:" : "Products in the category:";
+    var NoCategory = language == "uk" ? "Немає товарів у цій категорії." : "There are no products in this category.";
+}
+
+<h2>@(CategoryBy) @ViewBag.Category</h2>
 
 <section class="products">
     @foreach (var product in Model)
@@ -13,8 +22,8 @@
             <img src="~/images/@product.ImageUrl" alt="@product.Name" class="product-img" />
             <h2>@product.Name</h2>
             <div class="product-info">
-                <p>Ціна: $@product.Price</p>
-                <button class="buy-btn add-to-cart" data-product-id="@product.Id">
+                <p>@(price) $@product.Price</p>
+                <button class="buy-btn add-to-cart" data-product-id="@product.Id" title="@(AddToCart)">
                     <i class="fa fa-shopping-cart"></i>
                 </button>
             </div>
@@ -24,7 +33,7 @@
 
 @if (!Model.Any())
 {
-    <p>Немає товарів у цій категорії.</p>
+    <p>@(NoCategory)</p>
 }
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>$(document).ready(function () {
